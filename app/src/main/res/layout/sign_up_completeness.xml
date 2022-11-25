@@ -29,7 +29,7 @@
             android:textSize="25dp"
             android:textStyle="bold"></TextView>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/MessageCreateSuccessfully"
@@ -40,7 +40,7 @@
             android:onClick="toSignIn"
             android:paddingLeft="50dp"
             android:paddingRight="50dp"
-            android:text="Back to Sign In"></Button>
+            android:text="Back to Sign In"></androidx.appcompat.widget.AppCompatButton>
     </RelativeLayout>
 
 </RelativeLayout>

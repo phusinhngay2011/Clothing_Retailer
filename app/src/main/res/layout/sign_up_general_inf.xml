@@ -8,10 +8,12 @@
     <ImageView
         android:layout_width="@dimen/size_of_back_img_view"
         android:layout_height="@dimen/size_of_back_img_view"
-        android:layout_margin="20dp"
-        android:src="@drawable/ic_baseline_arrow_back_24"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:onClick="toSignIn"
-        ></ImageView>
+        android:src="@drawable/ic_baseline_arrow_back_24"></ImageView>
 
     <RelativeLayout
         android:id="@+id/InfomationSignupEdit"
@@ -20,7 +22,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginTop="80dp"
         android:layout_marginRight="30dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="120dp"
         android:background="@drawable/rounded_bg">
 
         <TextView
@@ -88,51 +90,49 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/genderSignUp"
-            android:orientation="horizontal"
             android:onClick="onGenderGroup"
-            >
+            android:orientation="horizontal">
 
             <RadioButton
+                android:id="@+id/MaleGenderSignUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:paddingLeft="10dp"
-                android:text="Male"
 
+                android:text="Male"
                 android:textColor="@color/black"
                 android:textSize="15dp"
-                android:textStyle="bold"
-                android:id="@+id/MaleGenderSignUp"/>
+                android:textStyle="bold" />
 
             <RadioButton
+                android:id="@+id/FemaleGenderSignUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:paddingLeft="10dp"
-                android:text="Female"
 
+                android:text="Female"
                 android:textColor="@color/black"
                 android:textSize="15dp"
-                android:textStyle="bold"
-                android:id="@+id/FemaleGenderSignUp"
-                />
+                android:textStyle="bold" />
 
             <RadioButton
+                android:id="@+id/CustomGenderSignUp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
 
+                android:layout_height="wrap_content"
                 android:layout_marginRight="15dp"
                 android:layout_weight="1"
                 android:paddingLeft="10dp"
-                android:text="Custom"
 
+                android:text="Custom"
                 android:textColor="@color/black"
                 android:textSize="15dp"
-                android:textStyle="bold"
-                android:id="@+id/CustomGenderSignUp"/>
+                android:textStyle="bold" />
 
         </RadioGroup>
 
@@ -174,7 +174,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
             android:paddingLeft="20dp"
-            android:text="Adress"
+            android:text="Address"
             android:textColor="@color/black"
             android:textSize="25dp"
             android:textStyle="bold"></TextView>
@@ -187,11 +187,11 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/rounded_edittext_states"
-            android:hint="Your Adress"
+            android:hint="Your Adrress"
             android:padding="10dp"
             android:textSize="20dp"></EditText>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/AdressSignUpEditText"
@@ -202,7 +202,7 @@
             android:onClick="toSignUpFinalStep"
             android:paddingLeft="50dp"
             android:paddingRight="50dp"
-            android:text="Next"></Button>
+            android:text="Next"></androidx.appcompat.widget.AppCompatButton>
     </RelativeLayout>
 
 

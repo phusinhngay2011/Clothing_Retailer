@@ -108,7 +108,7 @@
                 android:layout_height="wrap_content">
 
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -117,9 +117,9 @@
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/rounded_button_size"
                 android:text="S"
-                android:textSize="20dp"></Button>
+                android:textSize="20dp"></androidx.appcompat.widget.AppCompatButton>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -128,8 +128,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:text="M"
-                android:textSize="20dp"></Button>
-                <Button
+                android:textSize="20dp"></androidx.appcompat.widget.AppCompatButton>
+                <androidx.appcompat.widget.AppCompatButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -138,8 +138,8 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:text="L"
-                    android:textSize="20dp"></Button>
-                <Button
+                    android:textSize="20dp"></androidx.appcompat.widget.AppCompatButton>
+                <androidx.appcompat.widget.AppCompatButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -148,8 +148,8 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:text="XL"
-                    android:textSize="20dp"></Button>
-                <Button
+                    android:textSize="20dp"></androidx.appcompat.widget.AppCompatButton>
+                <androidx.appcompat.widget.AppCompatButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -158,8 +158,8 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:text="XXL"
-                    android:textSize="20dp"></Button>
-                <Button
+                    android:textSize="20dp"></androidx.appcompat.widget.AppCompatButton>
+                <androidx.appcompat.widget.AppCompatButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -169,12 +169,12 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:text="3XL"
-                    android:textSize="20dp"></Button>
+                    android:textSize="20dp"></androidx.appcompat.widget.AppCompatButton>
 
             </LinearLayout>
         </HorizontalScrollView>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/addToCart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -188,9 +188,9 @@
             android:paddingLeft="30dp"
             android:paddingRight="20dp"
             android:text="Add to cart"
-            android:textColor="@color/black"></Button>
+            android:textColor="@color/black"></androidx.appcompat.widget.AppCompatButton>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id = "@+id/BuyNow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -206,7 +206,7 @@
             android:drawableRight="@drawable/ic_baseline_arrow_right_alt_24"
             android:paddingRight="20dp"
             android:background="@drawable/rounded_btn_buy_now"
-            ></Button>
+            ></androidx.appcompat.widget.AppCompatButton>
 
         <LinearLayout
             android:id="@+id/paymentMethodsLayout"

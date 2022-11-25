@@ -19,7 +19,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginTop="80dp"
         android:layout_marginRight="30dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="120dp"
         android:background="@drawable/rounded_bg">
 
         <TextView
@@ -47,10 +47,9 @@
             android:background="@drawable/rounded_edittext_states"
 
             android:hint="Enter username"
-            android:padding="10dp"
-            android:textSize="20dp"
             android:inputType="textVisiblePassword|textNoSuggestions"
-            ></EditText>
+            android:padding="10dp"
+            android:textSize="20dp"></EditText>
 
         <TextView
             android:id="@+id/emailSignUp"
@@ -93,9 +92,9 @@
             android:background="@drawable/rounded_edittext_states"
 
             android:hint="Your phone number"
+            android:inputType="textVisiblePassword|textNoSuggestions"
             android:padding="10dp"
-            android:textSize="20dp"
-            android:inputType="textVisiblePassword|textNoSuggestions"></EditText>
+            android:textSize="20dp"></EditText>
 
         <TextView
             android:id="@+id/passwordSignUp"
@@ -122,9 +121,9 @@
             android:background="@drawable/rounded_edittext_states"
 
             android:hint="Enter password"
+            android:inputType="textPassword"
             android:padding="10dp"
             android:textSize="20dp"
-            android:inputType="textPassword"
 
             ></EditText>
 
@@ -140,11 +139,11 @@
             android:background="@drawable/rounded_edittext_states"
 
             android:hint="Re-enter password"
+            android:inputType="textPassword"
             android:padding="10dp"
-            android:textSize="20dp"
-            android:inputType="textPassword"></EditText>
+            android:textSize="20dp"></EditText>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/repasswordSignUpEditText"
@@ -155,7 +154,7 @@
             android:onClick="toSignUpComplessness"
             android:paddingLeft="50dp"
             android:paddingRight="50dp"
-            android:text="Finish"></Button>
+            android:text="Finish"></androidx.appcompat.widget.AppCompatButton>
 
     </RelativeLayout>
 

@@ -41,4 +41,8 @@ dependencies {
 
     // RoundedImageView
     implementation 'com.makeramen:roundedimageview:2.3.0'
+
+    // https://mvnrepository.com/artifact/commons-codec/commons-codec
+    implementation group: 'commons-codec', name: 'commons-codec', version: '1.9'
+
 }
