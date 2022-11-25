@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_sign_in"
+    android:id= "@+id/SignUpGeneralInfLayout">
+
+    <ImageView
+        android:layout_width="@dimen/size_of_back_img_view"
+        android:layout_height="@dimen/size_of_back_img_view"
+        android:layout_margin="20dp"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        android:onClick="toSignIn"
+        ></ImageView>
+
+    <RelativeLayout
+        android:id="@+id/InfomationSignupEdit"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/rounded_bg">
+
+        <TextView
+            android:id="@+id/fullNameSignIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="20dp"
+            android:text="Full name"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:textStyle="bold"></TextView>
+
+        <LinearLayout
+
+            android:id="@+id/fullNameSignInLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fullNameSignIn"
+            android:orientation="vertical">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_edittext_states"
+                android:hint="First name"
+                android:padding="10dp"
+                android:textSize="20dp"></EditText>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_edittext_states"
+                android:hint="Last name"
+                android:padding="10dp"
+                android:textSize="20dp"></EditText>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/genderSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fullNameSignInLayout"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="20dp"
+            android:text="Gender"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:textStyle="bold"></TextView>
+
+        <RadioGroup
+            android:id="@+id/GenderSignUpRadioGr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/genderSignUp"
+            android:orientation="horizontal"
+            android:onClick="onGenderGroup"
+            >
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:paddingLeft="10dp"
+                android:text="Male"
+
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:id="@+id/MaleGenderSignUp"/>
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:paddingLeft="10dp"
+                android:text="Female"
+
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:id="@+id/FemaleGenderSignUp"
+                />
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginRight="15dp"
+                android:layout_weight="1"
+                android:paddingLeft="10dp"
+                android:text="Custom"
+
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:id="@+id/CustomGenderSignUp"/>
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/BirthdaySignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/GenderSignUpRadioGr"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="20dp"
+            android:text="Birthday"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:textStyle="bold"></TextView>
+
+        <EditText
+            android:id="@+id/BirthdaySignUpEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/BirthdaySignUp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/rounded_edittext_states"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:hint="Your birthday"
+            android:onClick="popUpDatePicker"
+            android:padding="10dp"
+            android:textSize="20dp"></EditText>
+
+        <TextView
+            android:id="@+id/AdressSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/BirthdaySignUpEditText"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="20dp"
+            android:text="Adress"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:textStyle="bold"></TextView>
+
+        <EditText
+            android:id="@+id/AdressSignUpEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/AdressSignUp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/rounded_edittext_states"
+            android:hint="Your Adress"
+            android:padding="10dp"
+            android:textSize="20dp"></EditText>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/AdressSignUpEditText"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/rounded_button_states"
+            android:onClick="toSignUpFinalStep"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:text="Next"></Button>
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_sign_in"
+    android:id ="@+id/SignUpFinalLayout">
+    <ImageView
+        android:layout_width="@dimen/size_of_back_img_view"
+        android:layout_height="@dimen/size_of_back_img_view"
+        android:layout_margin="20dp"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        android:onClick="toSignUpGeneralInf">
+    </ImageView>
+
+    <RelativeLayout
+        android:id="@+id/InfomationSignupEdit"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/rounded_bg">
+
+        <TextView
+            android:id="@+id/usernameSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="20dp"
+            android:text="Username"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:textStyle="bold"></TextView>
+
+        <EditText
+            android:id="@+id/usernameSignUpEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/usernameSignUp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_edittext_states"
+
+            android:hint="Enter username"
+            android:padding="10dp"
+            android:textSize="20dp"
+            android:inputType="textVisiblePassword|textNoSuggestions"
+            ></EditText>
+
+        <TextView
+            android:id="@+id/emailSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/usernameSignUpEditText"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="20dp"
+            android:text="Contacts"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:textStyle="bold"></TextView>
+
+        <EditText
+            android:id="@+id/emailSignUpEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/emailSignUp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_edittext_states"
+
+            android:hint="Your email"
+            android:inputType="textVisiblePassword|textNoSuggestions"
+            android:padding="10dp"
+            android:textSize="20dp"></EditText>
+
+        <EditText
+            android:id="@+id/phoneSignUpEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/emailSignUpEditText"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_edittext_states"
+
+            android:hint="Your phone number"
+            android:padding="10dp"
+            android:textSize="20dp"
+            android:inputType="textVisiblePassword|textNoSuggestions"></EditText>
+
+        <TextView
+            android:id="@+id/passwordSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/phoneSignUpEditText"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="20dp"
+            android:text="Password"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:textStyle="bold"></TextView>
+
+        <EditText
+            android:id="@+id/passwordSignUpEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/passwordSignUp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_edittext_states"
+
+            android:hint="Enter password"
+            android:padding="10dp"
+            android:textSize="20dp"
+            android:inputType="textPassword"
+
+            ></EditText>
+
+        <EditText
+            android:id="@+id/repasswordSignUpEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/passwordSignUpEditText"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_edittext_states"
+
+            android:hint="Re-enter password"
+            android:padding="10dp"
+            android:textSize="20dp"
+            android:inputType="textPassword"></EditText>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/repasswordSignUpEditText"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/rounded_button_states"
+            android:onClick="toSignUpComplessness"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:text="Finish"></Button>
+
+    </RelativeLayout>
+
+</RelativeLayout>

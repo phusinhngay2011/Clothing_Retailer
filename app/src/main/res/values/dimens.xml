@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name = "height_page_viewer_img">600dp</dimen>
+    <dimen name="size_of_back_img_view">48dp</dimen>
+
+</resources>
