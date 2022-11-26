@@ -45,4 +45,13 @@ public class ItemAttribute {
         this.count = count;
     }
 
+    @Override
+    public String toString() {
+        return "ItemAttribute{" +
+                "item_id='" + item_id + '\'' +
+                ", size='" + size + '\'' +
+                ", color='" + color + '\'' +
+                ", count=" + count +
+                '}';
+    }
 }

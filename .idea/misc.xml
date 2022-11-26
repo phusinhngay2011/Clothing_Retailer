@@ -24,6 +24,12 @@
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/drawable/rounded_edittext_focused.xml" value="0.1315" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/drawable/rounded_edittext_states.xml" value="0.141" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/activity_main.xml" value="0.17135416666666667" />
+        <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/activity_product_details.xml" value="0.12905982905982907" />
+        <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/activity_sign_in_main.xml" value="0.1405982905982906" />
+        <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/activity_sign_up_completeness.xml" value="0.12905982905982907" />
+        <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/activity_sign_up_general_info.xml" value="0.1" />
+        <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/activity_sign_up_main_info.xml" value="0.1405982905982906" />
+        <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/activity_sign_up_welcome.xml" value="0.1405982905982906" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/fragment_signup_general_information.xml" value="0.22" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/product_details.xml" value="0.14666666666666667" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/sign_in_main.xml" value="0.25" />

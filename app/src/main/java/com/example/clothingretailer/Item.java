@@ -96,4 +96,19 @@ public class Item {
     public void setRate_count(int rate_count) {
         this.rate_count = rate_count;
     }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", gender=" + gender +
+                ", category='" + category + '\'' +
+                ", description_path='" + description_path + '\'' +
+                ", image_path='" + image_path + '\'' +
+                ", price=" + price +
+                ", rate=" + rate +
+                ", rate_count=" + rate_count +
+                '}';
+    }
 }

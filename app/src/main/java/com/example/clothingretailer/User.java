@@ -1,4 +1,6 @@
 package com.example.clothingretailer;
+import android.widget.Toast;
+
 import org.apache.commons.codec.binary.Base64;
 
 import java.nio.charset.StandardCharsets;
@@ -29,6 +31,35 @@ public class User {
         this.address = address;
         this.password = password;
     }
+    public User(String firstname, String lastname, int gender,
+                String birthday, String address) {
+        this.username = "";
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.gender = gender;
+        this.email = "";
+        this.phone = "";
+        this.birthday = birthday;
+        this.address = address;
+        this.password = "".getBytes(StandardCharsets.UTF_8);
+    }
+
+    public User(String username, String email, String phone, byte[] password) {
+        this.username = username;
+        this.firstname = "";
+        this.lastname = "";
+        this.gender = -1;
+        this.email = email;
+        this.phone = phone;
+        this.birthday = "";
+        this.address = "";
+        this.password = password;
+    }
+
+    public User(String password) {
+        this.password = password.getBytes(StandardCharsets.UTF_8);
+    }
+
 
     public String getUsername() {
         return username;
@@ -56,21 +87,6 @@ public class User {
 
     public String getBirthday() {
         return birthday;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", gender=" + gender +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                ", birthday='" + birthday + '\'' +
-                ", address='" + address + '\'' +
-                ", password=" + Arrays.toString(password) +
-                '}';
     }
 
     public String getAddress() {
@@ -117,12 +133,18 @@ public class User {
         this.password = password;
     }
 
-    public byte[] encodePassword(String pw){
-        return Base64.encodeBase64(pw.getBytes(StandardCharsets.UTF_8));
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", gender=" + gender +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", birthday='" + birthday + '\'' +
+                ", address='" + address + '\'' +
+                ", password=" + Arrays.toString(password) +
+                '}';
     }
-
-    public String decodePassword(byte[] epw){
-        return new String(Base64.decodeBase64(epw), StandardCharsets.UTF_8);
-    }
-
 }

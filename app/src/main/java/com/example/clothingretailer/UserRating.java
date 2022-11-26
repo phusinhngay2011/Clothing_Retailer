@@ -35,4 +35,13 @@ public class UserRating {
     public void setRate(int rate) {
         this.rate = rate;
     }
+
+    @Override
+    public String toString() {
+        return "UserRating{" +
+                "item_id='" + item_id + '\'' +
+                ", username='" + username + '\'' +
+                ", rate=" + rate +
+                '}';
+    }
 }

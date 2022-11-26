@@ -25,4 +25,12 @@ public class UserPreferences {
     public void setItem_id(String item_id) {
         this.item_id = item_id;
     }
+
+    @Override
+    public String toString() {
+        return "UserPreferences{" +
+                "username='" + username + '\'' +
+                ", item_id='" + item_id + '\'' +
+                '}';
+    }
 }

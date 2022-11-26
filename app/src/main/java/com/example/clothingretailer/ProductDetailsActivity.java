@@ -2,37 +2,29 @@ package com.example.clothingretailer;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
-
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.os.Bundle;
+import android.view.View;
+
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class MainActivity extends AppCompatActivity {
-
-
-    // For Slider
+public class ProductDetailsActivity extends AppCompatActivity {
     private ViewPager2 viewPager2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //setContentView(R.layout.activity_main);
-        //setContentView(R.layout.product_details);
-        //viewPager2Handler();
+        setContentView(R.layout.activity_product_details);
+        GenerateFindViewById_ProductDetails();
     }
-
+    private void GenerateFindViewById_ProductDetails() {
+        viewPager2 = findViewById(R.id.viewPagerClothingDetails);
+    }
 
     private void viewPager2Handler() {
         List<SliderItem> sliderItems = createSliderItem();
@@ -63,9 +55,6 @@ public class MainActivity extends AppCompatActivity {
         viewPager2.setPageTransformer(compositePageTransformer);
     }
 
-    private void GenerateFindViewById() {
-        viewPager2 = findViewById(R.id.viewPagerClothingDetails);
-    }
 
 
     private List<SliderItem> createSliderItem() {
@@ -79,6 +68,4 @@ public class MainActivity extends AppCompatActivity {
         return sliderItems;
     }
 
-
 }
-

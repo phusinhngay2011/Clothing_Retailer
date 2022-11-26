@@ -34,4 +34,13 @@ public class CartItem {
         this.item_id = item_id;
         this.count_item = count_item;
     }
+
+    @Override
+    public String toString() {
+        return "CartItem{" +
+                "cart_id='" + cart_id + '\'' +
+                ", item_id='" + item_id + '\'' +
+                ", count_item=" + count_item +
+                '}';
+    }
 }

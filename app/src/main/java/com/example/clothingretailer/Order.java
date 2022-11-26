@@ -55,4 +55,15 @@ public class Order {
     public void setPaid(boolean paid) {
         this.paid = paid;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "cart_id='" + cart_id + '\'' +
+                ", total_prices=" + total_prices +
+                ", shipping_fee=" + shipping_fee +
+                ", payment_method=" + payment_method +
+                ", paid=" + paid +
+                '}';
+    }
 }
