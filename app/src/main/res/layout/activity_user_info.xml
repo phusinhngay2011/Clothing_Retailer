@@ -48,12 +48,13 @@
 
     <ScrollView
         android:layout_width="@dimen/account_page_width"
-        android:layout_height="605dp"
+        android:layout_height="535dp"
         android:layout_marginStart="@dimen/account_page_marginStart"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="85dp"
         android:scrollbars="none"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        >
 
         <LinearLayout
             android:layout_width="@dimen/account_page_width"
@@ -74,7 +75,8 @@
                 android:layout_height="@dimen/edittext_height"
                 android:background="@drawable/round_style"
                 android:paddingStart="10dp"
-                android:text="cristiano_ronaldo" />
+                android:text="cristiano_ronaldo"
+                android:maxLines="1"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -91,7 +93,8 @@
                 android:layout_height="@dimen/edittext_height"
                 android:background="@drawable/round_style"
                 android:paddingStart="10dp"
-                android:text="Cristiano" />
+                android:text="Cristiano"
+                android:maxLines="1"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -108,7 +111,8 @@
                 android:layout_height="@dimen/edittext_height"
                 android:background="@drawable/round_style"
                 android:paddingStart="10dp"
-                android:text="Ronaldo" />
+                android:text="Ronaldo"
+                android:maxLines="1"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -158,7 +162,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/edittext_height"
                 android:background="@drawable/round_style"
-                android:paddingStart="10dp" />
+                android:paddingStart="10dp"
+                android:maxLines="1"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -175,7 +180,8 @@
                 android:layout_height="@dimen/edittext_height"
                 android:background="@drawable/round_style"
                 android:paddingStart="10dp"
-                android:text="email@gmail.com" />
+                android:text="email@gmail.com"
+                android:maxLines="1"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -192,7 +198,8 @@
                 android:layout_height="@dimen/edittext_height"
                 android:background="@drawable/round_style"
                 android:paddingStart="10dp"
-                android:text="227 Nguyen Van Cu, Ward 4, District 5" />
+                android:text="227 Nguyen Van Cu, Ward 4, District 5"
+                android:maxLines="1"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -209,7 +216,8 @@
                 android:layout_height="@dimen/edittext_height"
                 android:background="@drawable/round_style"
                 android:paddingStart="10dp"
-                android:text="0123456789" />
+                android:text="0123456789"
+                android:maxLines="1"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -239,7 +247,8 @@
                 android:gravity="right"
                 android:paddingEnd="10dp"
                 android:password="true"
-                android:text="passdayne" />
+                android:text="passdayne"
+                android:maxLines="1"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -258,7 +267,8 @@
                 android:gravity="right"
                 android:paddingEnd="10dp"
                 android:password="true"
-                android:text="passdayne" />
+                android:text="passdayne"
+                android:maxLines="1"/>
 
             <TextView
                 android:layout_width="match_parent"

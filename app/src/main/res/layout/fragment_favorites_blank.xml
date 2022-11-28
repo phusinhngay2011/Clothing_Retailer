@@ -6,13 +6,12 @@
     tools:context=".FavoritesBlankFragment">
 
     <ImageView
+        android:id="@+id/heartInEmptyFavorites"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src = "@drawable/ic_love"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="350dp"
-        android:id="@+id/heartInEmptyFavorites"
-        ></ImageView>
+        android:src="@drawable/ic_love"></ImageView>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
