@@ -20,7 +20,7 @@
             android:name=".ShoppingCartActivity"
             android:exported="false" />
         <activity
-            android:name=".UserInfoActivity"
+            android:name=".FavoritesActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,7 +32,7 @@
             android:name=".SearchActivity"
             android:exported="false" />
         <activity
-            android:name=".FavoritesActivity"
+            android:name=".UserInfoActivity"
             android:exported="false" />
         <activity
             android:name=".ProductDetailsActivity"

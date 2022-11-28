@@ -1,31 +1,62 @@
 package com.example.clothingretailer;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.os.Bundle;
-import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 public class FavoritesActivity extends AppCompatActivity {
-
+    private static ArrayList<Item> mFavoriteItems;
+    private RecyclerView mRecyclerView;
+    private FavoriteItemAdapter mFavoriteItemAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorites);
-        Fragment emptyFav = new FavoritesBlankFragment();
-        replaceFragment(emptyFav);
+        mRecyclerView = findViewById(R.id.recyclerView_favorite);
+        mFavoriteItems = new ArrayList<Item>();
+        loadFavoriteItems();
+
+        mFavoriteItemAdapter = new FavoriteItemAdapter(this, mFavoriteItems);
+        mRecyclerView.setAdapter(mFavoriteItemAdapter);
+        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+
+//        Fragment emptyFav = new FavoritesBlankFragment();
+//        replaceFragment(emptyFav);
     }
 
-    private void replaceFragment(Fragment fragment){
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction =  fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.framelayoutFavorites, fragment);
-        fragmentTransaction.commit();
+//    private void replaceFragment(Fragment fragment){
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        FragmentTransaction fragmentTransaction =  fragmentManager.beginTransaction();
+//        fragmentTransaction.replace(R.id.framelayoutFavorites, fragment);
+//        fragmentTransaction.commit();
+//    }
+//
+//    public void toHome(View view) {
+//
+//    }
+
+    public static String formatPriceString(int price) {
+        String res = String.valueOf(price);
+        int len = res.length();
+        int position = len - 3;
+        for (int i = 0; i < len / 3; i++) {
+            res = res.substring(0, position) + '.' + res.substring(position);
+            position -= 3;
+        }
+        return res;
     }
 
-    public void toHome(View view) {
-
+    private void loadFavoriteItems() {
+        // Replace by loading data from DB
+        mFavoriteItems.add(new Item("001", "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description", String.valueOf(R.drawable.clothing_ex_details_2), 2999000, 4.75, 316));
+        mFavoriteItems.add(new Item("001", "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description", String.valueOf(R.drawable.clothing_ex_details_1), 2999000, 4.75, 316));
+        mFavoriteItems.add(new Item("001", "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description", String.valueOf(R.drawable.clothing_ex_details_3), 2999000, 4.75, 316));
+        mFavoriteItems.add(new Item("001", "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description", String.valueOf(R.drawable.clothing_ex_details_4), 2999000, 4.75, 316));
+        mFavoriteItems.add(new Item("001", "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description", String.valueOf(R.drawable.clothing_ex_details_5), 2999000, 4.75, 316));
     }
+
 }
