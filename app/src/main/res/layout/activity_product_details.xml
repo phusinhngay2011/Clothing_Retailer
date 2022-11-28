@@ -264,12 +264,59 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
-                android:text="Long pants are always an essential item to have in your wardrobe. The Essential Jogger Men's Sports Pants, made of 47% Sorona yarn, will provide comfort and ease in every movement, making them an excellent choice for your wardrobe.&#xA;&#xA;
-The low environmental impact of Sorona's high recycling rate
-When melted, 100% Sorona fabrics can be easily recycled back into PET (and PTT if desired). This means creating garments from safe and renewable materials that can be replaced, reused, and recycled after use in the fashion industry."
+                android:text="Long pants are always an essential item to have in your wardrobe. The Essential Jogger Men's Sports Pants, made of 47% Sorona yarn, will provide comfort and ease in every movement, making them an excellent choice for your wardrobe."
                 android:textColor="@color/black"
                 android:textSize="18dp"></TextView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="The low environmental impact of Sorona's high recycling rate
+When melted, 100% Sorona fabrics can be easily recycled back into PET (and PTT if desired). This means creating garments from safe and renewable materials that can be replaced, reused, and recycled after use in the fashion industry."
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:id = "@+id/desProduct1_2"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                ></TextView>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text=""
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:id = "@+id/desProduct2"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                ></TextView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:id = "@+id/desProduct2_1"
+                ></TextView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:id = "@+id/desProduct2_2"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                ></TextView>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -287,12 +334,70 @@ When melted, 100% Sorona fabrics can be easily recycled back into PET (and PTT i
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:text="- Long-leg pants with an elastic waist and drawstring for a comfortable fit.&#xA;
-- Material: 47% Polyester Sorona + 53% Polyester&#xA;
-- Using plant-based products Fiber SORONA&#xA;"
+                android:text="Long-leg pants with an elastic waist and drawstring for a comfortable fit."
                 android:textColor="@color/black"
                 android:textSize="18dp"
-                android:id = "@+id/Highlight"
+                android:id = "@+id/Highlight1"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                ></TextView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Material: 47% Polyester Sorona + 53% Polyester"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:id = "@+id/Highlight2"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                ></TextView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Using plant-based products Fiber SORONA"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:id = "@+id/Highlight3"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                ></TextView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:id = "@+id/Highlight4"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                ></TextView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:id = "@+id/Highlight5"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                ></TextView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:id = "@+id/Highlight6"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
