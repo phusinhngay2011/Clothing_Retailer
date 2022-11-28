@@ -1,13 +1,14 @@
 package com.example.clothingretailer;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
@@ -71,5 +72,10 @@ public class ShoppingCartActivity extends AppCompatActivity {
         mProductItems.add(new ProductItemInCart("002", "Adidas Lite Racer", R.drawable.ic_launcher_background, (float)38.5, "Black", 2, 2000000));
         mProductItems.add(new ProductItemInCart("001", "Adidas Stan Smith", R.drawable.ic_launcher_background, (float)35.5, "White", 1, 2500000));
         mProductItems.add(new ProductItemInCart("002", "Adidas Lite Racer", R.drawable.ic_launcher_background, (float)38.5, "Black", 2, 2000000));
+    }
+
+    public void toPayment(View view) {
+        Intent switchActivityIntent = new Intent(this, PaymentActivity.class);
+        startActivity(switchActivityIntent);
     }
 }
