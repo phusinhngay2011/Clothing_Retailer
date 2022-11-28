@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -75,7 +76,21 @@ public class ShoppingCartActivity extends AppCompatActivity {
     }
 
     public void toPayment(View view) {
+        savePriceTemporary();
         Intent switchActivityIntent = new Intent(this, PaymentActivity.class);
         startActivity(switchActivityIntent);
     }
+
+    private void savePriceTemporary(){
+        SharedPreferences.Editor editor = getSharedPreferences(
+                PREFERENCES_PRICE, MODE_PRIVATE).edit();
+        editor.putString(SUBTOTAL_PRICE, mTotalPrice.getText().toString());
+        editor.putString(SHIPPING_PRICE, mShippingFee.getText().toString());
+        editor.apply();
+    }
+
+    private String PREFERENCES_PRICE = "TOTAL_PRICE_TEMP";
+    private String SUBTOTAL_PRICE = "st";
+    private String SHIPPING_PRICE = "sp";
+
 }
