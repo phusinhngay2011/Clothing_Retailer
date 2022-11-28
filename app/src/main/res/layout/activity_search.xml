@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SearchActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="5dp"
+            android:paddingVertical="10dp">
+
+            <ImageButton
+                android:id="@+id/profile_button"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/profile_button_ripple"
+                android:minWidth="130dp"
+                android:paddingHorizontal="10dp"
+                android:src="@drawable/ic_user" />
+
+            <SearchView
+                android:id="@+id/home_search_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/searchbar_background"
+                android:paddingHorizontal="10dp"
+                android:longClickable="true">
+
+            </SearchView>
+
+            <ImageButton
+                android:id="@+id/cart_button"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/cart_button_ripple"
+                android:minWidth="130dp"
+                android:padding="0dp"
+                android:src="@drawable/ic_bag" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#000000" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="5dp">
+
+            <RelativeLayout
+                android:id="@+id/abc123"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:background="@drawable/categories_spinner_ripple"
+                android:clickable="true">
+                <Spinner
+                    android:id="@+id/gender_selector"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/genders"
+                    android:spinnerMode="dropdown"
+                    android:layout_marginHorizontal="5dp"
+                    android:paddingHorizontal="10dp"
+                    android:dropDownVerticalOffset="30dp"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:background="@drawable/categories_spinner_ripple">
+                <Spinner
+                    android:id="@+id/clothes_type_selector"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:paddingHorizontal="10dp"
+                    android:entries="@array/clothes_types"
+                    android:spinnerMode="dropdown"
+                    android:dropDownVerticalOffset="30dp"/>
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/current_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:background="#FFFFFF"
+            android:scrollbars="vertical"
+            tools:listitem="@android:layout/simple_list_item_1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/show_more_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="20dp"
+            android:layout_gravity="center"
+            android:text="Show More"
+            android:textStyle="normal"
+            android:drawableRight="@drawable/ic_triangle_down"
+            android:drawablePadding="10dp"
+            android:background="@drawable/showmore_button_ripple"
+            />
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

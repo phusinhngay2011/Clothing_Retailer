@@ -8,6 +8,7 @@
     android:id= "@+id/SignUpGeneralInfLayout"
     tools:context=".SignUpGeneralInfoActivity"
     >
+
     <ImageView
         android:layout_width="@dimen/size_of_back_img_view"
         android:layout_height="@dimen/size_of_back_img_view"

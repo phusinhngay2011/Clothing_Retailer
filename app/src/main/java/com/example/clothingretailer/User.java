@@ -16,11 +16,11 @@ public class User {
     private String phone;
     private String birthday;
     private String address;
-    private byte[] password;
+    private String password;
 
     public User(String username, String firstname, String lastname, int gender,
                 String email, String phone, String birthday, String address,
-                byte[] password) {
+                String password) {
         this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -41,10 +41,10 @@ public class User {
         this.phone = "";
         this.birthday = birthday;
         this.address = address;
-        this.password = "".getBytes(StandardCharsets.UTF_8);
+        this.password = "";
     }
 
-    public User(String username, String email, String phone, byte[] password) {
+    public User(String username, String email, String phone, String password) {
         this.username = username;
         this.firstname = "";
         this.lastname = "";
@@ -55,9 +55,10 @@ public class User {
         this.address = "";
         this.password = password;
     }
+    public User(){}
 
     public User(String password) {
-        this.password = password.getBytes(StandardCharsets.UTF_8);
+        this.password = password;
     }
 
 
@@ -93,7 +94,7 @@ public class User {
         return address;
     }
 
-    public byte[] getPassword() {
+    public String getPassword() {
         return password;
     }
 
@@ -129,7 +130,7 @@ public class User {
         this.address = address;
     }
 
-    public void setPassword(byte[] password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -144,7 +145,7 @@ public class User {
                 ", phone='" + phone + '\'' +
                 ", birthday='" + birthday + '\'' +
                 ", address='" + address + '\'' +
-                ", password=" + Arrays.toString(password) +
+                ", password=" + password +
                 '}';
     }
 }

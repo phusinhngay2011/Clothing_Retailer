@@ -7,6 +7,7 @@
     tools:context=".SignUpMainInfoActivity"
     android:background="@drawable/background_sign_in"
     android:id ="@+id/SignUpFinalLayout">
+
     <ImageView
         android:layout_width="@dimen/size_of_back_img_view"
         android:layout_height="@dimen/size_of_back_img_view"
@@ -41,7 +42,7 @@
             android:textStyle="bold"></TextView>
 
         <EditText
-            android:id="@+id/usernameSignUpEditText"
+            android:id="@+id/usernameSignupET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/usernameSignUp"
@@ -61,7 +62,7 @@
             android:id="@+id/emailSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/usernameSignUpEditText"
+            android:layout_below="@id/usernameSignupET"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
             android:paddingLeft="20dp"
@@ -71,7 +72,7 @@
             android:textStyle="bold"></TextView>
 
         <EditText
-            android:id="@+id/emailSignUpEditText"
+            android:id="@+id/emailSignupET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/emailSignUp"
@@ -88,10 +89,10 @@
             android:textSize="20dp"></EditText>
 
         <EditText
-            android:id="@+id/phoneSignUpEditText"
+            android:id="@+id/phoneSignupET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/emailSignUpEditText"
+            android:layout_below="@id/emailSignupET"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
@@ -108,9 +109,8 @@
             android:id="@+id/passwordSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/phoneSignUpEditText"
+            android:layout_below="@id/phoneSignupET"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
             android:paddingLeft="20dp"
             android:text="Password"
             android:textColor="@color/black"
@@ -118,7 +118,7 @@
             android:textStyle="bold"></TextView>
 
         <EditText
-            android:id="@+id/passwordSignUpEditText"
+            android:id="@+id/passwordSignupET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/passwordSignUp"
@@ -137,10 +137,10 @@
             ></EditText>
 
         <EditText
-            android:id="@+id/repasswordSignUpEditText"
+            android:id="@+id/repasswordSignupET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/passwordSignUpEditText"
+            android:layout_below="@id/passwordSignupET"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
@@ -154,14 +154,15 @@
             android:textSize="20dp"></EditText>
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/finishSignupBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/repasswordSignUpEditText"
+            android:layout_below="@+id/repasswordSignupET"
             android:layout_alignParentRight="true"
             android:layout_marginTop="30dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/rounded_button_states"
-            android:onClick="toSignUpComplessness"
+            android:onClick="toSignUpCompleteness"
             android:paddingLeft="50dp"
             android:paddingRight="50dp"
             android:text="Finish"></androidx.appcompat.widget.AppCompatButton>

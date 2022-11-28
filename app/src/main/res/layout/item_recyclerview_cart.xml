@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="100dp">
+
+    <ImageView
+        android:id="@+id/item_image_cart"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_launcher_background" />
+
+    <TextView
+        android:id="@+id/item_name_cart"
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:lineHeight="20dp"
+        android:maxHeight="40dp"
+        android:maxLines="2"
+        android:text="Adidas Stand Smith All-White Customized Christmas 2022 "
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/item_image_cart"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/item_size_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="50dp"
+        android:text="Color: Black - Size: 35"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@id/item_image_cart"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="67dp"
+        android:text="đ"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@id/item_image_cart"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/item_price"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="67dp"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@id/item_image_cart"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/plus_button"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginEnd="10dp"
+        android:adjustViewBounds="true"
+        android:padding="2dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/plus_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/plus_image" />
+
+    <TextView
+        android:id="@+id/item_count"
+        android:layout_width="30dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginEnd="45dp"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/minus_button"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginEnd="86dp"
+        android:adjustViewBounds="true"
+        android:padding="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/minus_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/minus_image" />
+</androidx.constraintlayout.widget.ConstraintLayout>

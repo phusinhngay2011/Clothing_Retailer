@@ -2,6 +2,8 @@ package com.example.clothingretailer;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.compose.ui.graphics.Color;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
@@ -9,21 +11,33 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.RadioButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDetailsActivity extends AppCompatActivity {
     private ViewPager2 viewPager2;
-
+    RadioButton sizeSBtn, sizeMBtn, sizeLBtn, sizeXLBtn, sizeXXLBtn, size3XLBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
+
         GenerateFindViewById_ProductDetails();
+        viewPager2Handler();
+
+
     }
+
     private void GenerateFindViewById_ProductDetails() {
         viewPager2 = findViewById(R.id.viewPagerClothingDetails);
+        sizeSBtn = (RadioButton) findViewById(R.id.btnSizeS);
+        sizeMBtn = (RadioButton) findViewById(R.id.btnSizeM);
+        sizeLBtn = (RadioButton) findViewById(R.id.btnSizeL);
+        sizeXLBtn = (RadioButton) findViewById(R.id.btnSizeXL);
+        sizeXXLBtn = (RadioButton) findViewById(R.id.btnSizeXXL);
+        size3XLBtn = (RadioButton) findViewById(R.id.btnSize3XL);
     }
 
     private void viewPager2Handler() {
@@ -68,4 +82,74 @@ public class ProductDetailsActivity extends AppCompatActivity {
         return sliderItems;
     }
 
+
+    public void onSizeProduct(View view){
+        int selectedId = view.getId();
+        switch (selectedId){
+            case R.id.btnSizeS:
+                updateSizeProductRadioBtn(sizeSBtn);
+                break;
+            case R.id.btnSizeM:
+                updateSizeProductRadioBtn(sizeMBtn);
+                break;
+            case R.id.btnSizeL:
+                updateSizeProductRadioBtn(sizeLBtn);
+                break;
+            case R.id.btnSizeXL:
+                updateSizeProductRadioBtn(sizeXLBtn);
+                break;
+            case R.id.btnSizeXXL:
+                updateSizeProductRadioBtn(sizeXXLBtn);
+                break;
+            case R.id.btnSize3XL:
+                updateSizeProductRadioBtn(size3XLBtn);
+                break;
+        }
+    }
+
+    private void updateSizeProductRadioBtn(RadioButton selected){
+        sizeSBtn.setBackground(ContextCompat.getDrawable(
+                getApplicationContext(), R.drawable.rounded_btn_size_off));
+        sizeSBtn.setTextColor(getResources().getColor(R.color.black));
+
+        sizeMBtn.setBackground(ContextCompat.getDrawable(
+                getApplicationContext(), R.drawable.rounded_btn_size_off));
+        sizeMBtn.setTextColor(getResources().getColor(R.color.black));
+
+        sizeLBtn.setBackground(ContextCompat.getDrawable(
+                getApplicationContext(), R.drawable.rounded_btn_size_off));
+        sizeLBtn.setTextColor(getResources().getColor(R.color.black));
+
+        sizeXLBtn.setBackground(ContextCompat.getDrawable(
+                getApplicationContext(), R.drawable.rounded_btn_size_off));
+        sizeXLBtn.setTextColor(getResources().getColor(R.color.black));
+
+        sizeXXLBtn.setBackground(ContextCompat.getDrawable(
+                getApplicationContext(), R.drawable.rounded_btn_size_off));
+        sizeXXLBtn.setTextColor(getResources().getColor(R.color.black));
+
+        size3XLBtn.setBackground(ContextCompat.getDrawable(
+                getApplicationContext(), R.drawable.rounded_btn_size_off));
+        size3XLBtn.setTextColor(getResources().getColor(R.color.black));
+
+        selected.setBackground(ContextCompat.getDrawable(
+                getApplicationContext(), R.drawable.rounded_btn_size_on));
+        selected.setTextColor(getResources().getColor(R.color.white));
+    }
+
+    public void onClickAddtoCart(View view) {
+
+    }
+
+    public void onClickBuyNow(View view) {
+
+    }
+
+    public void onClickShareProduct(View view) {
+
+    }
+
+    public void onClickLikeProduct(View view) {
+
+    }
 }

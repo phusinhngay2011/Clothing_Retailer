@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,7 +15,10 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import java.nio.charset.StandardCharsets;
+import java.time.temporal.Temporal;
 import java.util.Calendar;
+import java.util.Map;
 
 public class SignUpGeneralInfoActivity extends AppCompatActivity {
     private EditText firstnameSignupET;
@@ -32,6 +36,15 @@ public class SignUpGeneralInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_general_info);
+
+        GenerateFindViewById_sign_up_general_inf();
+        User usr = getUserInfomationTemporary();
+
+        firstnameSignupET.setText(usr.getFirstname());
+        lastnameSignupET.setText(usr.getLastname());
+        birthdaySignupET.setText(usr.getBirthday());
+        addressSignupET.setText(usr.getAddress());
+
     }
     private void GenerateFindViewById_sign_up_general_inf() {
         firstnameSignupET = (EditText) findViewById(R.id.firstnameSignupET);
@@ -44,6 +57,7 @@ public class SignUpGeneralInfoActivity extends AppCompatActivity {
         femaleSignupRB = findViewById(R.id.femaleGenderSignupRB);
         customSignupRB = findViewById(R.id.customGenderSignupRB);
     }
+
     public void popUpDatePicker(View view){
         try {
             birthdaySignupET = findViewById(R.id.birthdaySignupET);
@@ -79,7 +93,6 @@ public class SignUpGeneralInfoActivity extends AppCompatActivity {
 
     public void toSignUpMain(View view){
         try{
-            GenerateFindViewById_sign_up_general_inf();
             String firstname = firstnameSignupET.getText().toString();
             String lastname = lastnameSignupET.getText().toString();
             String birthday = birthdaySignupET.getText().toString();
@@ -102,8 +115,24 @@ public class SignUpGeneralInfoActivity extends AppCompatActivity {
                 return;
             }
 
-            User usr = new User(firstname, lastname, genderType, birthday, address);
-            Toast.makeText(getApplicationContext(), usr.toString(), Toast.LENGTH_SHORT).show();
+
+            if(birthday.equals("")){
+                Toast.makeText(getApplicationContext(), "Birthday can not left blank", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if(address.equals("")){
+                Toast.makeText(getApplicationContext(), "Address can not left blank", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            User old = getUserInfomationTemporary();
+            User usr = new User(old.getUsername(), firstname, lastname, genderType,
+                    old.getEmail(), old.getPhone(), birthday, address, old.getPassword());
+            //Toast.makeText(getApplicationContext(), usr.toString(), Toast.LENGTH_SHORT).show();
+
+            // Lưu thông tin user tạm
+            saveUserInfomationTemporary(usr);
 
             Intent switchActivityIntent = new Intent(this, SignUpMainInfoActivity.class);
             startActivity(switchActivityIntent);
@@ -115,10 +144,55 @@ public class SignUpGeneralInfoActivity extends AppCompatActivity {
     }
 
     public void toSignIn(View view){
+        SharedPreferences.Editor editor = getSharedPreferences(
+                PREFERENCES_NAME, MODE_PRIVATE).edit();
+        editor.clear();
+        editor.apply();
         Intent switchActivityIntent = new Intent(this, SignInMainActivity.class);
         startActivity(switchActivityIntent);
     }
 
+    private void saveUserInfomationTemporary(User usr){
+        SharedPreferences.Editor editor = getSharedPreferences(
+                PREFERENCES_NAME, MODE_PRIVATE).edit();
+        editor.putString(USERNAME_KEY, usr.getUsername());
+        editor.putString(FIRSTNAME_KEY, usr.getFirstname());
+        editor.putString(LASTNAME_KEY, usr.getLastname());
+        editor.putInt(GENDER_KEY, usr.getGender());
+        editor.putString(EMAIL_KEY, usr.getEmail());
+        editor.putString(PHONE_KEY, usr.getPhone());
+        editor.putString(BIRTHDAY_KEY, usr.getBirthday());
+        editor.putString(ADDRESS_KEY, usr.getAddress());
+        editor.putString(PASSWORD_KEY, usr.getPassword().toString());
+        editor.apply();
+    }
+
+    private User getUserInfomationTemporary(){
+        User usr = new User();
+        SharedPreferences getInfo = getSharedPreferences(
+                PREFERENCES_NAME, MODE_PRIVATE);
+
+        usr.setUsername(getInfo.getString(USERNAME_KEY, ""));
+        usr.setFirstname(getInfo.getString(FIRSTNAME_KEY, ""));
+        usr.setLastname(getInfo.getString(LASTNAME_KEY, ""));
+        usr.setGender(getInfo.getInt(GENDER_KEY, 0));
+        usr.setEmail(getInfo.getString(EMAIL_KEY, ""));
+        usr.setPhone(getInfo.getString(PHONE_KEY, ""));
+        usr.setBirthday(getInfo.getString(BIRTHDAY_KEY,""));
+        usr.setAddress(getInfo.getString(ADDRESS_KEY, ""));
+        usr.setPassword(getInfo.getString(PASSWORD_KEY, ""));
 
 
+        return usr;
+    }
+    private String PREFERENCES_NAME = "USER_TEMP";
+    private String USERNAME_KEY = "usrn";
+    private String FIRSTNAME_KEY = "fn";
+    private String LASTNAME_KEY = "ln";
+    private String GENDER_KEY = "gd";
+    private String EMAIL_KEY = "em";
+    private String PHONE_KEY = "pn";
+    private String BIRTHDAY_KEY = "bd";
+    private String ADDRESS_KEY = "ad";
+    private String PASSWORD_KEY = "pw";
 }

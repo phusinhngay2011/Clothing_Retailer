@@ -3,6 +3,7 @@ package com.example.clothingretailer;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -19,6 +20,12 @@ public class SignInMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in_main);
         GenerateFindViewById_sign_in_main();
+
+        // Xoa du lieu tam
+        SharedPreferences.Editor editor = getSharedPreferences(
+                PREFERENCES_NAME, MODE_PRIVATE).edit();
+        editor.clear();
+        editor.apply();
     }
 
     private void GenerateFindViewById_sign_in_main() {
@@ -64,4 +71,5 @@ public class SignInMainActivity extends AppCompatActivity {
     public void onGoogleSigninOption(View view) {
     }
 
+    private String PREFERENCES_NAME = "USER_TEMP";
 }

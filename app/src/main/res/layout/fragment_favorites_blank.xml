@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FavoritesBlankFragment">
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src = "@drawable/ic_love"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="350dp"
+        android:id="@+id/heartInEmptyFavorites"
+        ></ImageView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Items added to your Favorites will be saved here"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="440dp"
+
+        ></TextView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="650dp"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/rounded_btn_size_on"
+        android:text="Shop now"
+        android:textColor="@color/white"
+        android:onClick="toHome"
+        ></androidx.appcompat.widget.AppCompatButton>
+
+</RelativeLayout>

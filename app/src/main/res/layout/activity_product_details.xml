@@ -24,6 +24,8 @@
             android:id="@+id/viewPagerClothingDetails"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_page_viewer_img"
+            android:layout_marginTop="-50dp"
+            android:layout_marginBottom="-50dp"
             android:paddingLeft="75sp"
             android:paddingRight="75sp"></androidx.viewpager2.widget.ViewPager2>
 
@@ -47,13 +49,16 @@
 
                 ></TextView>
 
-            <ImageButton
+            <CheckBox
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_margin="10dp"
-                android:background="@drawable/btn_heart"
+                android:background="@drawable/checkbox_like"
                 android:padding="10dp"
-                ></ImageButton>
+                android:onClick="onClickLikeProduct"
+                android:button="@null"
+                ></CheckBox>
+
         </LinearLayout>
 
         <LinearLayout
@@ -98,83 +103,62 @@
         </TextView>
 
         <HorizontalScrollView
+            android:id="@+id/SizeScrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/SizeText"
             android:fillViewport="true"
             android:measureAllChildren="true"
-            android:scrollbars="none"
-            android:id = "@+id/SizeScrollView">
+            android:scrollbars="none">
 
-            <LinearLayout
+            <RadioGroup
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
 
+                >
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/rounded_button_size"
-                    android:text="S"
-                    android:textSize="20dp"></androidx.appcompat.widget.AppCompatButton>
+                <RadioButton
+                    android:id="@+id/btnSizeS"
+                    style="@style/radioBtnStyle"
+                    android:background="@drawable/rounded_btn_size_off"
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/rounded_button_size"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
+                    android:text="S"></RadioButton>
+                <RadioButton
+                    android:id="@+id/btnSizeM"
+                    style = "@style/radioBtnStyle"
+                    android:background="@drawable/rounded_btn_size_on"
+                    android:textColor="@color/white"
                     android:text="M"
-                    android:textSize="20dp"></androidx.appcompat.widget.AppCompatButton>
-                <androidx.appcompat.widget.AppCompatButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/rounded_button_size"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
+                    ></RadioButton>
+                <RadioButton
+                    android:id="@+id/btnSizeL"
+                    style = "@style/radioBtnStyle"
+                    android:background="@drawable/rounded_btn_size_off"
                     android:text="L"
-                    android:textSize="20dp"></androidx.appcompat.widget.AppCompatButton>
-                <androidx.appcompat.widget.AppCompatButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/rounded_button_size"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
+                    ></RadioButton>
+                <RadioButton
+                    android:id="@+id/btnSizeXL"
+                    style = "@style/radioBtnStyle"
+                    android:background="@drawable/rounded_btn_size_off"
                     android:text="XL"
-                    android:textSize="20dp"></androidx.appcompat.widget.AppCompatButton>
-                <androidx.appcompat.widget.AppCompatButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/rounded_button_size"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
+                    ></RadioButton>
+                <RadioButton
+                    android:id="@+id/btnSizeXXL"
+                    style = "@style/radioBtnStyle"
+                    android:background="@drawable/rounded_btn_size_off"
                     android:text="XXL"
-                    android:textSize="20dp"></androidx.appcompat.widget.AppCompatButton>
-                <androidx.appcompat.widget.AppCompatButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/rounded_button_size"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
+                    ></RadioButton>
+                <RadioButton
+                    android:id="@+id/btnSize3XL"
+                    style = "@style/radioBtnStyle"
+                    android:background="@drawable/rounded_btn_size_off"
                     android:text="3XL"
-                    android:textSize="20dp"></androidx.appcompat.widget.AppCompatButton>
+                    ></RadioButton>
 
-            </LinearLayout>
+            </RadioGroup>
         </HorizontalScrollView>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -191,25 +175,26 @@
             android:paddingLeft="30dp"
             android:paddingRight="20dp"
             android:text="Add to cart"
-            android:textColor="@color/black"></androidx.appcompat.widget.AppCompatButton>
+            android:textColor="@color/black"
+            android:onClick="onClickAddtoCart"></androidx.appcompat.widget.AppCompatButton>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id = "@+id/BuyNow"
+            android:id="@+id/BuyNow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/addToCart"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
             android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
-            android:gravity="left|center_vertical"
-            android:paddingLeft="30dp"
-            android:text="Buy now"
-            android:textColor="@color/white"
-            android:drawableRight="@drawable/ic_baseline_arrow_right_alt_24"
-            android:paddingRight="20dp"
             android:background="@drawable/rounded_btn_buy_now"
-            ></androidx.appcompat.widget.AppCompatButton>
+            android:drawableRight="@drawable/ic_baseline_arrow_right_alt_24"
+            android:gravity="left|center_vertical"
+            android:onClick="onClickBuyNow"
+            android:paddingLeft="30dp"
+            android:paddingRight="20dp"
+            android:text="Buy now"
+            android:textColor="@color/white"></androidx.appcompat.widget.AppCompatButton>
 
         <LinearLayout
             android:id="@+id/paymentMethodsLayout"
@@ -246,6 +231,7 @@
                 android:layout_below="@id/paymentMethodsLayout"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="170dp"
+                android:onClick="onClickShareProduct"
                 android:src="@drawable/ic_share"></ImageView>
         </LinearLayout>
 
@@ -269,18 +255,18 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 ></TextView>
+
             <TextView
+                android:id="@+id/desProduct1_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
                 android:text="Long pants are always an essential item to have in your wardrobe. The Essential Jogger Men's Sports Pants, made of 47% Sorona yarn, will provide comfort and ease in every movement, making them an excellent choice for your wardrobe."
                 android:textColor="@color/black"
-                android:textSize="18dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
-                android:id = "@+id/desProduct1_1"
-                ></TextView>
+                android:textSize="18dp"></TextView>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -442,13 +428,14 @@ When melted, 100% Sorona fabrics can be easily recycled back into PET (and PTT i
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 >
+
                 <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/ic_baseline_chat_24"
+                    android:layout_width="39dp"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="250dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_baseline_chat_24"
 
                     ></ImageView>
                 <ImageView

@@ -14,7 +14,9 @@ public class SignUpCompletenessActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up_completeness);
     }
     public void toSignIn(View view){
+
         Intent switchActivityIntent = new Intent(this, SignInMainActivity.class);
         startActivity(switchActivityIntent);
+
     }
 }
