@@ -17,6 +17,7 @@
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/drawable/ic_baseline_remove_red_eye_24.xml" value="0.141" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/drawable/ic_baseline_vpn_key_24.xml" value="0.141" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/drawable/ic_launcher_background.xml" value="0.141" />
+        <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/drawable/map_bg_box.xml" value="0.1" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/drawable/rounded_bg.xml" value="0.175" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/drawable/rounded_btn_add_to_cart.xml" value="0.1" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/drawable/rounded_btn_buy_now.xml" value="0.1" />
@@ -27,6 +28,7 @@
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/drawable/rounded_edittext_focused.xml" value="0.1315" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/drawable/rounded_edittext_states.xml" value="0.141" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/drawable/spinner_bg.xml" value="0.116" />
+        <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/activity_about_us.xml" value="0.16666666666666666" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/activity_favorites.xml" value="0.22" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/activity_main.xml" value="0.17135416666666667" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/activity_payment.xml" value="0.1405982905982906" />
@@ -39,10 +41,15 @@
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/activity_sign_up_main_info.xml" value="0.1405982905982906" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/activity_sign_up_welcome.xml" value="0.1405982905982906" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/activity_user_info.xml" value="0.1405982905982906" />
+        <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/custom_branch_spinner.xml" value="0.22" />
+        <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/display_google_map_layout.xml" value="0.12393162393162394" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/fragment_favorites.xml" value="0.12454710144927536" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/fragment_favorites_blank.xml" value="0.1" />
+        <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/fragment_map.xml" value="0.1123931623931624" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/fragment_signup_general_information.xml" value="0.22" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/item_recyclerview_cart.xml" value="0.1405982905982906" />
+        <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/item_recyclerview_favorite.xml" value="0.16666666666666666" />
+        <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/place_order_successfully.xml" value="0.12393162393162394" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/product_details.xml" value="0.14666666666666667" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/recycler_view_row.xml" value="0.1405982905982906" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/sign_in_main.xml" value="0.25" />
