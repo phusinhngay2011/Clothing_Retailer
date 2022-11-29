@@ -70,8 +70,9 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String ORDER_SHIPPING_FEE = "shipping_fee";
     private static final String ORDER_PAYMENT_METHOD = "payment_method";
     private static final String ORDER_PAID = "paid";
-    SQLiteDatabase db;
-    boolean read_mode, write_mode;
+    SQLiteDatabase read_db = null;
+    SQLiteDatabase write_db = null;
+
 
     public DBHandler(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VER);
@@ -157,31 +158,25 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public void open_DB_for_read()
     {
-        if (read_mode == false && write_mode == true)
+        if (this.read_db == null)
         {
-            if (db != null)
-                db.close();
-            db = this.getReadableDatabase();
-            read_mode = true;
-            write_mode = false;
+            this.read_db = this.getReadableDatabase();
         }
     }
 
     public void open_DB_for_write()
     {
-        if (write_mode == false && read_mode == true)
-        {
-            if (db != null)
-                db.close();
-            db = this.getWritableDatabase();
-            read_mode = false;
-            write_mode = true;
+        if (this.write_db == null){
+            this.write_db = this.getWritableDatabase();
         }
     }
 
     public void close_DB()
     {
-        db.close();
+        if (read_db != null)
+            read_db.close();
+        if (write_db != null)
+            write_db.close();
     }
 
     public void add_user(String username, String password, String firstname, String lastname, int gender, String email, String phone, String birthday, String address)
@@ -197,7 +192,7 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(USER_PHONE, phone);
         values.put(USER_BIRTHDAY, birthday);
         values.put(USER_ADDRESS, address);
-        this.db.insert(USER_TABLE, null, values);
+        this.write_db.insert(USER_TABLE, null, values);
     }
 
     @SuppressLint("Range")
@@ -227,7 +222,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 selectionArgs = new String[] {password};
             }
         }
-        Cursor cursor = db.query(USER_TABLE, null, selection, selectionArgs, null, null, null);
+        Cursor cursor = read_db.query(USER_TABLE, null, selection, selectionArgs, null, null, null);
         ArrayList<User> result = new ArrayList<User>();
 
         if (cursor != null)
