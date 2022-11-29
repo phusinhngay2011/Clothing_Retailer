@@ -2,21 +2,22 @@ package com.example.clothingretailer;
 
 // Đánh giá sản phẩm
 public class UserRating {
-    private String item_id; // PRIMARY KEY
+    private int item_id; // PRIMARY KEY
     private String username; // PRIMARY KEY
-    private int rate;
+    private float rating_score;
 
-    public UserRating(String item_id, String username, int rate) {
+    public UserRating(int item_id, String username, float rating_score) {
         this.item_id = item_id;
         this.username = username;
-        this.rate = rate;
+        this.rating_score = rating_score;
     }
 
-    public String getItem_id() {
+
+    public int getItem_id() {
         return item_id;
     }
 
-    public void setItem_id(String item_id) {
+    public void setItem_id(int item_id) {
         this.item_id = item_id;
     }
 
@@ -28,12 +29,12 @@ public class UserRating {
         this.username = username;
     }
 
-    public int getRate() {
-        return rate;
+    public float getRating_score() {
+        return rating_score;
     }
 
-    public void setRate(int rate) {
-        this.rate = rate;
+    public void setRating_score(float rating_score) {
+        this.rating_score = rating_score;
     }
 
     @Override
@@ -41,7 +42,8 @@ public class UserRating {
         return "UserRating{" +
                 "item_id='" + item_id + '\'' +
                 ", username='" + username + '\'' +
-                ", rate=" + rate +
+                ", rating_score=" + rating_score +
                 '}';
     }
+
 }

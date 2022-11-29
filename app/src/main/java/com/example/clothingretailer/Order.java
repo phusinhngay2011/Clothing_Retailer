@@ -1,58 +1,57 @@
 package com.example.clothingretailer;
 
 public class Order {
-    private String cart_id; // PRIMARY KEY
-    private double total_prices;
-    private double shipping_fee;
-    private int payment_method;
-    private boolean paid;
+    private int cart_id; // PRIMARY KEY
+    private int total_price;
+    private int shipping_fee;
+    private String payment_method;
+    private int paid;
 
-    public Order(String cart_id, double total_prices,
-                 double shipping_fee, int payment_method, boolean paid) {
+    public Order(int cart_id, int total_price, int shipping_fee, String payment_method, int paid) {
         this.cart_id = cart_id;
-        this.total_prices = total_prices;
+        this.total_price = total_price;
         this.shipping_fee = shipping_fee;
         this.payment_method = payment_method;
         this.paid = paid;
     }
 
-    public String getCart_id() {
+    public int getCart_id() {
         return cart_id;
     }
 
-    public void setCart_id(String cart_id) {
+    public void setCart_id(int cart_id) {
         this.cart_id = cart_id;
     }
 
-    public double getTotal_prices() {
-        return total_prices;
+    public int getTotal_price() {
+        return total_price;
     }
 
-    public void setTotal_prices(double total_prices) {
-        this.total_prices = total_prices;
+    public void setTotal_price(int total_price) {
+        this.total_price = total_price;
     }
 
-    public double getShipping_fee() {
+    public int getShipping_fee() {
         return shipping_fee;
     }
 
-    public void setShipping_fee(double shipping_fee) {
+    public void setShipping_fee(int shipping_fee) {
         this.shipping_fee = shipping_fee;
     }
 
-    public int getPayment_method() {
+    public String getPayment_method() {
         return payment_method;
     }
 
-    public void setPayment_method(int payment_method) {
+    public void setPayment_method(String payment_method) {
         this.payment_method = payment_method;
     }
 
-    public boolean isPaid() {
+    public int getPaid() {
         return paid;
     }
 
-    public void setPaid(boolean paid) {
+    public void setPaid(int paid) {
         this.paid = paid;
     }
 
@@ -60,10 +59,11 @@ public class Order {
     public String toString() {
         return "Order{" +
                 "cart_id='" + cart_id + '\'' +
-                ", total_prices=" + total_prices +
+                ", total_price=" + total_price +
                 ", shipping_fee=" + shipping_fee +
                 ", payment_method=" + payment_method +
                 ", paid=" + paid +
                 '}';
     }
+
 }
