@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
@@ -36,14 +37,18 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 
-public class AboutUsActivity extends FragmentActivity implements
-        OnMapReadyCallback,
-        GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener,
-        LocationListener {
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+public class AboutUsActivity extends FragmentActivity implements OnMapReadyCallback
+//        ,
+//        GoogleApiClient.ConnectionCallbacks,
+//        GoogleApiClient.OnConnectionFailedListener,
+//        LocationListener
+{
+    private FusedLocationProviderClient fusedLocationClient;
+
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 49;
     GoogleMap mGoogleMap;
     GoogleApiClient mGoogleApiClient;
     LocationRequest mLocationRequest;
@@ -53,7 +58,6 @@ public class AboutUsActivity extends FragmentActivity implements
     FrameLayout ggMapFrameLayout;
     private Spinner spinner;
     private Marker[] markerStore = new Marker[5];
-    private Marker homeMarker;
     private final float zoomLevel = 16.0f;
     private float curZoomLevel;
 
@@ -65,7 +69,7 @@ public class AboutUsActivity extends FragmentActivity implements
         try {
             createSpinnerBranches();
             showOrHideFrameLayout();
-            checkLocationPermission();
+            //checkLocationPermission();
             SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().
                     findFragmentById(R.id.GGmapfragment);
             mapFragment.getMapAsync(this);
@@ -74,18 +78,6 @@ public class AboutUsActivity extends FragmentActivity implements
         }
     }
 
-    public void onOpenGoogleMap(View view) {
-        showOrHideFrameLayout();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        if (mGoogleApiClient != null) {
-            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-        }
-    }
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
@@ -100,9 +92,13 @@ public class AboutUsActivity extends FragmentActivity implements
                         .zIndex(1.00f)
                         .flat(true));
             }
-            mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(STORE[2], zoomLevel));
 
-            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        }
+        catch (Exception e) {
+            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT);
+        }
+    }
+           /* if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (ContextCompat.checkSelfPermission(this,
                         Manifest.permission.ACCESS_FINE_LOCATION)
                         == PackageManager.PERMISSION_GRANTED) {
@@ -125,6 +121,14 @@ public class AboutUsActivity extends FragmentActivity implements
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        if (mGoogleApiClient != null) {
+            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+        }
+    }
+
+    @Override
     public void onConnected(Bundle bundle) {
         mLocationRequest = new LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 1000)
                 .setWaitForAccurateLocation(false)
@@ -138,7 +142,10 @@ public class AboutUsActivity extends FragmentActivity implements
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
         }
     }
-
+    @Override
+    public void onConnectionSuspended(int i) {}
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {}
     @Override
     public void onLocationChanged(@NonNull Location location) {
         mLastLocation = location;
@@ -155,16 +162,7 @@ public class AboutUsActivity extends FragmentActivity implements
         mCurrLocationMarker = mGoogleMap.addMarker(markerOptions);
 
         //move map camera
-        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,11));
-    }
-
-    protected synchronized void buildGoogleApiClient() {
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
-        mGoogleApiClient.connect();
+        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoomLevel));
     }
 
 
@@ -217,14 +215,21 @@ public class AboutUsActivity extends FragmentActivity implements
             }
         }
     }
+    protected synchronized void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+        mGoogleApiClient.connect();
+    }
+*/
 
-    @Override
-    public void onConnectionSuspended(int i) {}
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {}
 
 
-
+    public void onOpenGoogleMap(View view) {
+        showOrHideFrameLayout();
+    }
     public void onHideMap(View view) {
         showOrHideFrameLayout();
     }
@@ -235,6 +240,7 @@ public class AboutUsActivity extends FragmentActivity implements
         else
             ggMapFrameLayout.setVisibility(View.VISIBLE);
     }
+
     public void createSpinnerBranches(){
         spinner = (Spinner) findViewById(R.id.branchSpinner);
         SpinnerAdapter spinnerAdapter = new BranchSpinnerAdapter(this, R.layout.custom_branch_spinner, BRANCH_NAME);
