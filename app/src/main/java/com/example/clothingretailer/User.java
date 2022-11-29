@@ -8,6 +8,7 @@ import java.util.Arrays;
 
 // Thông tin người dùng
 public class User {
+    private int id;
     private String username; // PRIMARY KEY
     private String firstname;
     private String lastname;
@@ -17,8 +18,10 @@ public class User {
     private String birthday;
     private String address;
     private String password;
+    public static final int MALE = 1;
+    public static final int FEMALE = 0;
 
-    public User(String username, String firstname, String lastname, int gender,
+    public User(int id, String username, String firstname, String lastname, int gender,
                 String email, String phone, String birthday, String address,
                 String password) {
         this.username = username;
@@ -137,6 +140,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
+                "id='" + id + '\'' +
                 "username='" + username + '\'' +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
@@ -147,5 +151,13 @@ public class User {
                 ", address='" + address + '\'' +
                 ", password=" + password +
                 '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

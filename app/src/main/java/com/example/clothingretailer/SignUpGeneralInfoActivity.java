@@ -127,7 +127,7 @@ public class SignUpGeneralInfoActivity extends AppCompatActivity {
             }
 
             User old = getUserInfomationTemporary();
-            User usr = new User(old.getUsername(), firstname, lastname, genderType,
+            User usr = new User(old.getId(), old.getUsername(), firstname, lastname, genderType,
                     old.getEmail(), old.getPhone(), birthday, address, old.getPassword());
             //Toast.makeText(getApplicationContext(), usr.toString(), Toast.LENGTH_SHORT).show();
 
