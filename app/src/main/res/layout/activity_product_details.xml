@@ -23,11 +23,12 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPagerClothingDetails"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height_page_viewer_img"
+            android:layout_height="650dp"
             android:layout_marginTop="-50dp"
-            android:layout_marginBottom="-50dp"
+            android:layout_marginBottom="-75dp"
             android:paddingLeft="75sp"
-            android:paddingRight="75sp"></androidx.viewpager2.widget.ViewPager2>
+            android:paddingRight="75sp"
+            android:onClick="toHome"></androidx.viewpager2.widget.ViewPager2>
 
         <LinearLayout
             android:id="@+id/TitleAndLikeLayout"
@@ -73,7 +74,7 @@
                 android:layout_below="@id/TitleAndLikeLayout"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:text="$14.09"
+                android:text="d350.000"
                 android:textColor="@color/black"
                 android:textSize="20dp"
                 android:textStyle="bold"></TextView>

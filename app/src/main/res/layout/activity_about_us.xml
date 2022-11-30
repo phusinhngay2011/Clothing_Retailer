@@ -5,17 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AboutUsActivity">
-    <ImageButton
-        android:id="@+id/back_button_aboutus"
+
+    <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#FFFFFF"
-        android:contentDescription="Back to Home Page"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="?attr/homeAsUpIndicator" />
+        android:layout_margin = "20dp"
+        android:padding="10dp"
+        android:src="@drawable/ic_cancel"
+        android:onClick="toHome"
+        android:layout_alignParentEnd="true"
+        >
+    </ImageView>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -28,12 +28,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
-                android:text="About Us"
-                android:textSize="30dp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
                 android:gravity="center_horizontal|center_vertical"
-                ></TextView>
+                android:text="About Us"
+                android:textColor="@color/black"
+                android:textSize="30dp"
+                android:textStyle="bold"></TextView>
 
             <ImageView
                 android:id="@+id/logoAboutUs"

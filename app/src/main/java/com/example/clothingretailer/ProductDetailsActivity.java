@@ -9,6 +9,7 @@ import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.provider.MediaStore;
@@ -138,7 +139,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
             updateRating(view.getId());
         else
             rating[4].setButtonDrawable(R.drawable.ic_baseline_star_border_50);
-
     }
 
     private void updateRating(int id) {
@@ -290,7 +290,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
     public void onClickLikeProduct(View view) {
 
     }
-
+    public void toHome(View view) {
+        Intent switchActivityIntent = new Intent(this, MainActivity.class);
+        startActivity(switchActivityIntent);
+    }
     private final String[] URL_IMGS= {
             "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/jogger-sorona19-up.jpg",
             "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/October2022/quan-essential-jogger-soi-sorona-den-2_4.jpg",
