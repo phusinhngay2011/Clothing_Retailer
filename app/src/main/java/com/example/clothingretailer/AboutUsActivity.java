@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.Toast;
@@ -37,15 +38,25 @@ public class AboutUsActivity extends FragmentActivity implements OnMapReadyCallb
     private FrameLayout inputLocFrameLayout;
     private EditText inputLocationEditText;
 
+
     private Spinner spinner;
     private Marker[] markerStore = new Marker[5];
     private final float zoomLevel = 16.0f;
     private float curZoomLevel;
+    private ImageButton mBackButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us);
+        mBackButton = findViewById(R.id.back_button_aboutus);
+        mBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
 
         try {
             ggMapFrameLayout = findViewById(R.id.frameLayoutMap);
@@ -62,6 +73,8 @@ public class AboutUsActivity extends FragmentActivity implements OnMapReadyCallb
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT);
         }
+
+
     }
 
 
