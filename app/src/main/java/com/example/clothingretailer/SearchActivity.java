@@ -26,13 +26,6 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-        cart_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
         showmore_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,4 +35,8 @@ public class SearchActivity extends AppCompatActivity {
     }
 
 
+    public void toShoppingCart(View view) {
+        Intent switchActivityIntent = new Intent(this, ShoppingCartActivity.class);
+        startActivity(switchActivityIntent);
+    }
 }

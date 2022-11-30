@@ -1,5 +1,6 @@
 package com.example.clothingretailer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -147,12 +148,18 @@ public class AboutUsActivity extends FragmentActivity implements OnMapReadyCallb
     }
 
 
+    public void toHome(View view) {
+        Intent switchActivityIntent = new Intent(this, MainActivity.class);
+        startActivity(switchActivityIntent);
+    }
+
     // Note: Các chi nhánh là không có thật
-    private final LatLng[] STORE = {new LatLng(10.8255013,106.687798),
+    private final LatLng[] STORE = {
+            new LatLng(10.8255013,106.687798),
             new LatLng(10.765372,106.6736618),
             new LatLng(10.7625768,106.6710036),
             new LatLng(10.776435,106.6642603),
-            new LatLng(10.7853291,106.7127872),
+            new LatLng(10.7626656,106.6645653),
             new LatLng(10.7385595,106.6068381)};
     private final String[] TITLE_STORE = {"Branch 1",
             "Branch 2", "Branch 3","Branch 4","Branch 5","Branch 6"};

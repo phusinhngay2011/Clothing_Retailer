@@ -1,6 +1,9 @@
 package com.example.clothingretailer;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -12,11 +15,15 @@ public class FavoritesActivity extends AppCompatActivity {
     private static ArrayList<Item> mFavoriteItems;
     private RecyclerView mRecyclerView;
     private FavoriteItemAdapter mFavoriteItemAdapter;
+    private static LinearLayout mEmptyFavoriteMessage;
+    private ImageButton mBackButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorites);
+        mBackButton = findViewById(R.id.back_button_favorites);
         mRecyclerView = findViewById(R.id.recyclerView_favorite);
+        mEmptyFavoriteMessage = findViewById(R.id.empty_favorite_message);
         mFavoriteItems = new ArrayList<Item>();
         loadFavoriteItems();
 
@@ -24,20 +31,23 @@ public class FavoritesActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(mFavoriteItemAdapter);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
-//        Fragment emptyFav = new FavoritesBlankFragment();
-//        replaceFragment(emptyFav);
+        checkEmpty();
+
+        mBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+
     }
 
-//    private void replaceFragment(Fragment fragment){
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction =  fragmentManager.beginTransaction();
-//        fragmentTransaction.replace(R.id.framelayoutFavorites, fragment);
-//        fragmentTransaction.commit();
-//    }
-//
-//    public void toHome(View view) {
-//
-//    }
+
+    public static void checkEmpty() {
+        if (mFavoriteItems.size() == 0) mEmptyFavoriteMessage.setVisibility(View.VISIBLE);
+        else mEmptyFavoriteMessage.setVisibility(View.INVISIBLE);
+    }
 
     public static String formatPriceString(int price) {
         String res = String.valueOf(price);

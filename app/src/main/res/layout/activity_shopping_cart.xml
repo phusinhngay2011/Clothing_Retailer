@@ -32,7 +32,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_cart"
         android:layout_width="match_parent"
-        android:layout_height="560dp"
+        android:layout_height="580dp"
         android:layout_marginTop="80dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="27dp"
             android:layout_marginBottom="105dp"
-            android:text="Total:"
+            android:text="Merchandise Subtotal:"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -85,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="27dp"
             android:layout_marginBottom="80dp"
-            android:text="Shipping Fee Included:"
+            android:text="Shipping Fee:"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
