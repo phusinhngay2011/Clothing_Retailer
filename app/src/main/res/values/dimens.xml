@@ -4,5 +4,5 @@
     <dimen name="account_page_width">340dp</dimen>
     <dimen name="account_page_marginStart">30dp</dimen>
     <dimen name="size_of_back_img_view"> 50dp </dimen>
-    <dimen name="height_page_viewer_img"> 50dp </dimen>
+    <dimen name="height_page_viewer_img"> 550dp </dimen>
    </resources>

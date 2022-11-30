@@ -19,7 +19,7 @@ public class TestGenerator {
         handler.add_user("username9", "password9", "firstname9", "lastname9", User.FEMALE, "email9", "phone9", "birthday9", "address9");
 
         // fill item table
-        handler.add_item("itemname1", Item.MALE, "type1", "dt1", "d1", "ht1", "h1", "path1", 1);
+        handler.add_item("itemname1", Item.MALE, "t-shirt", "dt1", "d1", "ht1", "h1", "link1", 1);
         handler.add_item("itemname2", Item.MALE, "type2", "dt2", "d2", "ht2", "h2", "path2", 2);
         handler.add_item("itemname3", Item.MALE, "type3", "dt3", "d3", "ht3", "h3", "path3", 3);
         handler.add_item("itemname4", Item.MALE, "type4", "dt4", "d4", "ht4", "h4", "path4", 4);

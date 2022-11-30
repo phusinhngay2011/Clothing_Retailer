@@ -10,8 +10,16 @@ import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
+import android.view.animation.TranslateAnimation;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +27,12 @@ import java.util.List;
 public class ProductDetailsActivity extends AppCompatActivity {
     private ViewPager2 viewPager2;
     RadioButton sizeSBtn, sizeMBtn, sizeLBtn, sizeXLBtn, sizeXXLBtn, size3XLBtn;
+    RadioButton blackBtn, whiteBtn, greyBtn, beBtn;
+    CheckBox[] rating = new CheckBox[5];
+    TextView ratingTV;
+    int onRating = 1;
+
+    private FrameLayout ratingFL;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +52,18 @@ public class ProductDetailsActivity extends AppCompatActivity {
         sizeXLBtn = (RadioButton) findViewById(R.id.btnSizeXL);
         sizeXXLBtn = (RadioButton) findViewById(R.id.btnSizeXXL);
         size3XLBtn = (RadioButton) findViewById(R.id.btnSize3XL);
+        blackBtn = (RadioButton) findViewById(R.id.colorBlackRB);
+        whiteBtn = (RadioButton) findViewById(R.id.colorWhiteRB);
+        greyBtn = (RadioButton) findViewById(R.id.colorGreyRB);
+        beBtn = (RadioButton) findViewById(R.id.colorBeRB);
+
+        ratingFL = (FrameLayout) findViewById(R.id.frameRating);
+        rating[0] =  findViewById(R.id.rate1);
+        rating[1] =  findViewById(R.id.rate2);
+        rating[2] =  findViewById(R.id.rate3);
+        rating[3] =  findViewById(R.id.rate4);
+        rating[4] =  findViewById(R.id.rate5);
+        ratingTV = findViewById(R.id.displayRatingTV);
     }
 
     private void viewPager2Handler() {
@@ -69,8 +95,81 @@ public class ProductDetailsActivity extends AppCompatActivity {
         viewPager2.setPageTransformer(compositePageTransformer);
     }
 
+    private void showOrHideTV(TextView tv){
+        if(tv.getVisibility() == View.VISIBLE){
+            tv.setVisibility(View.GONE);
+        }
+        else{
+            tv.setVisibility(View.VISIBLE);
+        }
+    }
+    private void showOrHideFrameLayout(FrameLayout frameLayout) {
+        if (frameLayout.getVisibility() == View.VISIBLE){
+            TranslateAnimation animate = new TranslateAnimation(
+                    rating[4].getWidth(),                 // fromXDelta
+                    frameLayout.getWidth() + rating[4].getWidth() + 60,// toXDelta
+                    0,  // fromYDelta
+                    0);                // toYDelta
+            animate.setDuration(500);
+            animate.setFillAfter(true);
+            frameLayout.startAnimation(animate);
+            frameLayout.setVisibility(View.GONE);
+        }
+        else{
+            TranslateAnimation animate = new TranslateAnimation(
+                    frameLayout.getWidth() + rating[4].getWidth(),   // fromXDelta
+                    0, // toXDelta
+                    0,  // fromYDelta
+                    0);                // toYDelta
+            animate.setDuration(500);
+            animate.setFillAfter(true);
+            frameLayout.startAnimation(animate);
+            frameLayout.setVisibility(View.VISIBLE);
+        }
+    }
 
+    public void onRating(View view) {
+        onRating = 1 - onRating;
+        showOrHideFrameLayout(ratingFL);
+        showOrHideTV(ratingTV);
+        if(onRating == 1)
+            updateRating(view.getId());
+    }
 
+    private void updateRating(int id) {
+        int cnt = 0, i = 0;
+
+        switch (id) {
+            case R.id.rate1:
+                cnt = 1;
+                break;
+            case R.id.rate2:
+                cnt = 2;
+                break;
+            case R.id.rate3:
+                cnt = 3;
+                break;
+            case R.id.rate4:
+                cnt = 4;
+                break;
+            case R.id.rate5:
+                cnt = 5;
+                break;
+        }
+        for(; i < cnt; i++){
+            rating[i].setButtonDrawable(R.drawable.ic_baseline_star_rate_50);
+        }
+        for(i = cnt; i < rating.length; i++){
+            rating[i].setButtonDrawable(R.drawable.ic_baseline_star_border_50);
+        }
+        ratingTV.setText(new String(String.valueOf(cnt)));
+        ratingTV.setTextSize(20);
+
+    }
+
+    public void displayRating(View view) {
+
+    }
     private List<SliderItem> createSliderItem() {
         List<SliderItem> sliderItems = new ArrayList<>();
         sliderItems.add(new SliderItem(R.drawable.clothing_ex_details_1));
@@ -79,6 +178,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         sliderItems.add(new SliderItem(R.drawable.clothing_ex_details_4));
         sliderItems.add(new SliderItem(R.drawable.clothing_ex_details_5));
         sliderItems.add(new SliderItem(R.drawable.clothing_ex_details_6));
+
         return sliderItems;
     }
 
@@ -137,6 +237,41 @@ public class ProductDetailsActivity extends AppCompatActivity {
         selected.setTextColor(getResources().getColor(R.color.white));
     }
 
+    public void onColorProduct(View view){
+        int selectedId = view.getId();
+        RadioButton selected = findViewById(selectedId);
+        updateColorProductRadioBtn(selected);
+    }
+
+    private void updateColorProductRadioBtn(RadioButton selected){
+        blackBtn.setBackground(ContextCompat.getDrawable(
+                getApplicationContext(), R.drawable.radio_btn_black_off));
+        whiteBtn.setBackground(ContextCompat.getDrawable(
+                getApplicationContext(), R.drawable.radio_btn_white_off));
+        greyBtn.setBackground(ContextCompat.getDrawable(
+                getApplicationContext(), R.drawable.radio_btn_grey_off));
+        beBtn.setBackground(ContextCompat.getDrawable(
+                getApplicationContext(), R.drawable.radio_btn_be_off));
+
+        switch (selected.getId()){
+            case R.id.colorBlackRB:
+                selected.setBackground(ContextCompat.getDrawable(
+                        getApplicationContext(), R.drawable.radio_btn_black_on));
+                break;
+            case R.id.colorWhiteRB:
+                selected.setBackground(ContextCompat.getDrawable(
+                        getApplicationContext(), R.drawable.radio_btn_white_on));
+                break;
+            case R.id.colorGreyRB:
+                selected.setBackground(ContextCompat.getDrawable(
+                        getApplicationContext(), R.drawable.radio_btn_grey_on));
+                break;
+            case R.id.colorBeRB:
+                selected.setBackground(ContextCompat.getDrawable(
+                        getApplicationContext(), R.drawable.radio_btn_be_on));
+                break;
+        }
+    }
     public void onClickAddtoCart(View view) {
 
     }
@@ -152,4 +287,5 @@ public class ProductDetailsActivity extends AppCompatActivity {
     public void onClickLikeProduct(View view) {
 
     }
+
 }
