@@ -61,46 +61,156 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id = "@+id/PriceLayout"
+        <FrameLayout
+            android:id="@+id/PriceLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/TitleAndLikeLayout"
-            >
+            android:layout_below="@id/TitleAndLikeLayout">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/TitleAndLikeLayout"
-                android:layout_weight="0.7"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:text="$14.09"
                 android:textColor="@color/black"
                 android:textSize="20dp"
-                android:textStyle="bold"
-                ></TextView>
+                android:textStyle="bold"></TextView>
 
-            <ImageView
-                android:layout_width="15dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="0.3"
-                android:layout_marginLeft="20dp"
-                android:paddingLeft="30dp"
-                android:src="@drawable/ic_star"></ImageView>
-        </LinearLayout>
+            <FrameLayout
+                android:id="@+id/frameRating"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginLeft="135dp"
+                android:visibility="gone"
+                >
+
+                <CheckBox
+                    android:id="@+id/rate1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginRight="150dp"
+                    android:onClick="onRating"
+                    android:button="@drawable/ic_baseline_star_border_24"></CheckBox>
+
+                <CheckBox
+                    android:id="@+id/rate2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginRight="100dp"
+                    android:onClick="onRating"
+                    android:button="@drawable/ic_baseline_star_border_24"></CheckBox>
+
+                <CheckBox
+                    android:id="@+id/rate3"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginRight="50dp"
+                    android:onClick="onRating"
+                    android:button="@drawable/ic_baseline_star_border_24"></CheckBox>
+
+                <CheckBox
+                    android:id="@+id/rate4"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginLeft="20dp"
+                    android:onClick="onRating"
+                    android:button="@drawable/ic_baseline_star_border_24"></CheckBox>
+
+            </FrameLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Not rating yet"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:layout_gravity="right|center"
+                android:layout_marginRight="70dp"
+                android:id="@+id/displayRatingTV"
+                android:onClick="displayRating"
+                ></TextView>
+            <CheckBox
+                android:id="@+id/rate5"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="right|center_vertical|center_horizontal"
+                android:layout_marginRight="10dp"
+                android:onClick="onRating"
+                android:button="@drawable/ic_baseline_star_border_24"></CheckBox>
+        </FrameLayout>
         <TextView
-            android:id = "@+id/SizeText"
+            android:id="@+id/colorTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/PriceLayout"
-            android:layout_marginTop="20dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:text="Color:"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            ></TextView>
+
+        <HorizontalScrollView
+            android:id="@+id/colorScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/colorTV"
+            android:fillViewport="true"
+            android:measureAllChildren="true"
+            android:scrollbars="none">
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:id = "@+id/sizeRadioGroup"
+                >
+                <RadioButton
+                    android:id = "@+id/colorBlackRB"
+                    style="@style/colorRadioBtnStyle"
+                    android:background="@drawable/radio_btn_black_on"
+
+                    ></RadioButton>
+                <RadioButton
+                    android:id = "@+id/colorGreyRB"
+                    style="@style/colorRadioBtnStyle"
+                    android:background="@drawable/radio_btn_grey_off"
+                    ></RadioButton>
+                <RadioButton
+                    android:id = "@+id/colorWhiteRB"
+                    style="@style/colorRadioBtnStyle"
+                    android:background="@drawable/radio_btn_white_off"
+                    android:textColor="@color/white"
+                    ></RadioButton>
+                <RadioButton
+                    android:id = "@+id/colorBeRB"
+                    style="@style/colorRadioBtnStyle"
+                    android:background="@drawable/radio_btn_be_off"
+                    ></RadioButton>
+            </RadioGroup>
+        </HorizontalScrollView>
+
+        <TextView
+            android:id="@+id/SizeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/colorScrollView"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:text="Size:"
             android:textColor="@color/black"
             android:textSize="20dp"
-            android:textStyle="bold">
-        </TextView>
+            android:textStyle="bold"></TextView>
 
         <HorizontalScrollView
             android:id="@+id/SizeScrollView"
