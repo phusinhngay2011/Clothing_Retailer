@@ -24,6 +24,7 @@
         android:layout_marginTop="20dp"
         android:backgroundTint="#FFFFFF"
         android:contentDescription="Back to Home Page"
+        android:onClick="toHome"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="?attr/homeAsUpIndicator" />

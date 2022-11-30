@@ -77,6 +77,11 @@ public class ShoppingCartActivity extends AppCompatActivity {
         mProductItems.add(new ProductItemInCart("002", "Adidas Lite Racer", R.drawable.ic_launcher_background, (float)38.5, "Black", 2, 2000000));
     }
 
+    public void toHome(View view) {
+        Intent switchActivityIntent = new Intent(this, MainActivity.class);
+        startActivity(switchActivityIntent);
+    }
+
     public void toPayment(View view) {
         savePriceTemporary();
         Intent switchActivityIntent = new Intent(this, PaymentActivity.class);

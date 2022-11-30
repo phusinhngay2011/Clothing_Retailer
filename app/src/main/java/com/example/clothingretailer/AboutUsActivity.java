@@ -2,6 +2,7 @@ package com.example.clothingretailer;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -149,6 +150,7 @@ public class AboutUsActivity extends FragmentActivity implements OnMapReadyCallb
 
 
     public void toHome(View view) {
+        Log.d("log", "toHome called");
         Intent switchActivityIntent = new Intent(this, MainActivity.class);
         startActivity(switchActivityIntent);
     }
