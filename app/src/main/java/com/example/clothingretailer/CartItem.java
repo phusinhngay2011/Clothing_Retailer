@@ -1,38 +1,38 @@
 package com.example.clothingretailer;
 
 public class CartItem {
-    private String cart_id; // PRIMARY KEY
-    private String item_id; // PRIMARY KEY
-    private int count_item;
+    private int cart_id; // PRIMARY KEY
+    private int item_id; // PRIMARY KEY
+    private int item_count;
 
-    public String getCart_id() {
+    public CartItem(int cart_id, int item_id, int item_count) {
+        this.cart_id = cart_id;
+        this.item_id = item_id;
+        this.item_count = item_count;
+    }
+
+    public int getCart_id() {
         return cart_id;
     }
 
-    public void setCart_id(String cart_id) {
+    public void setCart_id(int cart_id) {
         this.cart_id = cart_id;
     }
 
-    public String getItem_id() {
+    public int getItem_id() {
         return item_id;
     }
 
-    public void setItem_id(String item_id) {
+    public void setItem_id(int item_id) {
         this.item_id = item_id;
     }
 
-    public int getCount_item() {
-        return count_item;
+    public int getItem_count() {
+        return item_count;
     }
 
-    public void setCount_item(int count_item) {
-        this.count_item = count_item;
-    }
-
-    public CartItem(String cart_id, String item_id, int count_item) {
-        this.cart_id = cart_id;
-        this.item_id = item_id;
-        this.count_item = count_item;
+    public void setItem_count(int item_count) {
+        this.item_count = item_count;
     }
 
     @Override
@@ -40,7 +40,8 @@ public class CartItem {
         return "CartItem{" +
                 "cart_id='" + cart_id + '\'' +
                 ", item_id='" + item_id + '\'' +
-                ", count_item=" + count_item +
+                ", item_count=" + item_count +
                 '}';
     }
+
 }

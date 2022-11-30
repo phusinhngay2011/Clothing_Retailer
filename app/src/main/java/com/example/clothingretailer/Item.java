@@ -2,34 +2,58 @@ package com.example.clothingretailer;
 
 // Thông tin chi tiết sản phẩm
 public class Item {
-    private String id; // PRIMARY KEY
+    private int id; // PRIMARY KEY
     private String name;
     private int gender;
-    private String category;
-    private String description_path;
+    private String type;
+    private String description_title;
+    private String description;
+    private String highlight_title;
+    private String highlight;
     private String image_path;
-    private double price;
-    private double rate;
-    private int rate_count;
+    private int price;
+    public static final int MALE = 1;
+    public static final int FEMALE = 2;
+    public static final int BOTH_GENDERS = 0;
 
-    public Item(String id, String name, int gender, String category, String description_path,
-                String image_path, double price, double rate, int rate_count) {
+
+    public Item(int id, String name, int gender, String type, String description_title, String description, String highlight_title, String highlight, String image_path, int price) {
         this.id = id;
         this.name = name;
         this.gender = gender;
-        this.category = category;
-        this.description_path = description_path;
+        this.type = type;
+        this.description_title = description_title;
+        this.description = description;
+        this.highlight_title = highlight_title;
+        this.highlight = highlight;
         this.image_path = image_path;
         this.price = price;
-        this.rate = rate;
-        this.rate_count = rate_count;
     }
 
-    public String getId() {
+
+
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", gender=" + gender +
+                ", type='" + type + '\'' +
+                ", description_title='" + description_title + '\'' +
+                ", description='" + description + '\'' +
+                ", highlight_title='" + highlight_title + '\'' +
+                ", highlight='" + highlight + '\'' +
+                ", image_path='" + image_path + '\'' +
+                ", price=" + price +
+                '}';
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -50,19 +74,43 @@ public class Item {
     }
 
     public String getType() {
-        return category;
+        return type;
     }
 
-    public void setType(String category) {
-        this.category = category;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getDescription_path() {
-        return description_path;
+    public String getDescription_title() {
+        return description_title;
     }
 
-    public void setDescription_path(String description_path) {
-        this.description_path = description_path;
+    public void setDescription_title(String description_title) {
+        this.description_title = description_title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getHighlight_title() {
+        return highlight_title;
+    }
+
+    public void setHighlight_title(String highlight_title) {
+        this.highlight_title = highlight_title;
+    }
+
+    public String getHighlight() {
+        return highlight;
+    }
+
+    public void setHighlight(String highlight) {
+        this.highlight = highlight;
     }
 
     public String getImage_path() {
@@ -73,42 +121,11 @@ public class Item {
         this.image_path = image_path;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
-    }
-
-    public double getRate() {
-        return rate;
-    }
-
-    public void setRate(double rate) {
-        this.rate = rate;
-    }
-
-    public int getRate_count() {
-        return rate_count;
-    }
-
-    public void setRate_count(int rate_count) {
-        this.rate_count = rate_count;
-    }
-
-    @Override
-    public String toString() {
-        return "Item{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", gender=" + gender +
-                ", category='" + category + '\'' +
-                ", description_path='" + description_path + '\'' +
-                ", image_path='" + image_path + '\'' +
-                ", price=" + price +
-                ", rate=" + rate +
-                ", rate_count=" + rate_count +
-                '}';
     }
 }

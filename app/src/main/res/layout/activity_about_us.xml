@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AboutUsActivity">
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin = "20dp"
+        android:padding="10dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_cancel"
+        >
+    </ImageView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:text="About Us"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:gravity="center_horizontal|center_vertical"
+                ></TextView>
+
+            <ImageView
+                android:id="@+id/logoAboutUs"
+                android:layout_width="500dp"
+                android:layout_height="500dp"
+                android:layout_marginTop="-50dp"
+                android:src="@drawable/logo_removebg"></ImageView>
+
+            <TextView
+                android:id="@+id/states"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/logoAboutUs"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="-210dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="We, BespokeTailor will become a representation of RESPONSIBILITY BUSINESS by conducting business with kindness, profit, and bringing practical and long-term values to customers, employees, partners, community, the environment, and shareholders."
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:textStyle="bold"></TextView>
+
+            <LinearLayout
+                android:id="@+id/layoutContacts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/states"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/gmail"
+
+                    ></ImageView>
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/facebook"></ImageView>
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/twitter"></ImageView>
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line1AboutUs"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_below="@id/layoutContacts"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/black"></View>
+
+            <ImageView
+                android:id="@+id/phoneICAboutUs"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_below="@id/line1AboutUs"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/phone"></ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/phoneICAboutUs"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="(123) 222 - 412 - 2314"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:id="@+id/phoneContactTextView"
+                ></TextView>
+
+            <View
+                android:id="@+id/line2AboutUs"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_below="@id/phoneContactTextView"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/black"></View>
+
+            <ImageView
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_below="@id/line2AboutUs"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/working_time"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/workingTimeIC"
+                ></ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/workingTimeIC"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="Monday - Friday&#xA;9am - 22pm&#xA;&#xA;Saturday-Sunday&#xA;9am - 12pm"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:id="@+id/workingTimeTextView"
+                ></TextView>
+            <View
+                android:id="@+id/line3AboutUs"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_below="@id/workingTimeTextView"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/black"></View>
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_below="@id/line3AboutUs"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:src ="@drawable/locations"
+                android:id="@+id/locationsIC"
+                ></ImageView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/locationsIC"
+                android:text="Our locations"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:id="@+id/ourLocationsTV"
+                ></TextView>
+
+            <TextView
+                android:id="@+id/openMapTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ourLocationsTV"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:onClick="onOpenGoogleMap"
+                android:text="Open map here"
+                android:textColor="#026806"
+                android:textSize="18dp"
+                android:textStyle="bold"></TextView>
+
+            <View
+                android:id="@+id/line4AboutUs"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_below="@id/openMapTV"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/black">
+
+            </View>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/line4AboutUs"
+                android:text="We always appreciate and anticipate receiving all customer feedback so that we can improve the service and product experience even further."
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="50dp"
+                >
+
+            </TextView>
+        </RelativeLayout>
+    </ScrollView>
+
+    <FrameLayout
+        android:id="@+id/frameLayoutMap"
+        android:layout_width="350dp"
+        android:layout_height="600dp"
+        android:layout_centerInParent="true">
+
+        <fragment
+            android:id="@+id/GGmapfragment"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="350dp"
+            android:layout_height="600dp"
+            ></fragment>
+
+        <ImageView
+            android:layout_width="350dp"
+            android:layout_height="600dp"
+            android:src="@drawable/map_bg_box" />
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin = "20dp"
+            android:layout_gravity="right"
+            android:src="@drawable/ic_cancel"
+            android:onClick="onHideMap"
+            >
+        </ImageView>
+
+        <Spinner
+            android:id="@+id/branchSpinner"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_gravity="left|top"
+            android:layout_margin="20dp"
+            android:spinnerMode="dialog"></Spinner>
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/zoom_in"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="130dp"
+            android:layout_marginRight="30dp"
+            android:onClick="onZoomInMap"
+            ></ImageView>
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/zoom_out"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="50dp"
+            android:layout_marginRight="30dp"
+            android:onClick="onZoomOutMap"
+            ></ImageView>
+    </FrameLayout>
+</RelativeLayout>

@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 
 import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class DBHandler extends SQLiteOpenHelper {
     private static final String DB_NAME = "AppDB";
@@ -38,7 +39,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String ITEM_HIGHLIGHT_TITLE = "highlight_title";
     private static final String ITEM_HIGHLIGHT = "highlight";
     private static final String ITEM_IMAGE_PATH = "image_path";
-    private static final String ITEM_PRICE = "ITEM_PRICE";
+    private static final String ITEM_PRICE = "price";
 
     private static final String RATING_TABLE = "USER_RATING";
     private static final String RATING_ITEM_ID = "item_id";
@@ -47,8 +48,8 @@ public class DBHandler extends SQLiteOpenHelper {
 
     private static final String QUANTITY_TABLE = "ITEM_QUANTITY";
     private static final String QUANTITY_ID = "id";
-    private static final String QUANTITY_SIZES = "sizes";
-    private static final String QUANTITY_COLORS = "colors";
+    private static final String QUANTITY_SIZE = "size";
+    private static final String QUANTITY_COLOR = "color";
     private static final String QUANTITY_COUNT = "count";
 
     private static final String LIKE_TABLE = "USER_LIKE";
@@ -110,8 +111,8 @@ public class DBHandler extends SQLiteOpenHelper {
                 + "PRIMARY KEY (" + RATING_ITEM_ID + ", " + RATING_USERNAME + "))",
         create_quantity_table_query = "CREATE TABLE " + QUANTITY_TABLE + " ("
                + QUANTITY_ID + " INTEGER PRIMARY KEY, "
-               + QUANTITY_SIZES + " TEXT, "
-               + QUANTITY_COLORS + " TEXT, "
+               + QUANTITY_SIZE + " TEXT, "
+               + QUANTITY_COLOR + " TEXT, "
                + QUANTITY_COUNT + " INTEGER)",
         create_like_table_query = "CREATE TABLE " + LIKE_TABLE + " ("
                 + LIKE_USERNAME + " TEXT, "
@@ -246,6 +247,438 @@ public class DBHandler extends SQLiteOpenHelper {
                     tmp_address = cursor.getString(cursor.getColumnIndex(USER_ADDRESS));
                     User tmp_user = new User(tmp_id, tmp_username, tmp_firstname, tmp_lastname, tmp_gender, tmp_email, tmp_phone, tmp_birthday, tmp_address, tmp_password);
                     result.add(tmp_user);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            if (result.size() > 0)
+                return result;
+            else
+                return null;
+        }
+
+        return null;
+    }
+
+    public void add_item(String name, int gender, String type, @Nullable String description_title, @Nullable String description, @Nullable String highlight_title, @Nullable String highlight, String image_path, int price)
+    {
+        open_DB_for_write();
+        ContentValues values = new ContentValues();
+        values.put(ITEM_NAME, name);
+        values.put(ITEM_GENDER, gender);
+        values.put(ITEM_TYPE, type);
+        values.put(ITEM_DESCRIPTION_TITLE, description_title);
+        values.put(ITEM_DESCRIPTION, description);
+        values.put(ITEM_HIGHLIGHT_TITLE, highlight_title);
+        values.put(ITEM_HIGHLIGHT, highlight);
+        values.put(ITEM_IMAGE_PATH, image_path);
+        values.put(ITEM_PRICE, price);
+        this.write_db.insert(ITEM_TABLE, null, values);
+    }
+
+    @SuppressLint("Range")
+    public ArrayList<Item> search_item(@Nullable String name, int gender, @Nullable String type)
+    {
+        open_DB_for_read();
+        name = name.toLowerCase();
+        String selection = null;
+        String[] selectionArgs = null;
+
+        if (!(name == null && gender == Item.BOTH_GENDERS && type == null))
+        {
+            selection = (name != null ? "LOWER(" + ITEM_NAME + ") = ?" : "") + (name != null && gender != Item.BOTH_GENDERS ? " AND " : "") + (gender != Item.BOTH_GENDERS ? ITEM_GENDER + " = ?" : "")
+                    + ((gender != Item.BOTH_GENDERS && type != null) || (name != null && type != null) ? " AND " : "") + (type != null ? ITEM_TYPE + " = ?" : "");
+            int count = 0;
+            count += (name != null ? 1 : 0) + (gender != Item.BOTH_GENDERS ? 1 : 0) + (type != null ? 1 : 0);
+            selectionArgs = new String[count];
+            if (type != null)
+            {
+                selectionArgs[count - 1] = type;
+                count--;
+            }
+            if (gender != Item.BOTH_GENDERS)
+            {
+                selectionArgs[count - 1] = String.valueOf(gender);
+                count--;
+            }
+            if (name != null)
+            {
+                selectionArgs[count - 1] = name;
+                count--;
+            }
+        }
+
+        Cursor cursor = read_db.query(ITEM_TABLE, null, selection, selectionArgs, null, null, null);
+        ArrayList<Item> result = new ArrayList<Item>();
+
+        if (cursor != null)
+        {
+            if (cursor.getCount() > 0)
+            {
+                cursor.moveToFirst();
+                do {
+                    int tmp_id, tmp_gender, tmp_price;
+                    String tmp_name, tmp_type, tmp_description_title, tmp_description, tmp_highlight_title, tmp_highlight, tmp_image_path;
+                    tmp_id = cursor.getInt(cursor.getColumnIndex(ITEM_ID));
+                    tmp_name = cursor.getString(cursor.getColumnIndex(ITEM_NAME));
+                    tmp_gender = cursor.getInt(cursor.getColumnIndex(ITEM_GENDER));
+                    tmp_type = cursor.getString(cursor.getColumnIndex(ITEM_TYPE));
+                    tmp_description_title = cursor.getString(cursor.getColumnIndex(ITEM_DESCRIPTION_TITLE));
+                    tmp_description = cursor.getString(cursor.getColumnIndex(ITEM_DESCRIPTION));
+                    tmp_highlight_title = cursor.getString(cursor.getColumnIndex(ITEM_HIGHLIGHT_TITLE));
+                    tmp_highlight = cursor.getString(cursor.getColumnIndex(ITEM_HIGHLIGHT));
+                    tmp_image_path = cursor.getString(cursor.getColumnIndex(ITEM_IMAGE_PATH));
+                    tmp_price = cursor.getInt(cursor.getColumnIndex(ITEM_PRICE));
+                    Item tmp_item = new Item(tmp_id, tmp_name, tmp_gender, tmp_type, tmp_description_title, tmp_description, tmp_highlight_title, tmp_highlight, tmp_image_path, tmp_price);
+                    result.add(tmp_item);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+
+            if (result.size() > 0)
+                return result;
+            else
+                return null;
+        }
+
+        return null;
+    }
+
+    public void add_rating(int item_id, String username, float rating_score)
+    {
+        open_DB_for_write();
+        ContentValues values = new ContentValues();
+        values.put(RATING_ITEM_ID, item_id);
+        values.put(RATING_USERNAME, username);
+        values.put(RATING_SCORE, rating_score);
+        write_db.insert(RATING_TABLE, null, values);
+    }
+
+    // item_id = -1 => match all items
+    // username = null => match all users
+    @SuppressLint("Range")
+    public ArrayList<UserRating> search_rating(int item_id, @Nullable String username)
+    {
+        open_DB_for_read();
+        String selection = null;
+        String[] selectionArgs = null;
+        int count = 0;
+        if (!(item_id == -1 && username == null))
+        {
+            selection = (item_id != -1 ? RATING_ITEM_ID +  " = ?" : "") + (item_id != -1 && username != null ? " AND " : "") + (username != null ? RATING_USERNAME + " = ?" : "");
+            count += (item_id != -1 ? 1 : 0) + (username != null ? 1 : 0);
+            selectionArgs = new String[count];
+            if (username != null)
+            {
+                selectionArgs[count - 1] = username;
+                count--;
+            }
+            if (item_id != -1)
+            {
+                selectionArgs[count - 1] = String.valueOf(item_id);
+                count--;
+            }
+        }
+
+        Cursor cursor = read_db.query(RATING_TABLE, null, selection, selectionArgs, null, null, null);
+        ArrayList<UserRating> result = new ArrayList<UserRating>();
+        if (cursor != null)
+        {
+            if (cursor.getCount()> 0)
+            {
+                cursor.moveToFirst();
+                do {
+                    int tmp_id;
+                    String tmp_username;
+                    float tmp_score;
+                    tmp_id = cursor.getInt(cursor.getColumnIndex(RATING_ITEM_ID));
+                    tmp_username = cursor.getString(cursor.getColumnIndex(RATING_USERNAME));
+                    tmp_score = cursor.getFloat(cursor.getColumnIndex(RATING_SCORE));
+                    UserRating tmp_user_rating = new UserRating(tmp_id, tmp_username, tmp_score);
+                    result.add(tmp_user_rating);
+
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+
+            if (result.size() > 0)
+                return result;
+            return null;
+        }
+
+        return null;
+    }
+
+    public void add_quantity(int item_id, @Nullable String size, @Nullable String color, int count)
+    {
+        open_DB_for_write();
+        ContentValues values = new ContentValues();
+        values.put(QUANTITY_ID, item_id);
+        values.put(QUANTITY_SIZE, size);
+        values.put(QUANTITY_COLOR, color);
+        values.put(QUANTITY_COUNT, count);
+        write_db.insert(QUANTITY_TABLE, null, values);
+    }
+
+    // item_id = -1 => match all items
+    // size = null => match all sizes
+    // color = null => match all colors
+    @SuppressLint("Range")
+    public ArrayList<ItemQuantity> search_quantity(int item_id, @Nullable String size, @Nullable String color)
+    {
+        open_DB_for_read();
+        String selection = null;
+        String[] selectionArgs = null;
+
+        if (!(item_id == -1 && size == null && color == null))
+        {
+            selection = (item_id != -1 ? QUANTITY_ID + " = ?" : "") + (item_id != -1 && size != null ? " AND " : "") + (size != null ? QUANTITY_SIZE + " = ?" : "")
+                    + ((item_id != -1 && color != null) || (size != null && color != null) ? " AND " : "") + (color != null ? QUANTITY_COLOR + " = ?" : "");
+            int count = 0;
+            count += (item_id != -1 ? 1 : 0) + (size != null ? 1 : 0) + (color != null ? 1 : 0);
+            selectionArgs = new String[count];
+            if (color != null)
+            {
+                selectionArgs[count - 1] = color;
+                count--;
+            }
+            if (size != null)
+            {
+                selectionArgs[count - 1] = size;
+                count--;
+            }
+            if (item_id != -1)
+            {
+                selectionArgs[count - 1] = String.valueOf(item_id);
+                count--;
+            }
+        }
+
+        Cursor cursor = read_db.query(QUANTITY_TABLE, null, selection, selectionArgs, null, null, null);
+        ArrayList<ItemQuantity> result = new ArrayList<ItemQuantity>();
+
+        if (cursor != null)
+        {
+            if (cursor.getCount() > 0)
+            {
+                cursor.moveToFirst();
+                do {
+                    int tmp_id, tmp_count;
+                    String tmp_size, tmp_color;
+
+                    tmp_id = cursor.getInt(cursor.getColumnIndex(QUANTITY_ID));
+                    tmp_size = cursor.getString(cursor.getColumnIndex(QUANTITY_SIZE));
+                    tmp_color = cursor.getString(cursor.getColumnIndex(QUANTITY_COLOR));
+                    tmp_count = cursor.getInt(cursor.getColumnIndex(QUANTITY_COUNT));
+
+                    ItemQuantity tmp_iq = new ItemQuantity(tmp_id, tmp_size, tmp_color, tmp_count);
+                    result.add(tmp_iq);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            if (result.size() > 0)
+                return result;
+            else
+                return null;
+        }
+
+        return null;
+    }
+
+    public void add_like(String username, int item_id)
+    {
+        open_DB_for_write();
+        ContentValues values = new ContentValues();
+        values.put(LIKE_USERNAME, username);
+        values.put(LIKE_ITEM_ID, item_id);
+        write_db.insert(LIKE_TABLE, null, values);
+    }
+
+    @SuppressLint("Range")
+    public ArrayList<UserLike> search_like(@Nullable String username)
+    {
+        open_DB_for_read();
+        String selection = (username != null ? LIKE_USERNAME + " = ?" : null);
+        String[] selectionArgs = (username != null ? new String[] {username} : null);
+
+        Cursor cursor = read_db.query(LIKE_TABLE, null, selection, selectionArgs, null, null, null);
+        ArrayList<UserLike> result = new ArrayList<UserLike>();
+
+        if (cursor != null)
+        {
+            if (cursor.getCount() > 0)
+            {
+                cursor.moveToFirst();
+                do {
+                    String tmp_username;
+                    int tmp_item_id;
+                    tmp_username = cursor.getString(cursor.getColumnIndex(LIKE_USERNAME));
+                    tmp_item_id = cursor.getInt(cursor.getColumnIndex(LIKE_ITEM_ID));
+
+                    UserLike tmp_user_like = new UserLike(tmp_username, tmp_item_id);
+                    result.add(tmp_user_like);
+
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+
+            if (result.size() > 0)
+                return result;
+            else
+                return null;
+        }
+
+        return null;
+    }
+
+    public void add_cart(String username)
+    {
+        open_DB_for_write();
+        ContentValues values = new ContentValues();
+        values.put(CART_USERNAME, username);
+        write_db.insert(CART_TABLE, null, values);
+    }
+
+    @SuppressLint("Range")
+    public ArrayList<Cart> search_cart(@Nullable String username)
+    {
+        open_DB_for_read();
+        String selection = (username != null ? CART_USERNAME + " = ?" : null);
+        String[] selectionArgs = (username != null ? new String[] {username} : null);
+
+        Cursor cursor = read_db.query(CART_TABLE, null, selection, selectionArgs, null, null, null);
+        ArrayList<Cart> result = new ArrayList<Cart>();
+
+        if (cursor != null)
+        {
+            if (cursor.getCount() > 0)
+            {
+                cursor.moveToFirst();
+                do {
+                    String tmp_username;
+                    int tmp_cart_id;
+                    tmp_cart_id = cursor.getInt(cursor.getColumnIndex(CART_ID));
+                    tmp_username = cursor.getString(cursor.getColumnIndex(CART_USERNAME));
+
+                    Cart tmp_cart = new Cart(tmp_cart_id, tmp_username);
+                    result.add(tmp_cart);
+
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+
+            if (result.size() > 0)
+                return result;
+            else
+                return null;
+        }
+
+        return null;
+    }
+
+    public void add_cart_item(int cart_id, int item_id, int item_count)
+    {
+        open_DB_for_write();
+        ContentValues values = new ContentValues();
+        values.put(CI_CART_ID, cart_id);
+        values.put(CI_ITEM_ID, item_count);
+        values.put(CI_ITEM_COUNT, item_count);
+        write_db.insert(CART_ITEM_TABLE, null, values);
+    }
+
+    // cart_id = -1 => match all carts
+    // item_id = -1 => match all items
+    @SuppressLint("Range")
+    public ArrayList<CartItem> search_cart_item(int cart_id, int item_id)
+    {
+        open_DB_for_read();
+        String selection = null;
+        String[] selectionArgs = null;
+
+        if (!(cart_id == -1 && item_id == -1))
+        {
+            selection = (cart_id != -1 ? CI_CART_ID + " = ?" : "") + (cart_id != -1 && item_id != -1 ? " AND " : "") + (item_id != -1 ? CI_ITEM_ID + " = ?" : "");
+            int count = 0;
+            count += (cart_id != -1 ? 1 : 0) + (item_id != -1 ? 1 : 0);
+            selectionArgs = new String[count];
+            if (item_id != -1)
+            {
+                selectionArgs[count - 1] = String.valueOf(item_id);
+                count--;
+            }
+            if (cart_id != -1)
+            {
+                selectionArgs[count - 1] = String.valueOf(cart_id);
+                count--;
+            }
+        }
+
+        Cursor cursor = read_db.query(CART_ITEM_TABLE, null, selection, selectionArgs, null, null, null);
+        ArrayList<CartItem> result = new ArrayList<CartItem>();
+
+        if (cursor != null)
+        {
+            if (cursor.getCount() > 0)
+            {
+                cursor.moveToFirst();
+                do {
+                    int tmp_cart_id, tmp_item_id, tmp_count;
+                    tmp_cart_id = cursor.getInt(cursor.getColumnIndex(CI_CART_ID));
+                    tmp_item_id = cursor.getInt(cursor.getColumnIndex(CI_ITEM_ID));
+                    tmp_count = cursor.getInt(cursor.getColumnIndex(CI_ITEM_COUNT));
+
+                    CartItem tmp_ci = new CartItem(tmp_cart_id, tmp_item_id, tmp_count);
+                    result.add(tmp_ci);
+
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+
+            if (result.size() > 0)
+                return result;
+            else
+                return null;
+        }
+
+        return null;
+    }
+
+    public void add_order(int cart_id, int total_price, int shipping_fee, String payment_method, int paid)
+    {
+        open_DB_for_write();
+        ContentValues values = new ContentValues();
+        values.put(ORDER_CART_ID, cart_id);
+        values.put(ORDER_TOTAL_PRICE, total_price);
+        values.put(ORDER_SHIPPING_FEE, shipping_fee);
+        values.put(ORDER_PAYMENT_METHOD, payment_method);
+        values.put(ORDER_PAID, paid);
+        write_db.insert(ORDER_TABLE, null, values);
+    }
+
+    @SuppressLint("Range")
+    public ArrayList<Order> search_order(int cart_id)
+    {
+        open_DB_for_read();
+        String selection = (cart_id != -1 ? ORDER_CART_ID + " = ?" : null);
+        String[] selectionArgs = (cart_id != -1 ? new String[] {String.valueOf(cart_id)} : null);
+
+        Cursor cursor = read_db.query(ORDER_TABLE, null, selection, selectionArgs, null, null, null);
+        ArrayList<Order> result = new ArrayList<Order>();
+
+        if (cursor != null)
+        {
+            if (cursor.getCount() > 0)
+            {
+                do {
+                    int tmp_cart_id, tmp_total_price, tmp_shipping_fee, tmp_paid;
+                    String tmp_payment_method;
+                    tmp_cart_id = cursor.getInt(cursor.getColumnIndex(ORDER_CART_ID));
+                    tmp_total_price = cursor.getInt(cursor.getColumnIndex(ORDER_TOTAL_PRICE));
+                    tmp_shipping_fee = cursor.getInt(cursor.getColumnIndex(ORDER_SHIPPING_FEE));
+                    tmp_paid = cursor.getInt(cursor.getColumnIndex(ORDER_PAID));
+                    tmp_payment_method = cursor.getString(cursor.getColumnIndex(ORDER_PAYMENT_METHOD));
+
+                    Order tmp_order = new Order(tmp_cart_id, tmp_total_price, tmp_shipping_fee, tmp_payment_method, tmp_paid);
+                    result.add(tmp_order);
                 } while (cursor.moveToNext());
             }
             cursor.close();

@@ -38,31 +38,8 @@ public class ShoppingCartActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         updateCart();
-        DBHandler handler = new DBHandler(getApplicationContext());
-        // ham add_user chua kiem tra trung nen may ong add 1 lan thoi
-        //handler.add_user("username14", "password14", "firstname14", "lastname14", User.MALE, "email14", "phone14", "birthday14", "address14");
-        ArrayList<User> res = handler.search_user("username3", "password3");
-        ArrayList<User> res2 = handler.search_user("username3", null);
-        ArrayList<User> res3 = handler.search_user("username15", "password15");
-        if (res != null)
-        {
-            System.out.println(res.size());
-            for (int i = 0; i < res.size(); i++)
-                System.out.println(res.get(i).toString());
-        }
-        if (res2 != null)
-        {
-            System.out.println(res2.size());
-            for (int i = 0; i < res2.size(); i++)
-                System.out.println(res2.get(i).toString());
-        }
-        if (res3 != null)
-        {
-            System.out.println(res3.size());
-            for (int i = 0; i < res3.size(); i++)
-                System.out.println(res3.get(i).toString());
-        }
-        handler.close_DB();
+        // chay cai nay 1 lan de generate test db
+        // TestGenerator.generate_test_db(getApplicationContext());
     }
 
     public static void updateCart() {

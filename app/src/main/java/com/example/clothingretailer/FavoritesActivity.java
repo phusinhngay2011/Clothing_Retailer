@@ -62,11 +62,11 @@ public class FavoritesActivity extends AppCompatActivity {
 
     private void loadFavoriteItems() {
         // Replace by loading data from DB
-        mFavoriteItems.add(new Item("001", "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description", String.valueOf(R.drawable.clothing_ex_details_2), 2999000, 4.75, 316));
-        mFavoriteItems.add(new Item("001", "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description", String.valueOf(R.drawable.clothing_ex_details_1), 2999000, 4.75, 316));
-        mFavoriteItems.add(new Item("001", "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description", String.valueOf(R.drawable.clothing_ex_details_3), 2999000, 4.75, 316));
-        mFavoriteItems.add(new Item("001", "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description", String.valueOf(R.drawable.clothing_ex_details_4), 2999000, 4.75, 316));
-        mFavoriteItems.add(new Item("001", "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description", String.valueOf(R.drawable.clothing_ex_details_5), 2999000, 4.75, 316));
+        mFavoriteItems.add(new Item(1, "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", null, null, null, null, String.valueOf(R.drawable.clothing_ex_details_2), 2999000));
+        mFavoriteItems.add(new Item(2, "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", null, null, null, null, String.valueOf(R.drawable.clothing_ex_details_1), 2999000));
+        mFavoriteItems.add(new Item(3, "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", null, null, null, null, String.valueOf(R.drawable.clothing_ex_details_3), 2999000));
+        mFavoriteItems.add(new Item(4, "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", null, null, null, null, String.valueOf(R.drawable.clothing_ex_details_4), 2999000));
+        mFavoriteItems.add(new Item(5, "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", null, null, null, null, String.valueOf(R.drawable.clothing_ex_details_5), 2999000));
     }
 
 }

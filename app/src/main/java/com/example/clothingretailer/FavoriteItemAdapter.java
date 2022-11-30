@@ -70,7 +70,7 @@ public class FavoriteItemAdapter extends RecyclerView.Adapter<FavoriteItemAdapte
         holder.mTextName.setText(item.getName());
         holder.mImageItem.setImageResource(Integer.valueOf(item.getImage_path()));
         holder.mTextPrice.setText(ShoppingCartActivity.formatPriceString((int)item.getPrice()));
-        holder.mTextRate.setText(String.valueOf(item.getRate()) + " (" + String.valueOf(item.getRate_count()) + ")");
+        //holder.mTextRate.setText(String.valueOf(item.getRate()) + " (" + String.valueOf(item.getRate_count()) + ")");
     }
 
     @Override
