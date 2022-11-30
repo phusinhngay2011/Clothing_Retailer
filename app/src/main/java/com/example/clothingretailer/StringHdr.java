@@ -26,27 +26,27 @@ public class StringHdr {
 
     public void setStr(String str) {
         this.str = str;
-        this.encode_str = Base64.encodeBase64String(str.getBytes());
+        //this.encode_str = Base64.encodeBase64String(str.getBytes());
     }
 
     public StringHdr(String str) {
         this.str = str;
-        this.encode_str = Base64.encodeBase64String(str.getBytes());
+        //this.encode_str = Base64.encodeBase64String(str.getBytes());
     }
 
     public StringHdr(String encode_str, String flag) {
         this.str = new String(Base64.decodeBase64(encode_str));
-        this.encode_str = encode_str;
+        //this.encode_str = encode_str;
     }
 
     public String encodePassword(){
-        encode_str = Base64.encodeBase64String(str.getBytes());
+        //encode_str = Base64.encodeBase64String(str.getBytes());
         return encode_str;
     }
 
-    public String decodePassword(){
-        return new String(Base64.decodeBase64(encode_str));
-    }
+    //public String decodePassword(){
+    //    return new String(Base64.decodeBase64(encode_str));
+    //}
 
     public boolean containAtLeastOne(String _str){
         for(int i = 0; i < _str.length(); i++){
