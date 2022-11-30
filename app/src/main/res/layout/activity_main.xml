@@ -38,7 +38,8 @@
             android:src="@drawable/ic_cart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:backgroundTint="@color/white"/>
+            android:backgroundTint="@color/white"
+            android:onClick="toShoppingCart"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -159,7 +160,8 @@
                         android:text="EXPLORE MORE"
                         android:background="@drawable/round_style"
                         android:backgroundTint="@color/black"
-                        android:textColor="@color/white"/>
+                        android:textColor="@color/white"
+                        android:onClick="toSearchActivity"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -111,4 +111,9 @@ public class PaymentActivity extends AppCompatActivity {
     public void toPlaceOrderSuccessfully(View view) {
         setContentView(R.layout.place_order_successfully);
     }
+
+    public void toHome(View view) {
+        Intent switchActivityIntent = new Intent(this, MainActivity.class);
+        startActivity(switchActivityIntent);
+    }
 }

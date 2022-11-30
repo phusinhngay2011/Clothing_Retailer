@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -71,6 +72,15 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String ORDER_SHIPPING_FEE = "shipping_fee";
     private static final String ORDER_PAYMENT_METHOD = "payment_method";
     private static final String ORDER_PAID = "paid";
+
+    private static final String NEW_ARRIVALS_TABLE = "NA_TABLE";
+    private static final String NA_ITEM_ID = "item_id";
+
+    private static final String TRENDING_FOR_MEN_TABLE = "TFM_TABLE";
+    private static final String TFM_ITEM_ID = "item_id";
+
+    private static final String TRENDING_FOR_WOMEN_TABLE = "TFW_TABLE";
+    private static final String TFW_ITEM_ID = "item_id";
     SQLiteDatabase read_db = null;
     SQLiteDatabase write_db = null;
 
@@ -131,7 +141,13 @@ public class DBHandler extends SQLiteOpenHelper {
                 + ORDER_TOTAL_PRICE + " INTEGER, "
                 + ORDER_SHIPPING_FEE + " INTEGER, "
                 + ORDER_PAYMENT_METHOD + " TEXT, "
-                + ORDER_PAID + " INTEGER)";
+                + ORDER_PAID + " INTEGER)",
+        create_new_arrival_table_query = "CREATE TABLE " + NEW_ARRIVALS_TABLE + " ("
+                + NA_ITEM_ID + " INTEGER PRIMARY KEY)",
+        create_trending_for_men_table_query = "CREATE TABLE " + TRENDING_FOR_MEN_TABLE + " ("
+                + TFM_ITEM_ID + " INTEGER PRIMARY KEY)",
+        create_trending_for_women_table_query = "CREATE TABLE " + TRENDING_FOR_WOMEN_TABLE + " ("
+                + TFW_ITEM_ID + " INTEGER PRIMARY KEY)";
 
         sqLiteDatabase.execSQL(create_user_table_query);
         sqLiteDatabase.execSQL(create_item_table_query);
@@ -141,6 +157,9 @@ public class DBHandler extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(create_cart_table_query);
         sqLiteDatabase.execSQL(create_ci_table_query);
         sqLiteDatabase.execSQL(create_order_table_query);
+        sqLiteDatabase.execSQL(create_new_arrival_table_query);
+        sqLiteDatabase.execSQL(create_trending_for_men_table_query);
+        sqLiteDatabase.execSQL(create_trending_for_women_table_query);
 
     }
 
@@ -154,6 +173,9 @@ public class DBHandler extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + CART_TABLE);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + CART_ITEM_TABLE);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + ORDER_TABLE);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + NEW_ARRIVALS_TABLE);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TRENDING_FOR_MEN_TABLE);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TRENDING_FOR_WOMEN_TABLE);
         onCreate(sqLiteDatabase);
     }
 
@@ -180,7 +202,7 @@ public class DBHandler extends SQLiteOpenHelper {
             write_db.close();
     }
 
-    public void add_user(String username, String password, String firstname, String lastname, int gender, String email, String phone, String birthday, String address)
+    public User add_user(String username, String password, String firstname, String lastname, int gender, String email, String phone, String birthday, String address)
     {
         open_DB_for_write();
         ContentValues values = new ContentValues();
@@ -193,7 +215,18 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(USER_PHONE, phone);
         values.put(USER_BIRTHDAY, birthday);
         values.put(USER_ADDRESS, address);
-        this.write_db.insert(USER_TABLE, null, values);
+        long res = this.write_db.insert(USER_TABLE, null, values);
+        if (res == -1)
+        {
+            return null;
+        }
+
+        ArrayList<User> users = search_user(username, password);
+        if (users != null)
+            if (users.size() > 0)
+                return users.get(0);
+
+        return null;
     }
 
     @SuppressLint("Range")
@@ -259,7 +292,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return null;
     }
 
-    public void add_item(String name, int gender, String type, @Nullable String description_title, @Nullable String description, @Nullable String highlight_title, @Nullable String highlight, String image_path, int price)
+    public Item add_item(String name, int gender, String type, @Nullable String description_title, @Nullable String description, @Nullable String highlight_title, @Nullable String highlight, String image_path, int price)
     {
         open_DB_for_write();
         ContentValues values = new ContentValues();
@@ -272,7 +305,16 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(ITEM_HIGHLIGHT, highlight);
         values.put(ITEM_IMAGE_PATH, image_path);
         values.put(ITEM_PRICE, price);
-        this.write_db.insert(ITEM_TABLE, null, values);
+        long res = this.write_db.insert(ITEM_TABLE, null, values);
+        if (res == -1)
+            return null;
+
+        ArrayList<Item> items = search_item(name, gender, type);
+        if (items != null)
+            if (items.size() > 0)
+                return items.get(0);
+
+        return null;
     }
 
     @SuppressLint("Range")
@@ -340,6 +382,49 @@ public class DBHandler extends SQLiteOpenHelper {
                 return null;
         }
 
+        return null;
+    }
+
+    // item_id = -1 => match all items
+    @SuppressLint("Range")
+    public ArrayList<Item> search_item_by_id(int item_id)
+    {
+        open_DB_for_read();
+        String selection = (item_id != -1 ? ITEM_ID + " = ?" : null);
+        String[] selectionArgs = (item_id != -1 ? new String[] {String.valueOf(item_id)} : null);
+
+        Cursor cursor = read_db.query(ITEM_TABLE, null, selection, selectionArgs, null, null, null);
+        ArrayList<Item> res = new ArrayList<Item>();
+
+        if (cursor != null)
+        {
+            if (cursor.getCount() > 0)
+            {
+                cursor.moveToFirst();
+                do {
+                    int tmp_id, tmp_gender, tmp_price;
+                    String tmp_name, tmp_type, tmp_description_title, tmp_description, tmp_highlight_title, tmp_highlight, tmp_image_path;
+                    tmp_id = cursor.getInt(cursor.getColumnIndex(ITEM_ID));
+                    tmp_name = cursor.getString(cursor.getColumnIndex(ITEM_NAME));
+                    tmp_gender = cursor.getInt(cursor.getColumnIndex(ITEM_GENDER));
+                    tmp_type = cursor.getString(cursor.getColumnIndex(ITEM_TYPE));
+                    tmp_description_title = cursor.getString(cursor.getColumnIndex(ITEM_DESCRIPTION_TITLE));
+                    tmp_description = cursor.getString(cursor.getColumnIndex(ITEM_DESCRIPTION));
+                    tmp_highlight_title = cursor.getString(cursor.getColumnIndex(ITEM_HIGHLIGHT_TITLE));
+                    tmp_highlight = cursor.getString(cursor.getColumnIndex(ITEM_HIGHLIGHT));
+                    tmp_image_path = cursor.getString(cursor.getColumnIndex(ITEM_IMAGE_PATH));
+                    tmp_price = cursor.getInt(cursor.getColumnIndex(ITEM_PRICE));
+                    Item tmp_item = new Item(tmp_id, tmp_name, tmp_gender, tmp_type, tmp_description_title, tmp_description, tmp_highlight_title, tmp_highlight, tmp_image_path, tmp_price);
+                    res.add(tmp_item);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+
+            if (res.size() > 0)
+                return res;
+            else
+                return null;
+        }
         return null;
     }
 
@@ -530,12 +615,71 @@ public class DBHandler extends SQLiteOpenHelper {
         return null;
     }
 
-    public void add_cart(String username)
+    // username = null => match all username
+    // item_id = -1 -> match all items
+    public void delete_like(@Nullable String username, int item_id)
+    {
+        open_DB_for_write();
+        String selection = null;
+        String[] selectionArgs = null;
+
+        if (!(username == null && item_id == -1))
+        {
+            selection = (username != null ? LIKE_USERNAME + " = ?": "") + (username != null && item_id != -1 ? " AND " : "") + (item_id != -1 ? LIKE_ITEM_ID + " = ?": "");
+            int count = 0;
+            count += (username != null ? 1 : 0) + (item_id != -1 ? 1 : 0);
+            selectionArgs = new String[count];
+            if (item_id != -1)
+            {
+                selectionArgs[count - 1] = String.valueOf(item_id);
+                count--;
+            }
+            if (username != null)
+            {
+                selectionArgs[count - 1] = username;
+                count--;
+            }
+        }
+
+        int rows_deleted = write_db.delete(LIKE_TABLE, selection, selectionArgs);
+    }
+
+    public void remove_cart(int cart_id)
+    {
+        open_DB_for_write();
+        String selection1 = CART_ID + " = ?", selection2 = CI_CART_ID + " = ?", selection3 = ORDER_CART_ID + " = ?";
+        String[] selectionArgs = new String[] {String.valueOf(cart_id)};
+        write_db.delete(CART_ITEM_TABLE, selection2, selectionArgs);
+        write_db.delete(ORDER_TABLE, selection3, selectionArgs);
+        write_db.delete(CART_TABLE, selection1, selectionArgs);
+    }
+
+    public Cart add_cart(String username)
     {
         open_DB_for_write();
         ContentValues values = new ContentValues();
         values.put(CART_USERNAME, username);
-        write_db.insert(CART_TABLE, null, values);
+        long res = write_db.insert(CART_TABLE, null, values);
+
+        if (res == -1)
+            return null;
+
+        int largest_id_index = 0;
+        int largest_id = 0;
+        ArrayList<Cart> list = search_cart(username);
+        if (list != null)
+            if (list.size() > 0)
+            {
+                for (int i = 0; i < list.size(); i++)
+                    if (list.get(i).getCart_id() > largest_id)
+                    {
+                        largest_id = list.get(i).getCart_id();
+                        largest_id_index = i;
+                    }
+                return list.get(largest_id_index);
+            }
+
+        return null;
     }
 
     @SuppressLint("Range")
@@ -684,6 +828,160 @@ public class DBHandler extends SQLiteOpenHelper {
             cursor.close();
             if (result.size() > 0)
                 return result;
+            else
+                return null;
+        }
+
+        return null;
+    }
+
+    public void add_na_item(int item_id)
+    {
+        try {
+            open_DB_for_write();
+            ContentValues values = new ContentValues();
+            values.put(NA_ITEM_ID, item_id);
+            write_db.insert(NEW_ARRIVALS_TABLE, null, values);
+        } catch (Exception e)
+        {
+            Log.d("exception:", e.toString());
+        }
+    }
+
+    @SuppressLint("Range")
+    public ArrayList<Item> get_na_items()
+    {
+        open_DB_for_read();
+        ArrayList<Item> res = new ArrayList<Item>();
+
+        Cursor cursor = read_db.query(NEW_ARRIVALS_TABLE, null, null, null, null, null, null);
+
+        if (cursor != null)
+        {
+            if (cursor.getCount() > 0)
+            {
+                cursor.moveToFirst();
+                do {
+                    int tmp_id;
+                    tmp_id = cursor.getInt(cursor.getColumnIndex(NA_ITEM_ID));
+                    ArrayList<Item> tmp_list = search_item_by_id(tmp_id);
+                    if (tmp_list != null)
+                    {
+                        if (tmp_list.size() > 0)
+                        {
+                            for (int i = 0; i < tmp_list.size(); i++)
+                                res.add(tmp_list.get(i));
+                        }
+                    }
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+
+            if (res.size() > 0)
+                return res;
+            else
+                return null;
+        }
+
+        return null;
+    }
+
+
+    public void add_tfm_item(int item_id)
+    {
+        try {
+            open_DB_for_write();
+            ContentValues values = new ContentValues();
+            values.put(TFM_ITEM_ID, item_id);
+            write_db.insert(TRENDING_FOR_MEN_TABLE, null, values);
+        } catch (Exception e)
+        {
+            Log.d("exception:", e.toString());
+        }
+    }
+
+    @SuppressLint("Range")
+    public ArrayList<Item> get_tfm_items()
+    {
+        open_DB_for_read();
+        ArrayList<Item> res = new ArrayList<Item>();
+
+        Cursor cursor = read_db.query(TRENDING_FOR_MEN_TABLE, null, null, null, null, null, null);
+
+        if (cursor != null)
+        {
+            if (cursor.getCount() > 0)
+            {
+                cursor.moveToFirst();
+                do {
+                    int tmp_id;
+                    tmp_id = cursor.getInt(cursor.getColumnIndex(TFM_ITEM_ID));
+                    ArrayList<Item> tmp_list = search_item_by_id(tmp_id);
+                    if (tmp_list != null)
+                    {
+                        if (tmp_list.size() > 0)
+                        {
+                            for (int i = 0; i < tmp_list.size(); i++)
+                                res.add(tmp_list.get(i));
+                        }
+                    }
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+
+            if (res.size() > 0)
+                return res;
+            else
+                return null;
+        }
+
+        return null;
+    }
+
+
+    public void add_tfw_item(int item_id)
+    {
+        try {
+            open_DB_for_write();
+            ContentValues values = new ContentValues();
+            values.put(TFW_ITEM_ID, item_id);
+            write_db.insert(TRENDING_FOR_WOMEN_TABLE, null, values);
+        } catch (Exception e)
+        {
+            Log.d("exception:", e.toString());
+        }
+    }
+    @SuppressLint("Range")
+    public ArrayList<Item> get_tfw_items()
+    {
+        open_DB_for_read();
+        ArrayList<Item> res = new ArrayList<Item>();
+
+        Cursor cursor = read_db.query(TRENDING_FOR_WOMEN_TABLE, null, null, null, null, null, null);
+
+        if (cursor != null)
+        {
+            if (cursor.getCount() > 0)
+            {
+                cursor.moveToFirst();
+                do {
+                    int tmp_id;
+                    tmp_id = cursor.getInt(cursor.getColumnIndex(TFW_ITEM_ID));
+                    ArrayList<Item> tmp_list = search_item_by_id(tmp_id);
+                    if (tmp_list != null)
+                    {
+                        if (tmp_list.size() > 0)
+                        {
+                            for (int i = 0; i < tmp_list.size(); i++)
+                                res.add(tmp_list.get(i));
+                        }
+                    }
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+
+            if (res.size() > 0)
+                return res;
             else
                 return null;
         }

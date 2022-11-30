@@ -80,6 +80,10 @@ public class MainActivity extends AppCompatActivity {
                                 toAboutUs();
                                 break;
                             }
+                            case R.id.nav_logout:{
+                                toSignIn();
+                                break;
+                            }
                         }
                         return true;
                     }
@@ -124,6 +128,11 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
+    private void toSignIn() {
+        Intent switchActivityIntent = new Intent(this, SignInMainActivity.class);
+        startActivity(switchActivityIntent);
+    }
+
     public void toUserInfo() {
         Intent switchActivityIntent = new Intent(this, UserInfoActivity.class);
         startActivity(switchActivityIntent);
@@ -161,5 +170,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void toSearchActivity(View view) {
+        Intent switchActivityIntent = new Intent(this, SearchActivity.class);
+        startActivity(switchActivityIntent);
+    }
+
+    public void toShoppingCart(View view) {
+        Intent switchActivityIntent = new Intent(this, ShoppingCartActivity.class);
+        startActivity(switchActivityIntent);
+    }
+
+    public void toProductDetails(View view) {
+        Intent switchActivityIntent = new Intent(this, ProductDetailsActivity.class);
+        startActivity(switchActivityIntent);
+    }
 }
 

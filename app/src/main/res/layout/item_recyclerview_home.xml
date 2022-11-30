@@ -12,7 +12,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -27,7 +28,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:background="@drawable/round_corner"
                 tools:srcCompat="@tools:sample/avatars"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop"
+                android:onClick="toProductDetails"/>
 
             <TextView
                 android:id="@+id/item_name_home"
@@ -41,7 +43,8 @@
                 android:text="ItemNameExampleItemNameExample2022"
                 android:textStyle="bold"
                 android:textSize="14sp"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:onClick="toProductDetails"/>
 
             <TextView
                 android:id="@+id/item_price_home"
