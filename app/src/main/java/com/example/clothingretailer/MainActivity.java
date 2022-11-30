@@ -1,82 +1,133 @@
 package com.example.clothingretailer;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.ImageButton;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.CompositePageTransformer;
-import androidx.viewpager2.widget.MarginPageTransformer;
-import androidx.viewpager2.widget.ViewPager2;
+
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
-
-
-    // For Slider
-    private ViewPager2 viewPager2;
+    private static ArrayList<Item> mHomeItems1;
+    private static ArrayList<Item> mHomeItems2;
+    private static ArrayList<Item> mHomeItems3;
+    private RecyclerView mRecyclerView1;
+    private RecyclerView mRecyclerView2;
+    private RecyclerView mRecyclerView3;
+    private HomeItemAdapter mHomeItemAdapter;
+    private DrawerLayout mDrawerLayout;
+    private ImageButton mMenuButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        mRecyclerView1 = findViewById(R.id.recyclerview1_home);
+        mRecyclerView2 = findViewById(R.id.recyclerview2_home);
+        mRecyclerView3 = findViewById(R.id.recyclerview3_home);
+        mHomeItems1 = new ArrayList<Item>();
+        mHomeItems2 = new ArrayList<Item>();
+        mHomeItems3 = new ArrayList<Item>();
+        loadHomeItems();
 
-        //setContentView(R.layout.activity_main);
-        //setContentView(R.layout.product_details);
-        //viewPager2Handler();
-    }
+        // Need to be 3 Adapter, but now just 1 for demo
+        mHomeItemAdapter = new HomeItemAdapter(this, mHomeItems1);
+        mRecyclerView1.setAdapter(mHomeItemAdapter);
+        mRecyclerView1.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        mRecyclerView2.setAdapter(mHomeItemAdapter);
+        mRecyclerView2.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        mRecyclerView3.setAdapter(mHomeItemAdapter);
+        mRecyclerView3.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
 
-    private void viewPager2Handler() {
-        List<SliderItem> sliderItems = createSliderItem();
-        setAdapterHanlder(sliderItems);
-    }
+        mMenuButton = findViewById(R.id.nav_button_homepage);
+        mDrawerLayout = findViewById(R.id.drawer_layout_home);
+        NavigationView navigationView = findViewById(R.id.nav_view_home);
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        // set item as selected to persist highlight
+                        //menuItem.setChecked(true);
+                        // close drawer when item is tapped
+                        mDrawerLayout.closeDrawers();
 
-    private void setAdapterHanlder(List<SliderItem> sliderItems) {
-        viewPager2.setAdapter(new SliderAdapter(sliderItems, viewPager2));
+                        switch (menuItem.getItemId()) {
 
-        // Cho xem trước 1 phần ảnh trước và ảnh sau
-        viewPager2.setClipToPadding(false);
-        viewPager2.setClipChildren(false);
-        viewPager2.setOffscreenPageLimit(3);
-        viewPager2.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
+                            case R.id.nav_userinfo: {
+                                toUserInfo();
+                                break;
+                            }
 
-        // Set transformer cho ViewPager
-        CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
-        compositePageTransformer.addTransformer(new MarginPageTransformer(40));
-        compositePageTransformer.addTransformer(new ViewPager2.PageTransformer(){
+                            case R.id.nav_favorite: {
+                                toFavorites();
+                                break;
+                            }
+                        }
+                        return true;
+                    }
+                });
 
+        mMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void transformPage(@NonNull View page, float position) {
-                float r = 1 - Math.abs(position);
-                page.setScaleY(0.85f + r * 0.15f);
-
+            public void onClick(View v) {
+                mDrawerLayout.openDrawer(GravityCompat.START);
             }
         });
-        viewPager2.setPageTransformer(compositePageTransformer);
+
+        mDrawerLayout.addDrawerListener(
+                new DrawerLayout.DrawerListener() {
+                    @Override
+                    public void onDrawerSlide(View drawerView, float slideOffset) {
+                        // Respond when the drawer's position changes
+                    }
+
+                    @Override
+                    public void onDrawerOpened(View drawerView) {
+                        navigationView.setCheckedItem(R.id.nav_home);
+                    }
+
+                    @Override
+                    public void onDrawerClosed(View drawerView) {
+                        // Respond when the drawer is closed
+                    }
+
+                    @Override
+                    public void onDrawerStateChanged(int newState) {
+                        // Respond when the drawer motion state changes
+                    }
+                }
+        );
     }
 
-    private void GenerateFindViewById() {
-        viewPager2 = findViewById(R.id.viewPagerClothingDetails);
+    public void toUserInfo() {
+        Intent switchActivityIntent = new Intent(this, UserInfoActivity.class);
+        startActivity(switchActivityIntent);
+    }
+
+    public void toFavorites() {
+        Intent switchActivityIntent = new Intent(this, FavoritesActivity.class);
+        startActivity(switchActivityIntent);
     }
 
 
-    private List<SliderItem> createSliderItem() {
-        List<SliderItem> sliderItems = new ArrayList<>();
-        sliderItems.add(new SliderItem(R.drawable.clothing_ex_details_1));
-        sliderItems.add(new SliderItem(R.drawable.clothing_ex_details_2));
-        sliderItems.add(new SliderItem(R.drawable.clothing_ex_details_3));
-        sliderItems.add(new SliderItem(R.drawable.clothing_ex_details_4));
-        sliderItems.add(new SliderItem(R.drawable.clothing_ex_details_5));
-        sliderItems.add(new SliderItem(R.drawable.clothing_ex_details_6));
-        return sliderItems;
+
+    public void loadHomeItems() {
+        mHomeItems1.add(new Item("001", "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description", String.valueOf(R.drawable.clothing_ex_details_2), 2999000, 4.75, 316));
+        mHomeItems1.add(new Item("001", "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description", String.valueOf(R.drawable.clothing_ex_details_1), 2999000, 4.75, 316));
+        mHomeItems1.add(new Item("001", "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description", String.valueOf(R.drawable.clothing_ex_details_3), 2999000, 4.75, 316));
+        mHomeItems1.add(new Item("001", "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description", String.valueOf(R.drawable.clothing_ex_details_4), 2999000, 4.75, 316));
+
     }
 
 

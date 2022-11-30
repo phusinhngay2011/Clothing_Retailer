@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class FavoriteItemAdapter extends RecyclerView.Adapter<FavoriteItemAdapter.ViewHolder> {
+public class HomeItemAdapter extends RecyclerView.Adapter<HomeItemAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView mImageItem;
         private TextView mTextName;
@@ -25,19 +25,17 @@ public class FavoriteItemAdapter extends RecyclerView.Adapter<FavoriteItemAdapte
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            mImageItem = itemView.findViewById(R.id.item_image_favorite);
-            mTextName = itemView.findViewById(R.id.item_name_favorite);
-            mTextPrice = itemView.findViewById(R.id.item_price_favorite);
-            mHeartButton = itemView.findViewById(R.id.item_heart_button_favorite);
-            mTextRate = itemView.findViewById(R.id.item_rate_favorite);
+            mImageItem = itemView.findViewById(R.id.item_image_home);
+            mTextName = itemView.findViewById(R.id.item_name_home);
+            mTextPrice = itemView.findViewById(R.id.item_price_home);
+            mHeartButton = itemView.findViewById(R.id.item_heart_button_home);
+            mTextRate = itemView.findViewById(R.id.item_rate_home);
             index = -1;
 
             mHeartButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mHeartButton.setImageResource(R.drawable.checkbox_like);
-
-                    removeHolder(index);
+                    mHeartButton.setImageResource(R.drawable.ic_heart);
                 }
             });
         }
@@ -45,18 +43,18 @@ public class FavoriteItemAdapter extends RecyclerView.Adapter<FavoriteItemAdapte
     }
 
     private Context mContext;
-    private ArrayList<Item> mFavoriteItems;
+    private ArrayList<Item> mHomeItems;
 
-    public FavoriteItemAdapter(Context mContext, ArrayList<Item> mFavoriteItems) {
+    public HomeItemAdapter(Context mContext, ArrayList<Item> mHomeItems) {
         this.mContext = mContext;
-        this.mFavoriteItems = mFavoriteItems;
+        this.mHomeItems = mHomeItems;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        View itemView = inflater.inflate(R.layout.item_recyclerview_favorite, parent, false);
+        View itemView = inflater.inflate(R.layout.item_recyclerview_home, parent, false);
         ViewHolder viewHolder = new ViewHolder(itemView);
         return viewHolder;
     }
@@ -65,7 +63,7 @@ public class FavoriteItemAdapter extends RecyclerView.Adapter<FavoriteItemAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         position = holder.getAdapterPosition();
-        Item item = mFavoriteItems.get(position);
+        Item item = mHomeItems.get(position);
         holder.index = position;
         holder.mTextName.setText(item.getName());
         holder.mImageItem.setImageResource(Integer.valueOf(item.getImage_path()));
@@ -75,14 +73,9 @@ public class FavoriteItemAdapter extends RecyclerView.Adapter<FavoriteItemAdapte
 
     @Override
     public int getItemCount() {
-        return mFavoriteItems.size();
+        return mHomeItems.size();
     }
 
-    public void removeHolder(int index) {
-        mFavoriteItems.remove(index);
-        notifyItemRemoved(index);
-        notifyItemRangeChanged(index, mFavoriteItems.size());
-        FavoritesActivity.checkEmpty();
-    }
+
 
 }

@@ -58,4 +58,11 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 
 
+    //    implementation 'com.android.support:appcompat-v7:27.1.0'
+    //    implementation 'com.android.support:design:27.1.0'
+    // Migrate to androidx
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
+
+
 }
