@@ -73,6 +73,11 @@ public class MainActivity extends AppCompatActivity {
                                 toFavorites();
                                 break;
                             }
+
+                            case R.id.nav_about: {
+                                toAboutUs();
+                                break;
+                            }
                         }
                         return true;
                     }
@@ -120,13 +125,21 @@ public class MainActivity extends AppCompatActivity {
         startActivity(switchActivityIntent);
     }
 
+    public void toAboutUs() {
+        Intent switchActivityIntent = new Intent(this, AboutUsActivity.class);
+        startActivity(switchActivityIntent);
+    }
+
 
 
     public void loadHomeItems() {
-        mHomeItems1.add(new Item("001", "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description", String.valueOf(R.drawable.clothing_ex_details_2), 2999000, 4.75, 316));
-        mHomeItems1.add(new Item("001", "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description", String.valueOf(R.drawable.clothing_ex_details_1), 2999000, 4.75, 316));
-        mHomeItems1.add(new Item("001", "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description", String.valueOf(R.drawable.clothing_ex_details_3), 2999000, 4.75, 316));
-        mHomeItems1.add(new Item("001", "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description", String.valueOf(R.drawable.clothing_ex_details_4), 2999000, 4.75, 316));
+        mHomeItems1.add(new Item(001, "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description title", "No description", "", "", String.valueOf(R.drawable.clothing_ex_details_2), 2999000));
+        mHomeItems1.add(new Item(001, "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description title", "No description", "", "", String.valueOf(R.drawable.clothing_ex_details_2), 2999000));
+        mHomeItems1.add(new Item(001, "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description title", "No description", "", "", String.valueOf(R.drawable.clothing_ex_details_2), 2999000));
+        mHomeItems1.add(new Item(001, "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description title", "No description", "", "", String.valueOf(R.drawable.clothing_ex_details_2), 2999000));
+//        mHomeItems1.add(new Item("001", "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description", String.valueOf(R.drawable.clothing_ex_details_1), 2999000, 4.75, 316));
+//        mHomeItems1.add(new Item("001", "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description", String.valueOf(R.drawable.clothing_ex_details_3), 2999000, 4.75, 316));
+//        mHomeItems1.add(new Item("001", "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description", String.valueOf(R.drawable.clothing_ex_details_4), 2999000, 4.75, 316));
 
     }
 
