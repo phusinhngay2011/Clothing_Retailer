@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private HomeItemAdapter mHomeItemAdapter;
     private DrawerLayout mDrawerLayout;
     private ImageButton mMenuButton;
+    private ImageButton mCartButton;
     private DBHandler dbHandler = null;
 
     @Override
