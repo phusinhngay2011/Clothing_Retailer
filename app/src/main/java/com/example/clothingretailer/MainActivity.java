@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private HomeItemAdapter mHomeItemAdapter;
     private DrawerLayout mDrawerLayout;
     private ImageButton mMenuButton;
+    private ImageButton mCartButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         mMenuButton = findViewById(R.id.nav_button_homepage);
+        mCartButton = findViewById(R.id.cart_button_homepage);
         mDrawerLayout = findViewById(R.id.drawer_layout_home);
         NavigationView navigationView = findViewById(R.id.nav_view_home);
         navigationView.setNavigationItemSelectedListener(
@@ -87,6 +89,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mDrawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
+        mCartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toCart();
             }
         });
 
@@ -129,6 +138,14 @@ public class MainActivity extends AppCompatActivity {
         Intent switchActivityIntent = new Intent(this, AboutUsActivity.class);
         startActivity(switchActivityIntent);
     }
+
+    public void toCart() {
+        Intent switchActivityIntent = new Intent(this, ShoppingCartActivity.class);
+        startActivity(switchActivityIntent);
+    }
+
+
+
 
 
 

@@ -5,17 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AboutUsActivity">
-    <ImageButton
-        android:id="@+id/back_button_aboutus"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#FFFFFF"
-        android:contentDescription="Back to Home Page"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="?attr/homeAsUpIndicator" />
+
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -24,6 +15,18 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/back_button_aboutus"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin = "20dp"
+                android:padding="10dp"
+                android:layout_alignParentLeft="true"
+                android:src="?android:attr/homeAsUpIndicator"
+                android:backgroundTint="@color/white"
+                >
+            </ImageButton>
 
             <TextView
                 android:layout_width="match_parent"
