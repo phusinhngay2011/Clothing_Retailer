@@ -1,15 +1,16 @@
 package com.example.clothingretailer;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
@@ -21,11 +22,13 @@ public class ShoppingCartActivity extends AppCompatActivity {
     private static TextView mTotalPrice;
     private static TextView mShippingFee;
     private static ImageView mImageEmpty;
+    private ImageButton mBackButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_cart);
+        mBackButton = findViewById(R.id.back_button_cart);
         mRecyclerView = findViewById(R.id.recyclerView_cart);
         mTotalPrice = findViewById(R.id.total_price);
         mShippingFee = findViewById(R.id.shipping_fee);
@@ -40,6 +43,13 @@ public class ShoppingCartActivity extends AppCompatActivity {
         updateCart();
         // chay cai nay 1 lan de generate test db
         // TestGenerator.generate_test_db(getApplicationContext());
+
+        mBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     public static void updateCart() {

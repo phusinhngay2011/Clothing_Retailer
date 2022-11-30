@@ -1,8 +1,5 @@
 package com.example.clothingretailer;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +8,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 public class PaymentActivity extends AppCompatActivity {
     RadioGroup paymentMethodsRG;
@@ -100,8 +100,9 @@ public class PaymentActivity extends AppCompatActivity {
     }
 
     public void toCart(View view) {
-        Intent switchActivityIntent = new Intent(this, ShoppingCartActivity.class);
-        startActivity(switchActivityIntent);
+//        Intent switchActivityIntent = new Intent(this, ShoppingCartActivity.class);
+//        startActivity(switchActivityIntent);
+        onBackPressed();
     }
 
     private String PREFERENCES_PRICE = "TOTAL_PRICE_TEMP";
