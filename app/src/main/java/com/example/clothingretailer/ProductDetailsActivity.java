@@ -10,6 +10,7 @@ import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
@@ -20,6 +21,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +43,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         GenerateFindViewById_ProductDetails();
         viewPager2Handler();
-
 
     }
 
@@ -67,12 +69,12 @@ public class ProductDetailsActivity extends AppCompatActivity {
     }
 
     private void viewPager2Handler() {
-        List<SliderItem> sliderItems = createSliderItem();
+        List<SliderItem> sliderItems = createSliderItem(URL_IMGS);
         setAdapterHanlder(sliderItems);
     }
 
     private void setAdapterHanlder(List<SliderItem> sliderItems) {
-        viewPager2.setAdapter(new SliderAdapter(sliderItems, viewPager2));
+        viewPager2.setAdapter(new SliderAdapter(ProductDetailsActivity.this, sliderItems, viewPager2));
 
         // Cho xem trước 1 phần ảnh trước và ảnh sau
         viewPager2.setClipToPadding(false);
@@ -134,11 +136,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
         showOrHideTV(ratingTV);
         if(onRating == 1)
             updateRating(view.getId());
+        else
+            rating[4].setButtonDrawable(R.drawable.ic_baseline_star_border_50);
+
     }
 
     private void updateRating(int id) {
         int cnt = 0, i = 0;
-
         switch (id) {
             case R.id.rate1:
                 cnt = 1;
@@ -159,9 +163,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
         for(; i < cnt; i++){
             rating[i].setButtonDrawable(R.drawable.ic_baseline_star_rate_50);
         }
-        for(i = cnt; i < rating.length; i++){
+        for(i = cnt; i < rating.length - 1; i++){
             rating[i].setButtonDrawable(R.drawable.ic_baseline_star_border_50);
         }
+
+        if(cnt < rating.length)
+            rating[4].setButtonDrawable(R.drawable.ic_baseline_star_half_50);
+
         ratingTV.setText(new String(String.valueOf(cnt)));
         ratingTV.setTextSize(20);
 
@@ -170,15 +178,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
     public void displayRating(View view) {
 
     }
-    private List<SliderItem> createSliderItem() {
+    private List<SliderItem> createSliderItem(String[] url_imgs) {
         List<SliderItem> sliderItems = new ArrayList<>();
-        sliderItems.add(new SliderItem(R.drawable.clothing_ex_details_1));
-        sliderItems.add(new SliderItem(R.drawable.clothing_ex_details_2));
-        sliderItems.add(new SliderItem(R.drawable.clothing_ex_details_3));
-        sliderItems.add(new SliderItem(R.drawable.clothing_ex_details_4));
-        sliderItems.add(new SliderItem(R.drawable.clothing_ex_details_5));
-        sliderItems.add(new SliderItem(R.drawable.clothing_ex_details_6));
-
+        for(int i = 0;i < url_imgs.length;i++)
+            sliderItems.add(new SliderItem(url_imgs[i]));
         return sliderItems;
     }
 
@@ -288,4 +291,12 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     }
 
+    private final String[] URL_IMGS= {
+            "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/jogger-sorona19-up.jpg",
+            "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/October2022/quan-essential-jogger-soi-sorona-den-2_4.jpg",
+            "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/jogger-sorona3.jpg",
+            "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/jogger-sorona5.jpg",
+            "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/jogger-sorona4.jpg",
+            "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/jogger-sorona2.jpg"
+    };
 }

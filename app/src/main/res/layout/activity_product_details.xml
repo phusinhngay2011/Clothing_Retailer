@@ -127,12 +127,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Not rating yet"
+                android:text="Not yet rated"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:textSize="16dp"
+                android:textSize="18dp"
                 android:layout_gravity="right|center"
-                android:layout_marginRight="70dp"
+                android:layout_marginRight="65dp"
                 android:id="@+id/displayRatingTV"
                 android:onClick="displayRating"
                 ></TextView>
