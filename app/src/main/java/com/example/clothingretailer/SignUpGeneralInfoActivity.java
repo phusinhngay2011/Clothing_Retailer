@@ -99,7 +99,9 @@ public class SignUpGeneralInfoActivity extends AppCompatActivity {
             String address = addressSignupET.getText().toString();
             int genderType = genderSignupRG.indexOfChild(
                     findViewById(genderSignupRG.getCheckedRadioButtonId())
-            );
+            ) + 1;
+            if (genderType == 3)
+                genderType = 0;
             StringHdr nameCheck = new StringHdr(firstname);
             String mess = nameCheck.validName();
             if(!mess.equals(""))

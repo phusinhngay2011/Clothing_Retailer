@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private HomeItemAdapter mHomeItemAdapter;
     private DrawerLayout mDrawerLayout;
     private ImageButton mMenuButton;
+    private DBHandler dbHandler = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +121,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void toSignIn() {
+        GlobalVars.current_user = null;
+        GlobalVars.logged_in = false;
         Intent switchActivityIntent = new Intent(this, SignInMainActivity.class);
         startActivity(switchActivityIntent);
     }

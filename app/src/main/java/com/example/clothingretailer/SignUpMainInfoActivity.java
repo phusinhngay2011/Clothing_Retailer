@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +13,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 public class SignUpMainInfoActivity extends AppCompatActivity {
     EditText usernameSignupET;
@@ -20,6 +22,11 @@ public class SignUpMainInfoActivity extends AppCompatActivity {
     EditText passwordSignupET;
     EditText repasswordSignupET;
     Button finishBtn;
+    DBHandler dbHandler = null;
+
+    public SignUpMainInfoActivity() {
+        super();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +39,30 @@ public class SignUpMainInfoActivity extends AppCompatActivity {
         emailSignupET.setText(usr.getEmail());
         phoneSignupET.setText(usr.getPhone());
 
+        if (dbHandler == null)
+        {
+            dbHandler = new DBHandler(getApplicationContext());
+        }
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (dbHandler != null)
+        {
+            dbHandler.close_DB();
+            dbHandler = null;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (dbHandler == null)
+        {
+            dbHandler = new DBHandler(getApplicationContext());
+        }
     }
 
     private void GenerateFindViewById_sign_up_main_inf() {
@@ -120,10 +151,19 @@ public class SignUpMainInfoActivity extends AppCompatActivity {
             usr.setUsername(username);
             usr.setEmail(email);
             usr.setPhone(phone);
-
-            usr.setPassword((new StringHdr(password)).encodePassword());
+            usr.setPassword(password);
+            //usr.setPassword((new StringHdr(password)).encodePassword());
             // Luu vao database
 
+            //Log.d("tag", usr.toString());
+            ArrayList<User> search_res = dbHandler.search_user(usr.getUsername(), usr.getPassword());
+            if (search_res != null && search_res.size() > 0)
+            {
+                Toast.makeText(getApplicationContext(), "Username or password already exists!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            User add_res = dbHandler.add_user(usr.getUsername(), usr.getPassword(), usr.getFirstname(), usr.getLastname(), usr.getGender(), usr.getEmail(), usr.getPhone(), usr.getBirthday(), usr.getAddress());
 
             // Xoa du lieu tam
             SharedPreferences.Editor editor = getSharedPreferences(

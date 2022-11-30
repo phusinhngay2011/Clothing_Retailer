@@ -20,6 +20,7 @@ public class User {
     private String password;
     public static final int MALE = 1;
     public static final int FEMALE = 2;
+    public static final int BOTH_GENDERS = 0;
 
     public User(int id, String username, String firstname, String lastname, int gender,
                 String email, String phone, String birthday, String address,

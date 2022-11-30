@@ -35,8 +35,8 @@ public class StringHdr {
     }
 
     public StringHdr(String encode_str, String flag) {
-        this.str = new String(Base64.decodeBase64(encode_str));
-        //this.encode_str = encode_str;
+        //this.str = new String(Base64.decodeBase64(encode_str));
+        this.encode_str = encode_str;
     }
 
     public String encodePassword(){
