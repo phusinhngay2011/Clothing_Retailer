@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,7 +25,7 @@ public class HomeItemAdapter extends RecyclerView.Adapter<HomeItemAdapter.ViewHo
         private TextView mTextName;
         private TextView mTextPrice;
         private TextView mTextRate;
-        private ImageButton mHeartButton;
+        private CheckBox mHeartButton;
         private int index;
 
         public ViewHolder(@NonNull View itemView) {
@@ -35,13 +36,6 @@ public class HomeItemAdapter extends RecyclerView.Adapter<HomeItemAdapter.ViewHo
             mHeartButton = itemView.findViewById(R.id.item_heart_button_home);
             mTextRate = itemView.findViewById(R.id.item_rate_home);
             index = -1;
-
-            mHeartButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mHeartButton.setImageResource(R.drawable.ic_heart);
-                }
-            });
         }
 
     }
@@ -95,7 +89,7 @@ public class HomeItemAdapter extends RecyclerView.Adapter<HomeItemAdapter.ViewHo
 
         holder.mTextPrice.setText(ShoppingCartActivity.formatPriceString((int)item.getPrice()));
         //holder.mTextRate.setText(String.valueOf(item.getRate()) + " (" + String.valueOf(item.getRate_count()) + ")");
-        holder.mTextRate.setText("Rating chưa load được");
+        holder.mTextRate.setText("Rating avg.");
     }
 
     @Override

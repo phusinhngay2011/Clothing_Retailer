@@ -101,20 +101,24 @@ public class MainActivity extends AppCompatActivity {
                         switch (menuItem.getItemId()) {
 
                             case R.id.nav_userinfo: {
+                                navigationView.setCheckedItem(R.id.nav_userinfo);
                                 toUserInfo();
                                 break;
                             }
 
                             case R.id.nav_favorite: {
+                                navigationView.setCheckedItem(R.id.nav_favorite);
                                 toFavorites();
                                 break;
                             }
 
                             case R.id.nav_about: {
+                                navigationView.setCheckedItem(R.id.nav_about);
                                 toAboutUs();
                                 break;
                             }
                             case R.id.nav_logout:{
+                                navigationView.setCheckedItem(R.id.nav_logout);
                                 toSignIn();
                                 break;
                             }
@@ -136,7 +140,6 @@ public class MainActivity extends AppCompatActivity {
                 toCart();
             }
         });
-
         mDrawerLayout.addDrawerListener(
                 new DrawerLayout.DrawerListener() {
                     @Override

@@ -6,6 +6,7 @@
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/drawable/btn_heart.xml" value="0.1095" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/drawable/checkbox_heart.xml" value="0.1095" />
+        <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/drawable/checkbox_like.xml" value="0.1" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/drawable/checkbox_selector.xml" value="0.1315" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/drawable/checkbox_selector_square.xml" value="0.1" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/drawable/curved_stroke_bg.xml" value="0.116" />
@@ -57,7 +58,7 @@
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/fragment_signup_general_information.xml" value="0.22" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/item_recyclerview_cart.xml" value="0.1405982905982906" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/item_recyclerview_favorite.xml" value="0.16666666666666666" />
-        <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/item_recyclerview_home.xml" value="0.12777777777777777" />
+        <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/item_recyclerview_home.xml" value="0.22" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/nav_header.xml" value="0.12692307692307692" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/place_order_successfully.xml" value="0.12393162393162394" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/product_details.xml" value="0.14666666666666667" />
@@ -69,6 +70,7 @@
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/sign_up_main.xml" value="0.16666666666666666" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/signup_general_information.xml" value="0.1" />
         <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/layout/slide_item_container.xml" value="0.1" />
+        <entry key="..\:/3rd/mobileDev/ClothingRetailer/app/src/main/res/menu/drawer_view.xml" value="0.144017094017094" />
       </map>
     </option>
   </component>

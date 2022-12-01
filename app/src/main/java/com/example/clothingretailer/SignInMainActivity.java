@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ public class SignInMainActivity extends AppCompatActivity {
     private EditText passwordSigninET;
     private EditText usernameSigninET;
     private DBHandler dbHandler = null;
+    private CheckBox rmbMeCheckBox;
 
     public SignInMainActivity() {
         super();
@@ -33,17 +35,31 @@ public class SignInMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in_main);
         GenerateFindViewById_sign_in_main();
 
-        // Xoa du lieu tam
-        SharedPreferences.Editor editor = getSharedPreferences(
-                PREFERENCES_NAME, MODE_PRIVATE).edit();
-        editor.clear();
-        editor.apply();
+        rememberMeHandler();
         if (dbHandler == null)
         {
             this.dbHandler = new DBHandler(getApplicationContext());
             //dbHandler.add_user("admin123", "Password_123", "admin", "admin", 1, "admin@mail.com", "0900009990", "01/01/2002", "address");
         }
         //handler.close_DB();
+    }
+
+    private void cleanTemporaryMem() {
+        SharedPreferences.Editor editor = getSharedPreferences(
+                PREFERENCES_NAME, MODE_PRIVATE).edit();
+        editor.clear();
+        editor.apply();
+    }
+
+    private void rememberMeHandler() {
+        SharedPreferences getInfo = getSharedPreferences(
+                PREFERENCES_NAME, MODE_PRIVATE);
+        Boolean isRmb = getInfo.getBoolean(REMEMBER_ME_KEY, true);
+        Toast.makeText(getApplicationContext(), isRmb.toString(), Toast.LENGTH_SHORT).show();
+        if(isRmb && GlobalVars.current_user != null && GlobalVars.logged_in == true){
+            usernameSigninET.setText(GlobalVars.current_user.getUsername());
+            passwordSigninET.setText(GlobalVars.current_user.getPassword());
+        }
     }
 
     @Override
@@ -71,6 +87,7 @@ public class SignInMainActivity extends AppCompatActivity {
     private void GenerateFindViewById_sign_in_main() {
         passwordSigninET = findViewById(R.id.passwordSignin);
         usernameSigninET = findViewById(R.id.usernameSignin);
+        rmbMeCheckBox = findViewById(R.id.remeberMe);
     }
 
     public void toSignUp(View view){
@@ -105,14 +122,18 @@ public class SignInMainActivity extends AppCompatActivity {
         {
             GlobalVars.current_user = res.get(0);
             GlobalVars.logged_in = true;
+            SharedPreferences.Editor editor = getSharedPreferences(
+                    PREFERENCES_NAME, MODE_PRIVATE).edit();
+            if(rmbMeCheckBox.isChecked())
+                editor.putBoolean(REMEMBER_ME_KEY, true);
+            else
+                editor.putBoolean(REMEMBER_ME_KEY, false);
+            editor.apply();
             Intent toHomeViewIntent = new Intent(this, MainActivity.class);
             startActivity(toHomeViewIntent);
         }
     }
 
-    public void onRememberMe(View view) {
-
-    }
 
     public void onForgotPasword(View view) {
 
@@ -126,4 +147,5 @@ public class SignInMainActivity extends AppCompatActivity {
     }
 
     private String PREFERENCES_NAME = "USER_TEMP";
+    private String REMEMBER_ME_KEY = "rmb";
 }
