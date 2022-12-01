@@ -1,5 +1,6 @@
 package com.example.clothingretailer;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -64,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
         {
             // do nothing
         }
+
+        //dbHandler.add_quantity(1, "M", "Black", 10);
+        //dbHandler.add_quantity(6, "M", "Black", 5);
 
         mRecyclerView1 = findViewById(R.id.recyclerview1_home);
         mRecyclerView2 = findViewById(R.id.recyclerview2_home);
