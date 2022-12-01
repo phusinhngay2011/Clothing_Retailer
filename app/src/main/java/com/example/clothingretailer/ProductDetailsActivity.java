@@ -296,6 +296,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 selected.setBackground(ContextCompat.getDrawable(
                         getApplicationContext(), R.drawable.radio_btn_black_on));
                 break;
+
             case R.id.colorWhiteRB:
                 selected.setBackground(ContextCompat.getDrawable(
                         getApplicationContext(), R.drawable.radio_btn_white_on));
