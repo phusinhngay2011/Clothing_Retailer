@@ -1,10 +1,12 @@
 package com.example.clothingretailer;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton mMenuButton;
     private DBHandler dbHandler = null;
     private ImageButton mCartButton;
+    private static final String DB_STATE_SHARED_PREF_NAME = "DB_STATE";
+    private static final String DB_STATE_PREF_KEY = "db_state";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,26 @@ public class MainActivity extends AppCompatActivity {
         mHomeItems2 = new ArrayList<Item>();
         mHomeItems3 = new ArrayList<Item>();
         loadHomeItems();
+
+        if (this.dbHandler == null)
+        {
+            this.dbHandler = new DBHandler(getApplicationContext());
+        }
+        SharedPreferences sp = getSharedPreferences(MainActivity.DB_STATE_SHARED_PREF_NAME, MODE_PRIVATE);
+        int state = sp.getInt(MainActivity.DB_STATE_PREF_KEY, -1);
+        if (state == -1)
+        {
+            TestGenerator.generate_test_db(getApplicationContext());
+            Toast.makeText(getApplicationContext(), "Loading database... This might take a while!", Toast.LENGTH_SHORT).show();
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putInt(DB_STATE_PREF_KEY, 1);
+            editor.apply();
+        }
+        else
+        {
+            // do nothing
+        }
+
 
         // Need to be 3 Adapter, but now just 1 for demo
         mHomeItemAdapter = new HomeItemAdapter(this, mHomeItems1);
