@@ -70,7 +70,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     }
 
     private void viewPager2Handler() {
-        List<SliderItem> sliderItems = createSliderItem(URL_IMGS);
+        List<SliderItem> sliderItems = createSliderItem(urls);
         setAdapterHanlder(sliderItems);
     }
 
@@ -178,10 +178,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
     public void displayRating(View view) {
 
     }
-    private List<SliderItem> createSliderItem(String[] url_imgs) {
+    private List<SliderItem> createSliderItem(String url_imgs_str) {
+        List<String> url_imgs = StringHdr.getURLImgs(url_imgs_str);
         List<SliderItem> sliderItems = new ArrayList<>();
-        for(int i = 0;i < url_imgs.length;i++)
-            sliderItems.add(new SliderItem(url_imgs[i]));
+        for(int i = 0;i < url_imgs.size();i++)
+            sliderItems.add(new SliderItem(url_imgs.get(i)));
         return sliderItems;
     }
 
@@ -294,12 +295,5 @@ public class ProductDetailsActivity extends AppCompatActivity {
         Intent switchActivityIntent = new Intent(this, MainActivity.class);
         startActivity(switchActivityIntent);
     }
-    private final String[] URL_IMGS= {
-            "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/jogger-sorona19-up.jpg",
-            "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/October2022/quan-essential-jogger-soi-sorona-den-2_4.jpg",
-            "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/jogger-sorona3.jpg",
-            "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/jogger-sorona5.jpg",
-            "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/jogger-sorona4.jpg",
-            "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/jogger-sorona2.jpg"
-    };
+    private String urls = "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/August2022/7_recycle_xam_nhat_1.jpg<<<https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/August2022/7_recycle_xam_nhat_3.jpg<<<https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/August2022/7_recycle_xam_nhat_2.jpg<<<https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/August2022/7_recycle_xam_nhat_7.jpg<<<https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/August2022/7_recycle_xam_nhat_4.jpg<<<https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/August2022/7_recycle_xam_nhat_5.jpg";
 }
