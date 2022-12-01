@@ -1,32 +1,24 @@
 package com.example.clothingretailer;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.animation.TranslateAnimation;
+import android.widget.CheckBox;
+import android.widget.FrameLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.compose.ui.graphics.Color;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.StrictMode;
-import android.provider.MediaStore;
-import android.util.Log;
-import android.view.View;
-import android.view.animation.TranslateAnimation;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +28,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     RadioButton sizeSBtn, sizeMBtn, sizeLBtn, sizeXLBtn, sizeXXLBtn, size3XLBtn;
     RadioButton blackBtn, whiteBtn, greyBtn, beBtn;
     CheckBox[] rating = new CheckBox[5];
+    CheckBox likeBtn;
     TextView ratingTV;
     private Item item;
     private TextView tv_item_name, tv_price;
@@ -67,6 +60,18 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("tag", "details onResume called");
+        for (int i = 0; i < GlobalVars.current_favorite_items.size(); i++) {
+            if (GlobalVars.current_favorite_items.get(i).getName().equals(item.getName())) {
+                likeBtn.setChecked(true);
+                break;
+            }
+        }
+    }
+
     private void GenerateFindViewById_ProductDetails() {
         viewPager2 = findViewById(R.id.viewPagerClothingDetails);
         sizeSBtn = (RadioButton) findViewById(R.id.btnSizeS);
@@ -79,6 +84,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
         whiteBtn = (RadioButton) findViewById(R.id.colorWhiteRB);
         greyBtn = (RadioButton) findViewById(R.id.colorGreyRB);
         beBtn = (RadioButton) findViewById(R.id.colorBeRB);
+        likeBtn = (CheckBox) findViewById(R.id.checkbox_like);
+        likeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickLikeProduct();
+            }
+        });
 
         ratingFL = (FrameLayout) findViewById(R.id.frameRating);
         rating[0] =  findViewById(R.id.rate1);
@@ -340,9 +352,26 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     }
 
-    public void onClickLikeProduct(View view) {
-
+    public void onClickLikeProduct() {
+        if (likeBtn.isChecked() == false) {
+            for (int i = 0; i < GlobalVars.current_favorite_items.size(); i++)
+            {
+                Item mItem = GlobalVars.current_favorite_items.get(i);
+                if (mItem.getName() == item.getName())
+                {
+                    GlobalVars.current_cart_item_counts.remove(i);
+                    Log.d("tag", "removed an item from favorites");
+                    break;
+                }
+            }
+            //likeBtn.setChecked(true);
+        }
+        else {
+            GlobalVars.current_favorite_items.add(item);
+            //likeBtn.setChecked(false);
+        }
     }
+
     public void toHome(View view) {
         Intent switchActivityIntent = new Intent(this, MainActivity.class);
         startActivity(switchActivityIntent);

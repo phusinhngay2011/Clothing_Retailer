@@ -68,15 +68,6 @@ public class FavoritesActivity extends AppCompatActivity {
 
     private void loadFavoriteItems() {
         // Replace by loading data from DB
-//        for (int i = 0; i < GlobalVars.current_cart_items.size(); i++)
-//        {
-//            Item item = GlobalVars.current_cart_items.get(i);
-//            List<String> urls = StringHdr.getURLImgs(item.getImage_path());
-//            mFavoriteItems.add(new ProductItemInCart(item.getId(), item.getName(), urls.get(0),
-//                    GlobalVars.current_cart_sizes.get(i), GlobalVars.current_cart_colors.get(i), (int) GlobalVars.current_cart_item_counts.get(i),
-//                    item.getPrice()));
-//        }
-        DBHandler dbHandler = new DBHandler(this);
         mFavoriteItems = GlobalVars.current_favorite_items;
 
     }

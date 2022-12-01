@@ -1,14 +1,12 @@
 package com.example.clothingretailer;
 
 import android.annotation.SuppressLint;
-import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -90,6 +88,12 @@ public class HomeItemAdapter extends RecyclerView.Adapter<HomeItemAdapter.ViewHo
         holder.mTextPrice.setText(ShoppingCartActivity.formatPriceString((int)item.getPrice()));
         //holder.mTextRate.setText(String.valueOf(item.getRate()) + " (" + String.valueOf(item.getRate_count()) + ")");
         holder.mTextRate.setText("Rating avg.");
+        for (int j = 0; j < GlobalVars.current_favorite_items.size(); j++) {
+            if (item.getName().equals(GlobalVars.current_favorite_items.get(j).getName())) {
+                holder.mHeartButton.setChecked(true);
+            }
+
+        }
     }
 
     @Override
@@ -102,5 +106,6 @@ public class HomeItemAdapter extends RecyclerView.Adapter<HomeItemAdapter.ViewHo
         Intent switchActivityIntent = new Intent(this.mContext, ProductDetailsActivity.class);
         mContext.startActivity(switchActivityIntent);
     }
+
 
 }

@@ -10,15 +10,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
+
         <ImageView
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_margin = "20dp"
-            android:padding="10dp"
             android:layout_alignParentRight="true"
-            android:src="@drawable/ic_cancel"
-            >
-        </ImageView>
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_cancel"></ImageView>
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPagerClothingDetails"
@@ -52,12 +54,12 @@
                 ></TextView>
 
             <CheckBox
+                android:id="@+id/checkbox_like"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_margin="10dp"
                 android:background="@drawable/checkbox_like"
                 android:padding="10dp"
-                android:onClick="onClickLikeProduct"
                 android:button="@null"
                 ></CheckBox>
 

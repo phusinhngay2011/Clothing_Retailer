@@ -73,8 +73,11 @@
         <entry key="..\:/Users/admin/AndroidStudioProjects/Clothing_Retailer/app/src/main/res/drawable/checkbox_like.xml" value="0.102" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/Clothing_Retailer/app/src/main/res/drawable/checkbox_selector.xml" value="0.102" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/Clothing_Retailer/app/src/main/res/drawable/checkbox_selector_square.xml" value="0.102" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/Clothing_Retailer/app/src/main/res/drawable/ic_baseline_remove_red_eye_24.xml" value="0.186" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/Clothing_Retailer/app/src/main/res/drawable/ic_baseline_star_border_50.xml" value="0.186" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/Clothing_Retailer/app/src/main/res/drawable/ic_cancel.xml" value="0.186" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/Clothing_Retailer/app/src/main/res/layout/activity_favorites.xml" value="0.10025062656641603" />
-        <entry key="..\:/Users/admin/AndroidStudioProjects/Clothing_Retailer/app/src/main/res/layout/activity_product_details.xml" value="0.14764492753623187" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/Clothing_Retailer/app/src/main/res/layout/activity_product_details.xml" value="0.2" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/Clothing_Retailer/app/src/main/res/layout/activity_user_info.xml" value="0.1743659420289855" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/Clothing_Retailer/app/src/main/res/layout/item_recyclerview_cart.xml" value="0.10025062656641603" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/Clothing_Retailer/app/src/main/res/layout/item_recyclerview_favorite.xml" value="0.10025062656641603" />
