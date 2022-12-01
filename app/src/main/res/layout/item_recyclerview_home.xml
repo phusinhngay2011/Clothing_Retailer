@@ -28,8 +28,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:background="@drawable/round_corner"
                 tools:srcCompat="@tools:sample/avatars"
-                android:scaleType="centerCrop"
-                android:onClick="toProductDetails"/>
+                android:scaleType="centerCrop"/>
 
             <TextView
                 android:id="@+id/item_name_home"
@@ -43,8 +42,7 @@
                 android:text="ItemNameExampleItemNameExample2022"
                 android:textStyle="bold"
                 android:textSize="14sp"
-                android:textColor="@color/black"
-                android:onClick="toProductDetails"/>
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/item_price_home"

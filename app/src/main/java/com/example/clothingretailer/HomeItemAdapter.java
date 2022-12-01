@@ -1,7 +1,9 @@
 package com.example.clothingretailer;
 
 import android.annotation.SuppressLint;
+import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -66,8 +70,29 @@ public class HomeItemAdapter extends RecyclerView.Adapter<HomeItemAdapter.ViewHo
         Item item = mHomeItems.get(position);
         holder.index = position;
         holder.mTextName.setText(item.getName());
-        // set image here
-        //holder.mImageItem.setImageResource(Integer.valueOf(item.getImage_path()));
+        if (item.getImage_path() != null && item.getImage_path().length() > 0)
+        {
+            ArrayList<String> urls = (ArrayList<String>) StringHdr.getURLImgs(item.getImage_path());
+            if (urls.size() > 0)
+            {
+                Glide.with(holder.itemView.getContext()).load(urls.get(0)).into(holder.mImageItem);
+            }
+        }
+        holder.mImageItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GlobalVars.selected_item = item;
+                toProductDetails(view);
+            }
+        });
+        holder.mTextName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GlobalVars.selected_item = item;
+                toProductDetails(view);
+            }
+        });
+
         holder.mTextPrice.setText(ShoppingCartActivity.formatPriceString((int)item.getPrice()));
         //holder.mTextRate.setText(String.valueOf(item.getRate()) + " (" + String.valueOf(item.getRate_count()) + ")");
         holder.mTextRate.setText("Rating chưa load được");
@@ -78,6 +103,10 @@ public class HomeItemAdapter extends RecyclerView.Adapter<HomeItemAdapter.ViewHo
         return mHomeItems.size();
     }
 
-
+    public void toProductDetails(View view)
+    {
+        Intent switchActivityIntent = new Intent(this.mContext, ProductDetailsActivity.class);
+        mContext.startActivity(switchActivityIntent);
+    }
 
 }

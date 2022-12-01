@@ -1,16 +1,15 @@
 package com.example.clothingretailer;
 
 public class ProductItemInCart {
-    private String id;
+    private int id;
     private String name;
-    private int image_path;
-    private float size;
+    private String image_path;
+    private String size;
     private String color;
     private int count;
     private int price;
 
-
-    public ProductItemInCart(String id, String name, int image_path, float size, String color, int count, int price) {
+    public ProductItemInCart(int id, String name, String image_path, String size, String color, int count, int price) {
         this.id = id;
         this.name = name;
         this.image_path = image_path;
@@ -20,11 +19,11 @@ public class ProductItemInCart {
         this.price = price;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -36,19 +35,19 @@ public class ProductItemInCart {
         this.name = name;
     }
 
-    public int getImage_path() {
+    public String getImage_path() {
         return image_path;
     }
 
-    public void setImage_path(int image_path) {
+    public void setImage_path(String image_path) {
         this.image_path = image_path;
     }
 
-    public float getSize() {
+    public String getSize() {
         return size;
     }
 
-    public void setSize(float size) {
+    public void setSize(String size) {
         this.size = size;
     }
 

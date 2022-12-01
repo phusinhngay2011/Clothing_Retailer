@@ -2,6 +2,7 @@ package com.example.clothingretailer;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.compose.ui.graphics.Color;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
@@ -21,6 +23,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -34,6 +37,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
     RadioButton blackBtn, whiteBtn, greyBtn, beBtn;
     CheckBox[] rating = new CheckBox[5];
     TextView ratingTV;
+    private Item item;
+    private TextView tv_item_name, tv_price;
+    private AppCompatButton add2cart_button;
+    private AppCompatButton buy_now_button;
+    private RadioGroup rg_size;
+    private RadioGroup rg_color;
+    private TextView tv_highlight_title, tv_highlight, tv_des_title, tv_des;
     int onRating = 1;
 
     private FrameLayout ratingFL;
@@ -42,8 +52,18 @@ public class ProductDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
 
+        this.item = GlobalVars.selected_item;
         GenerateFindViewById_ProductDetails();
         viewPager2Handler();
+        if (this.item != null)
+        {
+            tv_item_name.setText(item.getName());
+            tv_price.setText(ShoppingCartActivity.formatPriceString(item.getPrice()));
+            tv_des_title.setText(item.getDescription_title());
+            tv_des.setText(item.getDescription());
+            tv_highlight_title.setText(item.getHighlight_title());
+            tv_highlight.setText(item.getHighlight());
+        }
 
     }
 
@@ -67,11 +87,25 @@ public class ProductDetailsActivity extends AppCompatActivity {
         rating[3] =  findViewById(R.id.rate4);
         rating[4] =  findViewById(R.id.rate5);
         ratingTV = findViewById(R.id.displayRatingTV);
+
+        tv_item_name = findViewById(R.id.tv_item_name);
+        tv_price = findViewById(R.id.tv_price);
+        add2cart_button = findViewById(R.id.addToCart);
+        buy_now_button = findViewById(R.id.BuyNow);
+        rg_size = findViewById(R.id.sizeRadioGroup);
+        rg_color = findViewById(R.id.colorRadioGroup);
+        tv_des_title = findViewById(R.id.desProduct1);
+        tv_des = findViewById(R.id.desProduct1_1);
+        tv_highlight_title = findViewById(R.id.HighlightProduct);
+        tv_highlight = findViewById(R.id.Highlight);
     }
 
     private void viewPager2Handler() {
-        List<SliderItem> sliderItems = createSliderItem(urls);
-        setAdapterHanlder(sliderItems);
+        if (item.getImage_path() != null && item.getImage_path().length() > 0)
+        {
+            List<SliderItem> sliderItems = createSliderItem(item.getImage_path());
+            setAdapterHanlder(sliderItems);
+        }
     }
 
     private void setAdapterHanlder(List<SliderItem> sliderItems) {
@@ -277,7 +311,24 @@ public class ProductDetailsActivity extends AppCompatActivity {
         }
     }
     public void onClickAddtoCart(View view) {
-
+        String color = getColor();
+        String size = getSize();
+        boolean found = false;
+        for (int i = 0; i < GlobalVars.current_cart_items.size(); i++)
+            if (item == GlobalVars.current_cart_items.get(i) && size == GlobalVars.current_cart_sizes.get(i) && color == GlobalVars.current_cart_colors.get(i))
+            {
+                found = true;
+                Integer tmp = GlobalVars.current_cart_item_counts.get(i) + 1;
+                GlobalVars.current_cart_item_counts.set(i, tmp);
+                break;
+            }
+        if (found == false)
+        {
+            GlobalVars.current_cart_items.add(item);
+            GlobalVars.current_cart_sizes.add(size);
+            GlobalVars.current_cart_colors.add(color);
+            GlobalVars.current_cart_item_counts.add(1);
+        }
     }
 
     public void onClickBuyNow(View view) {
@@ -295,5 +346,40 @@ public class ProductDetailsActivity extends AppCompatActivity {
         Intent switchActivityIntent = new Intent(this, MainActivity.class);
         startActivity(switchActivityIntent);
     }
-    private String urls = "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/August2022/7_recycle_xam_nhat_1.jpg<<<https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/August2022/7_recycle_xam_nhat_3.jpg<<<https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/August2022/7_recycle_xam_nhat_2.jpg<<<https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/August2022/7_recycle_xam_nhat_7.jpg<<<https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/August2022/7_recycle_xam_nhat_4.jpg<<<https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/August2022/7_recycle_xam_nhat_5.jpg";
+
+    public String getColor()
+    {
+        int id = rg_color.getCheckedRadioButtonId();
+        Log.d("tag", String.valueOf(id));
+        if (id == blackBtn.getId())
+            return "#000000";
+        else if (id == whiteBtn.getId())
+            return "#FFFFFF";
+        else if (id == greyBtn.getId())
+            return "#A9A9A9";
+        else if (id == beBtn.getId())
+            return "#F5F5DC";
+
+        return null;
+    }
+
+    public String getSize()
+    {
+        int id = rg_size.getCheckedRadioButtonId();
+        Log.d("tag", String.valueOf(id));
+        if (id == sizeSBtn.getId())
+            return "S";
+        else if (id == sizeMBtn.getId())
+            return "M";
+        else if (id == sizeLBtn.getId())
+            return  "L";
+        else if (id == sizeXLBtn.getId())
+            return "XL";
+        else if (id == sizeXXLBtn.getId())
+            return "XXL";
+        else if (id == size3XLBtn.getId())
+            return "3XL";
+
+        return null;
+    }
 }

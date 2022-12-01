@@ -3,6 +3,7 @@ package com.example.clothingretailer;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class ShoppingCartActivity extends AppCompatActivity {
@@ -32,15 +34,12 @@ public class ShoppingCartActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.recyclerView_cart);
         mTotalPrice = findViewById(R.id.total_price);
         mShippingFee = findViewById(R.id.shipping_fee);
-        mProductItems = new ArrayList<ProductItemInCart>();
+
         mImageEmpty = findViewById(R.id.image_empty_cart);
-        loadProductItems();
 
-        mProductItemAdapter = new ProductItemAdapter(this, mProductItems);
-        mRecyclerView.setAdapter(mProductItemAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        updateCart();
+
+
         // chay cai nay 1 lan de generate test db
         // TestGenerator.generate_test_db(getApplicationContext());
 
@@ -50,6 +49,18 @@ public class ShoppingCartActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("tag", "Shopping cart onResume called");
+        mProductItems = new ArrayList<ProductItemInCart>();
+        loadProductItems();
+        mProductItemAdapter = new ProductItemAdapter(this, mProductItems);
+        mRecyclerView.setAdapter(mProductItemAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        updateCart();
     }
 
     public static void updateCart() {
@@ -74,17 +85,21 @@ public class ShoppingCartActivity extends AppCompatActivity {
             res = res.substring(0, position) + '.' + res.substring(position);
             position -= 3;
         }
+        if (len % 3 == 0)
+            res = res.substring(1);
         return res;
     }
 
     private void loadProductItems() {
         // Replace by loading data from DB
-        mProductItems.add(new ProductItemInCart("001", "Adidas Stan Smith", R.drawable.ic_launcher_background, (float)35.5, "White", 1, 2500000));
-        mProductItems.add(new ProductItemInCart("002", "Adidas Lite Racer", R.drawable.ic_launcher_background, (float)38.5, "Black", 2, 2000000));
-        mProductItems.add(new ProductItemInCart("001", "Adidas Stan Smith", R.drawable.ic_launcher_background, (float)35.5, "White", 1, 2500000));
-        mProductItems.add(new ProductItemInCart("002", "Adidas Lite Racer", R.drawable.ic_launcher_background, (float)38.5, "Black", 2, 2000000));
-        mProductItems.add(new ProductItemInCart("001", "Adidas Stan Smith", R.drawable.ic_launcher_background, (float)35.5, "White", 1, 2500000));
-        mProductItems.add(new ProductItemInCart("002", "Adidas Lite Racer", R.drawable.ic_launcher_background, (float)38.5, "Black", 2, 2000000));
+        for (int i = 0; i < GlobalVars.current_cart_items.size(); i++)
+        {
+            Item item = GlobalVars.current_cart_items.get(i);
+            List<String> urls = StringHdr.getURLImgs(item.getImage_path());
+            mProductItems.add(new ProductItemInCart(item.getId(), item.getName(), urls.get(0),
+                    GlobalVars.current_cart_sizes.get(i), GlobalVars.current_cart_colors.get(i), (int) GlobalVars.current_cart_item_counts.get(i),
+                    item.getPrice()));
+        }
     }
 
     public void toHome(View view) {

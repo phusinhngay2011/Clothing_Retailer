@@ -64,6 +64,8 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String CART_ITEM_TABLE = "CART_ITEM";
     private static final String CI_CART_ID = "cart_id";
     private static final String CI_ITEM_ID = "item_id";
+    private static final String CI_SIZE = "size";
+    private static final String CI_COLOR = "color";
     private static final String CI_ITEM_COUNT = "item_count";
 
     private static final String ORDER_TABLE = "ORDER_TABLE";
@@ -134,8 +136,10 @@ public class DBHandler extends SQLiteOpenHelper {
         create_ci_table_query = "CREATE TABLE " + CART_ITEM_TABLE + " ("
                 + CI_CART_ID + " INTEGER, "
                 + CI_ITEM_ID + " INTEGER, "
+                + CI_SIZE + " TEXT, "
+                + CI_COLOR + " TEXT, "
                 + CI_ITEM_COUNT + " INTEGER, "
-                + "PRIMARY KEY (" + CI_CART_ID + ", " + CI_ITEM_ID + "))",
+                + "PRIMARY KEY (" + CI_CART_ID + ", " + CI_ITEM_ID + ", " + CI_SIZE + ", " + CI_COLOR + "))",
         create_order_table_query = "CREATE TABLE " + ORDER_TABLE + " ("
                 + ORDER_CART_ID + " INTEGER PRIMARY KEY, "
                 + ORDER_TOTAL_PRICE + " INTEGER, "
@@ -719,12 +723,14 @@ public class DBHandler extends SQLiteOpenHelper {
         return null;
     }
 
-    public void add_cart_item(int cart_id, int item_id, int item_count)
+    public void add_cart_item(int cart_id, int item_id, String size, String color, int item_count)
     {
         open_DB_for_write();
         ContentValues values = new ContentValues();
         values.put(CI_CART_ID, cart_id);
         values.put(CI_ITEM_ID, item_count);
+        values.put(CI_SIZE, size);
+        values.put(CI_COLOR, color);
         values.put(CI_ITEM_COUNT, item_count);
         write_db.insert(CART_ITEM_TABLE, null, values);
     }
@@ -766,11 +772,14 @@ public class DBHandler extends SQLiteOpenHelper {
                 cursor.moveToFirst();
                 do {
                     int tmp_cart_id, tmp_item_id, tmp_count;
+                    String tmp_size, tmp_color;
                     tmp_cart_id = cursor.getInt(cursor.getColumnIndex(CI_CART_ID));
                     tmp_item_id = cursor.getInt(cursor.getColumnIndex(CI_ITEM_ID));
                     tmp_count = cursor.getInt(cursor.getColumnIndex(CI_ITEM_COUNT));
+                    tmp_size = cursor.getString(cursor.getColumnIndex(CI_SIZE));
+                    tmp_color = cursor.getString(cursor.getColumnIndex(CI_COLOR));
 
-                    CartItem tmp_ci = new CartItem(tmp_cart_id, tmp_item_id, tmp_count);
+                    CartItem tmp_ci = new CartItem(tmp_cart_id, tmp_item_id, tmp_size, tmp_color, tmp_count);
                     result.add(tmp_ci);
 
                 } while (cursor.moveToNext());
