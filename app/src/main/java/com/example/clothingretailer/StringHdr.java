@@ -135,10 +135,10 @@ public class StringHdr {
         int beg = 0;
         while(pos != -1){
             res.add(image_path.substring(beg, pos));
-            beg += pos + URL_SEPERATE.length();
+            beg = pos + URL_SEPERATE.length();
             pos = image_path.indexOf(URL_SEPERATE, beg);
         }
-        res.add(image_path.substring(beg, image_path.length() - 1));
+        res.add(image_path.substring(beg, image_path.length()));
         return res;
     }
 
