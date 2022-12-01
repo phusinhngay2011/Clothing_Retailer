@@ -14,4 +14,5 @@ public class GlobalVars {
     public static String quick_cart_size;
     public static String quick_cart_color;
     public static String quick_cart_count;
+    public static ArrayList<Item> current_favorite_items = new ArrayList<Item>();
 }

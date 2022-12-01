@@ -12,6 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 public class FavoriteItemAdapter extends RecyclerView.Adapter<FavoriteItemAdapter.ViewHolder> {
@@ -68,9 +70,16 @@ public class FavoriteItemAdapter extends RecyclerView.Adapter<FavoriteItemAdapte
         Item item = mFavoriteItems.get(position);
         holder.index = position;
         holder.mTextName.setText(item.getName());
-        holder.mImageItem.setImageResource(Integer.valueOf(item.getImage_path()));
+        if (item.getImage_path() != null && item.getImage_path().length() > 0)
+        {
+            ArrayList<String> urls = (ArrayList<String>) StringHdr.getURLImgs(item.getImage_path());
+            if (urls.size() > 0)
+            {
+                Glide.with(holder.itemView.getContext()).load(urls.get(0)).into(holder.mImageItem);
+            }
+        }
         holder.mTextPrice.setText(ShoppingCartActivity.formatPriceString((int)item.getPrice()));
-        //holder.mTextRate.setText(String.valueOf(item.getRate()) + " (" + String.valueOf(item.getRate_count()) + ")");
+        holder.mTextRate.setText("Average rating");
     }
 
     @Override
