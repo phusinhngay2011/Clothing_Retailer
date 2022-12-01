@@ -66,7 +66,8 @@ public class HomeItemAdapter extends RecyclerView.Adapter<HomeItemAdapter.ViewHo
         Item item = mHomeItems.get(position);
         holder.index = position;
         holder.mTextName.setText(item.getName());
-        holder.mImageItem.setImageResource(Integer.valueOf(item.getImage_path()));
+        // set image here
+        //holder.mImageItem.setImageResource(Integer.valueOf(item.getImage_path()));
         holder.mTextPrice.setText(ShoppingCartActivity.formatPriceString((int)item.getPrice()));
         //holder.mTextRate.setText(String.valueOf(item.getRate()) + " (" + String.valueOf(item.getRate_count()) + ")");
         holder.mTextRate.setText("Rating chưa load được");
