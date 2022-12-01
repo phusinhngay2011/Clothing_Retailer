@@ -156,10 +156,10 @@ public class SignUpMainInfoActivity extends AppCompatActivity {
             // Luu vao database
 
             //Log.d("tag", usr.toString());
-            ArrayList<User> search_res = dbHandler.search_user(usr.getUsername(), null);
+            ArrayList<User> search_res = dbHandler.search_user(usr.getUsername(), usr.getPassword());
             if (search_res != null && search_res.size() > 0)
             {
-                Toast.makeText(getApplicationContext(), "Username already exists!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Username or password already exists!", Toast.LENGTH_SHORT).show();
                 return;
             }
 
