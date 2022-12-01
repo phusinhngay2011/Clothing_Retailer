@@ -243,9 +243,5 @@ public class MainActivity extends AppCompatActivity {
         startActivity(switchActivityIntent);
     }
 
-    public void toProductDetails(View view) {
-        Intent switchActivityIntent = new Intent(this, ProductDetailsActivity.class);
-        startActivity(switchActivityIntent);
-    }
 }
 
