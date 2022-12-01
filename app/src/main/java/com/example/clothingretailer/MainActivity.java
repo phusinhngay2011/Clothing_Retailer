@@ -3,6 +3,7 @@ package com.example.clothingretailer;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView2;
     private RecyclerView mRecyclerView3;
     private HomeItemAdapter mHomeItemAdapter;
+    private HomeItemAdapter mHomeItemAdapter2;
+    private HomeItemAdapter mHomeItemAdapter3;
     private DrawerLayout mDrawerLayout;
     private ImageButton mMenuButton;
     private DBHandler dbHandler = null;
@@ -34,17 +37,14 @@ public class MainActivity extends AppCompatActivity {
     private static final String DB_STATE_SHARED_PREF_NAME = "DB_STATE";
     private static final String DB_STATE_PREF_KEY = "db_state";
 
+    public MainActivity() {
+        super();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mRecyclerView1 = findViewById(R.id.recyclerview1_home);
-        mRecyclerView2 = findViewById(R.id.recyclerview2_home);
-        mRecyclerView3 = findViewById(R.id.recyclerview3_home);
-        mHomeItems1 = new ArrayList<Item>();
-        mHomeItems2 = new ArrayList<Item>();
-        mHomeItems3 = new ArrayList<Item>();
-        loadHomeItems();
 
         if (this.dbHandler == null)
         {
@@ -65,14 +65,23 @@ public class MainActivity extends AppCompatActivity {
             // do nothing
         }
 
+        mRecyclerView1 = findViewById(R.id.recyclerview1_home);
+        mRecyclerView2 = findViewById(R.id.recyclerview2_home);
+        mRecyclerView3 = findViewById(R.id.recyclerview3_home);
+        /*mHomeItems1 = new ArrayList<Item>();
+        mHomeItems2 = new ArrayList<Item>();
+        mHomeItems3 = new ArrayList<Item>();*/
+        loadHomeItems();
 
         // Need to be 3 Adapter, but now just 1 for demo
         mHomeItemAdapter = new HomeItemAdapter(this, mHomeItems1);
+        mHomeItemAdapter2 = new HomeItemAdapter(this, mHomeItems2);
+        mHomeItemAdapter3 = new HomeItemAdapter(this, mHomeItems3);
         mRecyclerView1.setAdapter(mHomeItemAdapter);
         mRecyclerView1.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        mRecyclerView2.setAdapter(mHomeItemAdapter);
+        mRecyclerView2.setAdapter(mHomeItemAdapter2);
         mRecyclerView2.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        mRecyclerView3.setAdapter(mHomeItemAdapter);
+        mRecyclerView3.setAdapter(mHomeItemAdapter3);
         mRecyclerView3.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
 
@@ -153,6 +162,27 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
+    /*@Override
+    protected void onPause() {
+        super.onPause();
+        if (dbHandler != null)
+        {
+            dbHandler.close_DB();
+            dbHandler = null;
+        }
+        Log.d("tag", "main onPause called");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("tag", "main onResume called");
+        if (dbHandler == null)
+        {
+            dbHandler = new DBHandler(getApplicationContext());
+        }
+    }*/
+
     private void toSignIn() {
         GlobalVars.current_user = null;
         GlobalVars.logged_in = false;
@@ -186,14 +216,17 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void loadHomeItems() {
+        mHomeItems1 = dbHandler.get_na_items();
+        mHomeItems2 = dbHandler.get_tfm_items();
+        mHomeItems3 = dbHandler.get_tfw_items();
+
+        /*mHomeItems1.add(new Item(001, "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description title", "No description", "", "", String.valueOf(R.drawable.clothing_ex_details_2), 2999000));
         mHomeItems1.add(new Item(001, "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description title", "No description", "", "", String.valueOf(R.drawable.clothing_ex_details_2), 2999000));
         mHomeItems1.add(new Item(001, "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description title", "No description", "", "", String.valueOf(R.drawable.clothing_ex_details_2), 2999000));
-        mHomeItems1.add(new Item(001, "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description title", "No description", "", "", String.valueOf(R.drawable.clothing_ex_details_2), 2999000));
-        mHomeItems1.add(new Item(001, "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description title", "No description", "", "", String.valueOf(R.drawable.clothing_ex_details_2), 2999000));
+        mHomeItems1.add(new Item(001, "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description title", "No description", "", "", String.valueOf(R.drawable.clothing_ex_details_2), 2999000));*/
 //        mHomeItems1.add(new Item("001", "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description", String.valueOf(R.drawable.clothing_ex_details_1), 2999000, 4.75, 316));
 //        mHomeItems1.add(new Item("001", "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description", String.valueOf(R.drawable.clothing_ex_details_3), 2999000, 4.75, 316));
 //        mHomeItems1.add(new Item("001", "Adidas Stan Smith All White Christmas 2022 Limited", 0, "Shoes", "No description", String.valueOf(R.drawable.clothing_ex_details_4), 2999000, 4.75, 316));
-
     }
 
 
