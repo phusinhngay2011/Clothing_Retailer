@@ -57,7 +57,6 @@ public class AboutUsActivity extends FragmentActivity implements OnMapReadyCallb
             }
         });
 
-
         try {
             ggMapFrameLayout = findViewById(R.id.frameLayoutMap);
             inputLocFrameLayout = findViewById(R.id.framLayoutLocationInput);
@@ -194,4 +193,5 @@ public class AboutUsActivity extends FragmentActivity implements OnMapReadyCallb
                                         "Sư Vạn Hạnh Branch",
                                         "AEON MALL Bình Tân Branch"
     };
+
 }

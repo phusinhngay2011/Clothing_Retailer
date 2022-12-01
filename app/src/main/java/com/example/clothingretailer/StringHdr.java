@@ -7,6 +7,9 @@ import org.apache.commons.codec.binary.Base64;
 import java.nio.charset.StandardCharsets;
 
 import javax.mail.internet.InternetAddress;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -124,4 +127,19 @@ public class StringHdr {
         }
         return mess;
     }
+
+    public static List<String> getURLImgs(String image_path){
+        String URL_SEPERATE = "<<<";
+        List<String> res = new ArrayList<String>();
+        int pos = image_path.indexOf(URL_SEPERATE);
+        int beg = 0;
+        while(pos != -1){
+            res.add(image_path.substring(beg, pos));
+            beg = pos + URL_SEPERATE.length();
+            pos = image_path.indexOf(URL_SEPERATE, beg);
+        }
+        res.add(image_path.substring(beg, image_path.length()));
+        return res;
+    }
+
 }

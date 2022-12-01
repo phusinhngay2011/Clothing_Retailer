@@ -1,5 +1,9 @@
 package com.example.clothingretailer;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
 // Thông tin chi tiết sản phẩm
 public class Item {
     private int id; // PRIMARY KEY
@@ -128,4 +132,5 @@ public class Item {
     public void setPrice(int price) {
         this.price = price;
     }
+
 }
