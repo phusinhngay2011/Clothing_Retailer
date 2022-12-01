@@ -133,4 +133,15 @@ public class Item {
         this.price = price;
     }
 
+    public static String getColorName(String RGB_color)
+    {
+        if (RGB_color == "#000000")
+            return "Black";
+        else if (RGB_color == "#FFFFFF")
+            return "White";
+        else if (RGB_color == "#A9A9A9")
+            return "Grey";
+
+        return null;
+    }
 }

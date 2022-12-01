@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.sql.Array;
@@ -573,6 +574,18 @@ public class DBHandler extends SQLiteOpenHelper {
         return null;
     }
 
+    public void update_quantity(int item_id, @NonNull String size, @NonNull String color, int new_qty)
+    {
+        open_DB_for_write();
+        ContentValues values = new ContentValues();
+        values.put(QUANTITY_COUNT, new_qty);
+        String selection = QUANTITY_ID + " = ? AND " + QUANTITY_SIZE + " = ? AND " + QUANTITY_COLOR + " = ?";
+        String[] selectionArgs = new String[] {String.valueOf(item_id), size, color};
+        long tmp = write_db.update(QUANTITY_TABLE, values, selection, selectionArgs);
+        Log.d("selection", selection + item_id + size + color + new_qty);
+        Log.d("rows update", String.valueOf(tmp) + "  " + values);
+    }
+
     public void add_like(String username, int item_id)
     {
         open_DB_for_write();
@@ -728,7 +741,7 @@ public class DBHandler extends SQLiteOpenHelper {
         open_DB_for_write();
         ContentValues values = new ContentValues();
         values.put(CI_CART_ID, cart_id);
-        values.put(CI_ITEM_ID, item_count);
+        values.put(CI_ITEM_ID, item_id);
         values.put(CI_SIZE, size);
         values.put(CI_COLOR, color);
         values.put(CI_ITEM_COUNT, item_count);

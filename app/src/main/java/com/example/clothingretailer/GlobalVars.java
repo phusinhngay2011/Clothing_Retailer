@@ -14,4 +14,5 @@ public class GlobalVars {
     public static String quick_cart_size;
     public static String quick_cart_color;
     public static String quick_cart_count;
+    public static boolean quick_purchase_mode = false;
 }

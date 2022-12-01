@@ -34,7 +34,7 @@ public class SignInMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in_main);
         GenerateFindViewById_sign_in_main();
-
+        //Log.d("tag", "main on create called");
         rememberMeHandler();
         if (dbHandler == null)
         {
@@ -65,7 +65,7 @@ public class SignInMainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d("tag", "on pause called");
+        //Log.d("tag", "main on pause called");
         if (dbHandler != null)
         {
             dbHandler.close_DB();
@@ -76,7 +76,7 @@ public class SignInMainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("tag", "on resume called");
+        //Log.d("tag", "main on resume called");
         if (dbHandler == null)
         {
             dbHandler = new DBHandler(getApplicationContext());

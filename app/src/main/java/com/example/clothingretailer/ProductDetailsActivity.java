@@ -353,13 +353,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
         int id = rg_color.getCheckedRadioButtonId();
         Log.d("tag", String.valueOf(id));
         if (id == blackBtn.getId())
-            return "#000000";
+            return "Black";
         else if (id == whiteBtn.getId())
-            return "#FFFFFF";
+            return "White";
         else if (id == greyBtn.getId())
-            return "#A9A9A9";
+            return "Grey";
         else if (id == beBtn.getId())
-            return "#F5F5DC";
+            return "Be";
 
         return null;
     }

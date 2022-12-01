@@ -149,6 +149,7 @@
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/et_name"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="20dp"
@@ -158,9 +159,11 @@
                 android:hint="Your name"
                 android:paddingLeft="20dp"
                 android:maxLines="1"
-                android:inputType="textPersonName"></EditText>
+                android:inputType="textPersonName"
+                android:enabled="false"></EditText>
 
             <EditText
+                android:id="@+id/et_email"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="20dp"
@@ -170,9 +173,11 @@
                 android:hint="Email"
                 android:paddingLeft="20dp"
                 android:maxLines="1"
-                android:inputType="textEmailAddress"></EditText>
+                android:inputType="textEmailAddress"
+                android:enabled="false"></EditText>
 
             <EditText
+                android:id="@+id/et_phone"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="20dp"
@@ -182,9 +187,11 @@
                 android:hint="Phone number"
                 android:paddingLeft="20dp"
                 android:maxLines="1"
-                android:inputType="phone"></EditText>
+                android:inputType="phone"
+                android:enabled="false"></EditText>
 
             <EditText
+                android:id="@+id/et_address"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="20dp"
@@ -194,7 +201,8 @@
                 android:hint="Your address"
                 android:paddingLeft="20dp"
                 android:maxLines="1"
-                android:inputType="text"></EditText>
+                android:inputType="text"
+                android:enabled="false"></EditText>
         </LinearLayout>
 
     <LinearLayout
@@ -235,6 +243,7 @@
                 android:background="@drawable/rounded_radio_btn_payment_method_on"
                 android:button="@drawable/inset_intenet_banking"
                 android:text="Internet Banking"
+                android:checked="true"
                 ></RadioButton>
 
             <RadioButton
@@ -265,5 +274,5 @@
         android:text="Place Order"
         android:textColor="@color/white"
         android:textSize="18dp"
-        android:onClick="toPlaceOrderSuccessfully"></androidx.appcompat.widget.AppCompatButton>
+        android:onClick="processCart"></androidx.appcompat.widget.AppCompatButton>
 </RelativeLayout>
