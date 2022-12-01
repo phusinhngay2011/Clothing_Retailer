@@ -45,7 +45,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@color/black" />
-
     <ScrollView
         android:layout_width="@dimen/account_page_width"
         android:layout_height="535dp"
@@ -60,14 +59,40 @@
             android:layout_width="@dimen/account_page_width"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edit Profile"
+                    android:textSize="25dp"
+                    android:textColor="@color/black"
+                    android:textStyle="normal"
+                    android:layout_marginLeft="160dp"
+                    android:layout_marginRight="20dp"
+                    ></TextView>
 
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical|right"
+                    android:onClick="onEnableEdit"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_baseline_edit_24"></ImageView>
+            </RelativeLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Username"
                 android:textColor="#000000"
                 android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginBottom="5dp"/>
 
             <EditText
                 android:id="@+id/edittext_username"
@@ -75,13 +100,16 @@
                 android:layout_height="@dimen/edittext_height"
                 android:background="@drawable/round_style"
                 android:paddingStart="10dp"
-                android:text="cristiano_ronaldo"
-                android:maxLines="1"/>
+                android:text="Username here"
+                android:inputType="text"
+                android:maxLines="1"
+                android:enabled="false"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
+                android:layout_marginBottom="5dp"
                 android:text="Fisrt Name"
                 android:textColor="#000000"
                 android:textSize="20dp"
@@ -93,10 +121,13 @@
                 android:layout_height="@dimen/edittext_height"
                 android:background="@drawable/round_style"
                 android:paddingStart="10dp"
-                android:text="Cristiano"
-                android:maxLines="1"/>
+                android:text="First name here"
+                android:inputType="textPersonName"
+                android:maxLines="1"
+                android:enabled="false"/>
 
             <TextView
+                android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
@@ -111,10 +142,13 @@
                 android:layout_height="@dimen/edittext_height"
                 android:background="@drawable/round_style"
                 android:paddingStart="10dp"
-                android:text="Ronaldo"
-                android:maxLines="1"/>
+                android:hint="Last name here"
+                android:inputType="textPersonName"
+                android:maxLines="1"
+                android:enabled="false"/>
 
             <TextView
+                android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
@@ -132,23 +166,26 @@
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:checked="true"
+                    android:id = "@+id/maleGenderUserRB"
                     android:text="Male" />
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:id = "@+id/femaleGenderUserRB"
                     android:text="Female" />
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:id = "@+id/customGenderUserRB"
                     android:text="Custom" />
 
 
             </RadioGroup>
 
             <TextView
+                android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
@@ -163,9 +200,17 @@
                 android:layout_height="@dimen/edittext_height"
                 android:background="@drawable/round_style"
                 android:paddingStart="10dp"
-                android:maxLines="1"/>
+                android:maxLines="1"
+                android:onClick="popUpDatePicker"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:enabled="false"
+                />
 
             <TextView
+                android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
@@ -180,10 +225,13 @@
                 android:layout_height="@dimen/edittext_height"
                 android:background="@drawable/round_style"
                 android:paddingStart="10dp"
-                android:text="email@gmail.com"
-                android:maxLines="1"/>
+                android:inputType="textEmailAddress"
+                android:hint="email@gmail.com"
+                android:maxLines="1"
+                android:enabled="false"/>
 
             <TextView
+                android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
@@ -193,15 +241,18 @@
                 android:textStyle="bold" />
 
             <EditText
+
                 android:id="@+id/edittext_address"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/edittext_height"
                 android:background="@drawable/round_style"
                 android:paddingStart="10dp"
-                android:text="227 Nguyen Van Cu, Ward 4, District 5"
-                android:maxLines="1"/>
+                android:hint="Your Address"
+                android:maxLines="1"
+                android:enabled="false"/>
 
             <TextView
+                android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
@@ -215,68 +266,84 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/edittext_height"
                 android:background="@drawable/round_style"
+                android:inputType="phone"
                 android:paddingStart="10dp"
-                android:text="0123456789"
-                android:maxLines="1"/>
+                android:hint="Phone number here"
+                android:maxLines="1"
+                android:enabled="false"
+                />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="right"
-                android:paddingTop="20dp"
+                android:layout_marginBottom="5dp"
+                android:drawableEnd="@drawable/ic_baseline_change_circle_24"
+                android:gravity="left"
+                android:layout_marginTop="20dp"
                 android:text="Change password"
                 android:textColor="#000000"
                 android:textSize="25dp"
-                android:textStyle="bold" />
-
-            <TextView
+                android:textStyle="bold"
+                android:onClick="displayChangePW"
+                android:elevation="5dp"
+                android:clickable="true"/>
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="right"
-                android:paddingTop="10dp"
-                android:text="New password"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                android:textStyle="bold" />
+                android:orientation="vertical"
+                android:id = "@+id/ChangePWLayout"
+                android:visibility="gone"
+                >
+                <TextView
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:text="New password"
+                    android:textColor="#000000"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/edittext_new_password"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/edittext_height"
-                android:background="@drawable/round_style"
-                android:gravity="right"
-                android:paddingEnd="10dp"
-                android:password="true"
-                android:text="passdayne"
-                android:maxLines="1"/>
+                <EditText
+                    android:id="@+id/edittext_new_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edittext_height"
+                    android:background="@drawable/round_style"
+                    android:gravity="center_vertical"
+                    android:paddingEnd="10dp"
+                    android:password="true"
+                    android:maxLines="1"
+                    android:enabled="false"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text="Confirmation"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                android:textStyle="bold" />
+                <TextView
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Confirmation"
+                    android:textColor="#000000"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/edittext_confirm_new_password"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/edittext_height"
-                android:background="@drawable/round_style"
-                android:gravity="right"
-                android:paddingEnd="10dp"
-                android:password="true"
-                android:text="passdayne"
-                android:maxLines="1"/>
+                <EditText
+                    android:id="@+id/edittext_confirm_new_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edittext_height"
+                    android:background="@drawable/round_style"
+                    android:gravity="center_vertical"
+                    android:paddingEnd="10dp"
+                    android:password="true"
+                    android:maxLines="1"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textColor="@android:color/holo_green_light"
-                android:textSize="15dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@android:color/holo_green_light"
+                    android:textSize="15dp"
+                    android:enabled="false"/>
 
+
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
@@ -292,7 +359,8 @@
         android:text="Save changes"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:onClick="onSaveChange"/>
 
 
     <androidx.appcompat.widget.AppCompatButton
@@ -306,6 +374,6 @@
         android:text="Log out"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
+        app:layout_constraintStart_toStartOf="parent"
+        android:onClick="toSignIn"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
