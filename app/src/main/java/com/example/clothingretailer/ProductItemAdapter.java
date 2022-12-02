@@ -138,6 +138,23 @@ public class ProductItemAdapter extends RecyclerView.Adapter<ProductItemAdapter.
         holder.mTextCount.setText(String.valueOf(item.getCount()));
         holder.mTextSizeColor.setText(String.format("Color: %s - Size: %s", item.getColor(), item.getSize()));
         holder.mTextPrice.setText(ShoppingCartActivity.formatPriceString(item.getPrice()));
+
+        final int index = position;
+        holder.mImageItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GlobalVars.selected_item = GlobalVars.current_cart_items.get(index);
+                toProductDetails(view);
+            }
+        });
+        holder.mTextName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GlobalVars.selected_item = GlobalVars.current_cart_items.get(index);
+                toProductDetails(view);
+            }
+        });
+
     }
 
     @Override
@@ -149,6 +166,12 @@ public class ProductItemAdapter extends RecyclerView.Adapter<ProductItemAdapter.
         mProductItems.remove(index);
         notifyItemRemoved(index);
         notifyItemRangeChanged(index, mProductItems.size());
+    }
+
+    public void toProductDetails(View view)
+    {
+        Intent switchActivityIntent = new Intent(this.mContext, ProductDetailsActivity.class);
+        mContext.startActivity(switchActivityIntent);
     }
 
 }

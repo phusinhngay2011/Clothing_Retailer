@@ -394,6 +394,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
             editor.putString(SUBTOTAL_PRICE, ShoppingCartActivity.formatPriceString(item.getPrice()));
             editor.putString(SHIPPING_PRICE, "50.000");
             editor.apply();
+
+            GlobalVars.quick_cart_item = GlobalVars.selected_item;
+            GlobalVars.quick_cart_color = getColor();
+            GlobalVars.quick_cart_size = getSize();
             Intent switchActivityIntent = new Intent(this,PaymentActivity.class);
             startActivity(switchActivityIntent);
         }

@@ -242,7 +242,7 @@ public class TestGenerator {
 
 
 
-// Pants
+        // Pants
         // id 48 -> 51
         handler.add_item("Adicolor Contempo Cargo Pants", Item.MALE, "Pants", "PRODUCT DESCRIPTION", "CARGO PANTS FOR CITY EXPLORERS.\n Wait for the adventure? No way. Go find it. Or better yet, go create it. Just pull on these adidas cargo pants for durability, comfort and utilitarian style while you're at it. Ripstop fabric holds up to long days of play, plus multiple pockets give you plenty of storage options.", "DETAILS", "- Loose fit\n- Drawcord on elastic waist\n- 100% nylon ripstop\n- Drawcord-adjustable hems", "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/17ea2b50459c42a08d1dae800126807f_9366/Adicolor_Contempo_Cargo_Pants_Black_HK2873_25_model.jpg<<<https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/3ba6eb7992ff4d119011ae8001267838_9366/Adicolor_Contempo_Cargo_Pants_Black_HK2873_23_hover_model.jpg<<<https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/17ea2b50459c42a08d1dae800126807f_9366/Adicolor_Contempo_Cargo_Pants_Black_HK2873_25_model.jpg", 480000);
         handler.add_item("ULTIMATE365 Tapered Pants", Item.MALE, "Pants", "PRODUCT DESCRIPTION", "TAPERED GOLF PANTS MADE WITH RECYCLED MATERIALS.\n For ultimate comfort on any course and any day, these adidas golf pants have you covered. The durable twill fabric is made for year-round play, with a breathable feel and four-way stretch for a full range of motion. Built-in UV coverage lets you play with confidence on sunny days. The tapered cut adds the finishing touch. Made with 100% recycled materials, this product represents just one of our solutions to help end plastic waste.", "DETAILS", "- Regular fit\n- Belt loops with fly\n- 100% recycled polyester twill\n- Breathable four-way stretch fabric", "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/23227c9b4e8545bbad43adeb00cc6262_9366/Ultimate365_Tapered_Pants_Black_HA6206_25_model.jpg<<<https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/3c60fff9f86d4daeab7eadf2002413b4_9366/Ultimate365_Tapered_Pants_Blue_HA6205_25_model.jpg<<<https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/48e3f414fae748258d26ae4a00cc33c3_9366/Ultimate365_Tapered_Pants_Green_HM3230_25_model.jpg", 399000);
@@ -258,6 +258,7 @@ public class TestGenerator {
         handler.add_na_item(39);
         handler.add_na_item(43);
         handler.add_na_item(48);
+
 
         handler.add_tfm_item(43);
         handler.add_tfm_item(49);

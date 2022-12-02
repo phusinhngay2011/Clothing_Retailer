@@ -70,6 +70,7 @@ public class HomeItemAdapter extends RecyclerView.Adapter<HomeItemAdapter.ViewHo
                 Glide.with(holder.itemView.getContext()).load(urls.get(0)).into(holder.mImageItem);
             }
         }
+
         holder.mImageItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,12 +88,11 @@ public class HomeItemAdapter extends RecyclerView.Adapter<HomeItemAdapter.ViewHo
 
         holder.mTextPrice.setText(ShoppingCartActivity.formatPriceString((int)item.getPrice()));
         //holder.mTextRate.setText(String.valueOf(item.getRate()) + " (" + String.valueOf(item.getRate_count()) + ")");
-        holder.mTextRate.setText("Rating avg.");
+        holder.mTextRate.setText("");
         for (int j = 0; j < GlobalVars.current_favorite_items.size(); j++) {
             if (item.getName().equals(GlobalVars.current_favorite_items.get(j).getName())) {
                 holder.mHeartButton.setChecked(true);
             }
-
         }
     }
 

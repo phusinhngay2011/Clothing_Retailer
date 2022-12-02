@@ -37,11 +37,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.recyclerView_cart);
         mTotalPrice = findViewById(R.id.total_price);
         mShippingFee = findViewById(R.id.shipping_fee);
-
         mImageEmpty = findViewById(R.id.image_empty_cart);
-
-
-
 
         // chay cai nay 1 lan de generate test db
         // TestGenerator.generate_test_db(getApplicationContext());

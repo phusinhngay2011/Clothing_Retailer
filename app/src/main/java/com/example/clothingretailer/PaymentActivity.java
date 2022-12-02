@@ -173,7 +173,8 @@ public class PaymentActivity extends AppCompatActivity {
                     ArrayList<Integer> stock_qty_list = new ArrayList<Integer>();
                     for (int i = 0; i < GlobalVars.current_cart_items.size(); i++)
                     {
-                        ArrayList<ItemQuantity> res = dbHandler.search_quantity(GlobalVars.current_cart_items.get(i).getId(),
+                        ArrayList<ItemQuantity> res = dbHandler.search_quantity(
+                                GlobalVars.current_cart_items.get(i).getId(),
                                 GlobalVars.current_cart_sizes.get(i),
                                 GlobalVars.current_cart_colors.get(i));
 
@@ -224,7 +225,52 @@ public class PaymentActivity extends AppCompatActivity {
                     toPlaceOrderSuccessfully(view);
                 }
        else{
+           ArrayList<ItemQuantity> res = dbHandler.search_quantity(
+                   GlobalVars.quick_cart_item.getId(),
+                   GlobalVars.quick_cart_size,
+                   GlobalVars.quick_cart_color);
 
+           if (res == null || res.size() == 0 || res.get(0).getCount() == 0)
+           {
+               Toast.makeText(PaymentActivity.this, "Sorry, your item \"" + GlobalVars.quick_cart_item.getName()
+                       + "\" is out of stock!", Toast.LENGTH_SHORT).show();
+               return;
+           }
+
+           Cart cart = dbHandler.add_cart(GlobalVars.current_user.getUsername());
+           Log.d("new cart", String.valueOf(cart.getCart_id()));
+           if (cart == null)
+           {
+               Toast.makeText(PaymentActivity.this, "Sorry, something went wrong!", Toast.LENGTH_SHORT).show();
+               return;
+           }
+
+           int new_stock_qty =  res.get(0).getCount() - GlobalVars.quick_cart_count;
+
+           dbHandler.update_quantity(
+                   GlobalVars.quick_cart_item.getId(),
+                   GlobalVars.quick_cart_size,
+                   GlobalVars.quick_cart_color,
+                   new_stock_qty);
+
+           dbHandler.add_cart_item(cart.getCart_id(),
+                   GlobalVars.quick_cart_item.getId(),
+                   GlobalVars.quick_cart_size,
+                   GlobalVars.quick_cart_color,
+                   GlobalVars.quick_cart_count);
+
+           dbHandler.add_order(cart.getCart_id(),
+                   Integer.parseInt(((String) SubtotalPriceTV.getText()).replaceAll("[.]", "")),
+                   (!ShippingFeeTV.getText().equals("Free") ?
+                           Integer.parseInt(((String) ShippingFeeTV.getText()).replaceAll("[.]", "")) : 0)
+                   ,get_payment_method(), 1);
+
+           GlobalVars.quick_cart_item = null;
+           GlobalVars.quick_cart_size= null;
+           GlobalVars.quick_cart_color = null;
+           GlobalVars.quick_cart_color = null;
+
+           toPlaceOrderSuccessfully(view);
        }
     }
 
