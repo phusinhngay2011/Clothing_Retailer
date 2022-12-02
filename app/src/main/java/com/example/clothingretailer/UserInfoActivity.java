@@ -37,6 +37,7 @@ public class UserInfoActivity extends AppCompatActivity {
     private EditText et_phone;
     private EditText et_new_pw;
     private EditText et_confirm_new_pw;
+    private DBHandler dbHandler = null;
 
     private LinearLayout changePWLayout;
     @Override
@@ -67,6 +68,23 @@ public class UserInfoActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (dbHandler != null)
+        {
+            dbHandler.close_DB();
+            dbHandler = null;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (dbHandler == null)
+            dbHandler = new DBHandler(UserInfoActivity.this);
     }
 
     private void setupUserInfoView()
@@ -161,7 +179,7 @@ public class UserInfoActivity extends AppCompatActivity {
     }
 
     public void onEnableEdit(View view) {
-        et_username.setEnabled(true);
+        et_username.setEnabled(false);
         et_firstname.setEnabled(true);
         et_lastname.setEnabled(true);
         et_dob.setEnabled(true);
@@ -208,14 +226,8 @@ public class UserInfoActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), mess, Toast.LENGTH_SHORT).show();
             return;
         }
-        StringHdr check = new StringHdr(username);
-        mess = check.validUsername();
-        if (!mess.equals("")){
-            Toast.makeText(getApplicationContext(), mess, Toast.LENGTH_SHORT).show();
-            return;
-        }
         // Check email
-        check.setStr(email);
+        StringHdr check = new StringHdr(email);
         mess = check.validEmail();
         if(!mess.equals("")){
             Toast.makeText(getApplicationContext(), mess, Toast.LENGTH_SHORT).show();
@@ -228,30 +240,47 @@ public class UserInfoActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), mess, Toast.LENGTH_SHORT).show();
             return;
         }
+
+        if ((password != null && password.length() > 0) || (repassword != null && repassword.length() > 0))
+        {
+            check.setStr(password);
+            mess = check.validPassword();
+            if(!mess.equals("")){
+                Toast.makeText(getApplicationContext(), mess, Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            //check re-password
+            if(!password.equals(repassword)){
+                mess = "Re-password doesn't match";
+                Toast.makeText(getApplicationContext(), mess, Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+        else
+        {
+            password = GlobalVars.current_user.getPassword();
+            repassword = password;
+        }
         // Check password
-        check.setStr(password);
-        mess = check.validPassword();
-        if(!mess.equals("")){
-            Toast.makeText(getApplicationContext(), mess, Toast.LENGTH_SHORT).show();
+
+        long tmp = dbHandler.update_user(GlobalVars.current_user.getId(), GlobalVars.current_user.getUsername(), password, firstname, lastname, genderType, email, phone, birthday, address);
+        if (tmp <= 0)
+        {
+            Toast.makeText(getApplicationContext(), "Sorry, something went wrong!", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        //check re-password
-        if(!password.equals(repassword)){
-            mess = "Re-password doesn't match";
-            Toast.makeText(getApplicationContext(), mess, Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-
-        GlobalVars.current_user.setUsername(username);
         GlobalVars.current_user.setFirstname(firstname);
         GlobalVars.current_user.setLastname(lastname);
+        GlobalVars.current_user.setGender(genderType);
         GlobalVars.current_user.setBirthday(birthday);
         GlobalVars.current_user.setAddress(address);
         GlobalVars.current_user.setEmail(email);
         GlobalVars.current_user.setPhone(phone);
         GlobalVars.current_user.setPassword(repassword);
+
+        Toast.makeText(getApplicationContext(), "Personal information updated!", Toast.LENGTH_SHORT).show();
 
         Intent switchActivityIntent = new Intent(this, MainActivity.class);
         startActivity(switchActivityIntent);

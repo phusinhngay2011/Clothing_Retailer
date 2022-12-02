@@ -25,6 +25,7 @@ public class User {
     public User(int id, String username, String firstname, String lastname, int gender,
                 String email, String phone, String birthday, String address,
                 String password) {
+        this.id = id;
         this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;

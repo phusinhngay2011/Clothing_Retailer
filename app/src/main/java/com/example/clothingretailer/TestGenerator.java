@@ -274,8 +274,11 @@ public class TestGenerator {
         handler.add_tfw_item(10);
         handler.add_tfw_item(15);
 
-        handler.add_quantity(1, "M", "Black", 10);
-        handler.add_quantity(6, "M", "Black", 10);
+        for (int i = 1; i <= 51; i++)
+        {
+            handler.add_quantity(i, "M", "Black", 10);
+            handler.add_quantity(i, "L", "Black", 10);
+        }
 
         handler.close_DB();
     }

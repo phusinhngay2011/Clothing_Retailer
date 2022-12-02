@@ -297,6 +297,22 @@ public class DBHandler extends SQLiteOpenHelper {
         return null;
     }
 
+    public long update_user(int id, String username, String password, String firstname, String lastname, int gender, String email, String phone, String birthday, String address){
+        open_DB_for_write();
+        ContentValues values = new ContentValues();
+        values.put(USER_PASSWORD, password);
+        values.put(USER_FIRSTNAME, firstname);
+        values.put(USER_LASTNAME, lastname);
+        values.put(USER_GENDER, gender);
+        values.put(USER_EMAIL, email);
+        values.put(USER_PHONE, phone);
+        values.put(USER_BIRTHDAY, birthday);
+        values.put(USER_ADDRESS, address);
+        String selection = USER_ID + " = ? AND " + USER_USERNAME + " = ?";
+        String[] selectionArgs = new String[] {String.valueOf(id), username};
+        return write_db.update(USER_TABLE, values, selection, selectionArgs);
+    }
+
     public Item add_item(String name, int gender, String type, @Nullable String description_title, @Nullable String description, @Nullable String highlight_title, @Nullable String highlight, String image_path, int price)
     {
         open_DB_for_write();
