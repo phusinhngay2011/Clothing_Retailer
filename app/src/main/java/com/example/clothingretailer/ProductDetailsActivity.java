@@ -4,9 +4,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
@@ -355,8 +358,22 @@ public class ProductDetailsActivity extends AppCompatActivity {
             GlobalVars.current_cart_colors.add(color);
             GlobalVars.current_cart_item_counts.add(1);
         }
-    }
+        popUpMessage(new String("+1 " +  item.getName()), 500);
 
+    }
+    private void popUpMessage(String msg, int delay ){
+        final Handler handler = new Handler();
+        final AlertDialog.Builder builder = new AlertDialog.Builder(ProductDetailsActivity.this);
+        builder.setMessage(msg);
+        final AlertDialog dialog = builder.create();
+        dialog.getWindow().setBackgroundDrawable(getResources().getDrawable(R.drawable.dialog_bg));
+        dialog.show();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                dialog.dismiss();
+            }
+        }, delay);
+    }
     public void onClickBuyNow(View view) {
         if (GlobalVars.current_user == null || GlobalVars.logged_in == false)
         {
