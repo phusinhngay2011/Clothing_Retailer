@@ -1,11 +1,15 @@
 package com.example.clothingretailer;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +27,7 @@ public class FavoritesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorites);
+        checkIfLogin();
         mBackButton = findViewById(R.id.back_button_favorites);
         mRecyclerView = findViewById(R.id.recyclerView_favorite);
         mEmptyFavoriteMessage = findViewById(R.id.empty_favorite_message);
@@ -71,5 +76,38 @@ public class FavoritesActivity extends AppCompatActivity {
         mFavoriteItems = GlobalVars.current_favorite_items;
 
     }
+
+    public void checkIfLogin(){
+        if (GlobalVars.current_user == null || GlobalVars.logged_in == false)
+        {
+            try {
+                new AlertDialog.Builder(FavoritesActivity.this)
+                        .setTitle("Requires login")
+                        .setMessage("You need to log in to use more features")
+                        // Specifying a listener allows you to take an action before dismissing the dialog.
+                        // The dialog is automatically dismissed when a dialog button is clicked.
+                        .setPositiveButton("Log in", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent switchActivityIntent = new Intent(FavoritesActivity.this, SignInMainActivity.class);
+                                startActivity(switchActivityIntent);
+                            }
+                        })
+
+                        .setNegativeButton("Back to homepage", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent switchActivityIntent = new Intent(FavoritesActivity.this, MainActivity.class);
+                                startActivity(switchActivityIntent);
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            }
+            catch (Exception e){
+                Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
 
 }

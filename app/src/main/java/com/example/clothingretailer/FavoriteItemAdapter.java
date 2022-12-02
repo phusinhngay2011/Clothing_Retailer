@@ -2,14 +2,18 @@ package com.example.clothingretailer;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -42,6 +46,8 @@ public class FavoriteItemAdapter extends RecyclerView.Adapter<FavoriteItemAdapte
                     removeHolder(index);
                 }
             });
+
+
         }
 
     }
@@ -79,7 +85,24 @@ public class FavoriteItemAdapter extends RecyclerView.Adapter<FavoriteItemAdapte
             }
         }
         holder.mTextPrice.setText(ShoppingCartActivity.formatPriceString((int)item.getPrice()));
-        holder.mTextRate.setText("Average rating");
+        holder.mTextRate.setText("");
+
+
+        holder.mImageItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GlobalVars.selected_item = item;
+                toProductDetails(view);
+            }
+        });
+
+        holder.mTextName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GlobalVars.selected_item = item;
+                toProductDetails(view);
+            }
+        });
     }
 
     @Override
@@ -92,6 +115,12 @@ public class FavoriteItemAdapter extends RecyclerView.Adapter<FavoriteItemAdapte
         notifyItemRemoved(index);
         notifyItemRangeChanged(index, mFavoriteItems.size());
         FavoritesActivity.checkEmpty();
+    }
+
+    public void toProductDetails(View view)
+    {
+        Intent switchActivityIntent = new Intent(this.mContext, ProductDetailsActivity.class);
+        mContext.startActivity(switchActivityIntent);
     }
 
 }

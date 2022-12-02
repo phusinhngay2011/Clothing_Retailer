@@ -1,7 +1,12 @@
 package com.example.clothingretailer;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
@@ -10,8 +15,10 @@ import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
@@ -20,7 +27,12 @@ import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.bumptech.glide.Glide;
+
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ProductDetailsActivity extends AppCompatActivity {
@@ -323,6 +335,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 break;
         }
     }
+
     public void onClickAddtoCart(View view) {
         String color = getColor();
         String size = getSize();
@@ -345,12 +358,55 @@ public class ProductDetailsActivity extends AppCompatActivity {
     }
 
     public void onClickBuyNow(View view) {
+        if (GlobalVars.current_user == null || GlobalVars.logged_in == false)
+        {
+            try {
+                new AlertDialog.Builder(ProductDetailsActivity.this)
+                        .setTitle("Requires login")
+                        .setMessage("You need to log in to use more features")
+                        // Specifying a listener allows you to take an action before dismissing the dialog.
+                        // The dialog is automatically dismissed when a dialog button is clicked.
+                        .setPositiveButton("Log in", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent switchActivityIntent = new Intent(ProductDetailsActivity.this, SignInMainActivity.class);
+                                startActivity(switchActivityIntent);
+                            }
+                        })
+
+                        .setNegativeButton("Back to homepage", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent switchActivityIntent = new Intent(ProductDetailsActivity.this, MainActivity.class);
+                                startActivity(switchActivityIntent);
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            }
+            catch (Exception e){
+                Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }
+        else{
+            GlobalVars.quick_purchase_mode = true;
+            SharedPreferences.Editor editor = getSharedPreferences(
+                    PREFERENCES_PRICE, MODE_PRIVATE).edit();
+            editor.putString(SUBTOTAL_PRICE, ShoppingCartActivity.formatPriceString(item.getPrice()));
+            editor.putString(SHIPPING_PRICE, "50.000");
+            editor.apply();
+
+            GlobalVars.quick_cart_item = GlobalVars.selected_item;
+            GlobalVars.quick_cart_color = getColor();
+            GlobalVars.quick_cart_size = getSize();
+            Intent switchActivityIntent = new Intent(this,PaymentActivity.class);
+            startActivity(switchActivityIntent);
+        }
 
     }
 
     public void onClickShareProduct(View view) {
-
     }
+
 
     public void onClickLikeProduct() {
         if (likeBtn.isChecked() == false) {
@@ -412,4 +468,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         return null;
     }
+
+    private String PREFERENCES_PRICE = "TOTAL_PRICE_TEMP";
+    private String SUBTOTAL_PRICE = "st";
+    private String SHIPPING_PRICE = "sp";
 }

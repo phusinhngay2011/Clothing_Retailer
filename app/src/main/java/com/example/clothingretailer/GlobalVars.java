@@ -13,7 +13,7 @@ public class GlobalVars {
     public static Item quick_cart_item;
     public static String quick_cart_size;
     public static String quick_cart_color;
-    public static String quick_cart_count;
+    public static int quick_cart_count = 1;
     public static boolean quick_purchase_mode = false;
     public static ArrayList<Item> current_favorite_items = new ArrayList<Item>();
 }

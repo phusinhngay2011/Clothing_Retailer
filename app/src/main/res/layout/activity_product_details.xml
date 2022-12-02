@@ -311,7 +311,8 @@
             android:paddingLeft="30dp"
             android:paddingRight="20dp"
             android:text="Buy now"
-            android:textColor="@color/white"></androidx.appcompat.widget.AppCompatButton>
+            android:textColor="@color/white"
+            ></androidx.appcompat.widget.AppCompatButton>
 
         <LinearLayout
             android:id="@+id/paymentMethodsLayout"

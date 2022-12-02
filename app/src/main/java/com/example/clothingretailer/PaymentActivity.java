@@ -162,100 +162,116 @@ public class PaymentActivity extends AppCompatActivity {
 
     public void processCart(View view)
     {
-        //Log.d("global vars", GlobalVars.current_cart_items.get(0).getId() + " " + GlobalVars.current_cart_sizes.get(0) + " " + GlobalVars.current_cart_colors.get(0) + " " + GlobalVars.current_cart_item_counts);
-        if (GlobalVars.current_user == null || GlobalVars.logged_in == false)
-        {
-            try {
-                new AlertDialog.Builder(PaymentActivity.this)
-                        .setTitle("Requires login")
-                        .setMessage("You need to log in to use more features")
-                        // Specifying a listener allows you to take an action before dismissing the dialog.
-                        // The dialog is automatically dismissed when a dialog button is clicked.
-                        .setPositiveButton("Log in", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent switchActivityIntent = new Intent(PaymentActivity.this, SignInMainActivity.class);
-                                startActivity(switchActivityIntent);
-                            }
-                        })
-
-                        .setNegativeButton("Back to homepage", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                Intent switchActivityIntent = new Intent(PaymentActivity.this, MainActivity.class);
-                                startActivity(switchActivityIntent);
-                            }
-                        })
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
-            }
-            catch (Exception e){
-                Toast.makeText(PaymentActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
-            }
-        }
-        else
-        {
-            if (GlobalVars.quick_purchase_mode == false)
-            {
-                if (GlobalVars.current_cart_items.size() == 0)
+       if (GlobalVars.quick_purchase_mode == false)
                 {
-                    Toast.makeText(PaymentActivity.this, "Cart is empty!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                ArrayList<Integer> stock_qty_list = new ArrayList<Integer>();
-                for (int i = 0; i < GlobalVars.current_cart_items.size(); i++)
-                {
-                    ArrayList<ItemQuantity> res = dbHandler.search_quantity(GlobalVars.current_cart_items.get(i).getId(),
-                            GlobalVars.current_cart_sizes.get(i),
-                            GlobalVars.current_cart_colors.get(i));
-
-
-                    if (res == null || res.size() == 0 || res.get(0).getCount() == 0)
+                    if (GlobalVars.current_cart_items.size() == 0)
                     {
-                        Toast.makeText(PaymentActivity.this, "Sorry, your item \"" + GlobalVars.current_cart_items.get(i).getName()
-                                + "\" is out of stock!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PaymentActivity.this, "Cart is empty!", Toast.LENGTH_SHORT).show();
                         return;
                     }
 
-                    if (res.get(0).getCount() < GlobalVars.current_cart_item_counts.get(i))
+                    ArrayList<Integer> stock_qty_list = new ArrayList<Integer>();
+                    for (int i = 0; i < GlobalVars.current_cart_items.size(); i++)
                     {
-                        Toast.makeText(PaymentActivity.this, "We only have " + res.get(0).getCount() +  " of your item \"" +
-                                GlobalVars.current_cart_items.get(i).getName() + String.format("\" (Size %s, Color %s) left!",
-                                GlobalVars.current_cart_sizes.get(i), GlobalVars.current_cart_colors.get(i)), Toast.LENGTH_SHORT).show();
+                        ArrayList<ItemQuantity> res = dbHandler.search_quantity(
+                                GlobalVars.current_cart_items.get(i).getId(),
+                                GlobalVars.current_cart_sizes.get(i),
+                                GlobalVars.current_cart_colors.get(i));
+
+
+                        if (res == null || res.size() == 0 || res.get(0).getCount() == 0)
+                        {
+                            Toast.makeText(PaymentActivity.this, "Sorry, your item \"" + GlobalVars.current_cart_items.get(i).getName()
+                                    + "\" is out of stock!", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        if (res.get(0).getCount() < GlobalVars.current_cart_item_counts.get(i))
+                        {
+                            Toast.makeText(PaymentActivity.this, "We only have " + res.get(0).getCount() +  " of your item \"" +
+                                    GlobalVars.current_cart_items.get(i).getName() + String.format("\" (Size %s, Color %s) left!",
+                                    GlobalVars.current_cart_sizes.get(i), GlobalVars.current_cart_colors.get(i)), Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        stock_qty_list.add(res.get(0).getCount());
+                    }
+                    Log.d("qty list", stock_qty_list + "");
+                    Cart cart = dbHandler.add_cart(GlobalVars.current_user.getUsername());
+                    Log.d("new cart", String.valueOf(cart.getCart_id()));
+                    if (cart == null)
+                    {
+                        Toast.makeText(PaymentActivity.this, "Sorry, something went wrong!", Toast.LENGTH_SHORT).show();
                         return;
                     }
+                    for (int i = 0; i < GlobalVars.current_cart_items.size(); i++)
+                    {
+                        Item item = GlobalVars.current_cart_items.get(i);
+                        int new_qty = stock_qty_list.get(i) - GlobalVars.current_cart_item_counts.get(i);
+                        dbHandler.update_quantity(item.getId(), GlobalVars.current_cart_sizes.get(i), GlobalVars.current_cart_colors.get(i), new_qty);
+                        //Log.d("update qty", String.valueOf(item.getId()) + new_qty);
+                        dbHandler.add_cart_item(cart.getCart_id(), item.getId(), GlobalVars.current_cart_sizes.get(i), GlobalVars.current_cart_colors.get(i), GlobalVars.current_cart_item_counts.get(i));
+                        //Log.d("add cart item", String.valueOf(GlobalVars.current_cart_item_counts.get(i)));
+                    }
+                    dbHandler.add_order(cart.getCart_id(),
+                            Integer.parseInt(((String) SubtotalPriceTV.getText()).replaceAll("[.]", "")),
+                            (!ShippingFeeTV.getText().equals("Free") ? Integer.parseInt(((String) ShippingFeeTV.getText()).replaceAll("[.]", "")) : 0), get_payment_method(), 1);
 
-                    stock_qty_list.add(res.get(0).getCount());
-                }
-                Log.d("qty list", stock_qty_list + "");
-                Cart cart = dbHandler.add_cart(GlobalVars.current_user.getUsername());
-                Log.d("new cart", String.valueOf(cart.getCart_id()));
-                if (cart == null)
-                {
-                    Toast.makeText(PaymentActivity.this, "Sorry, something went wrong!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                for (int i = 0; i < GlobalVars.current_cart_items.size(); i++)
-                {
-                    Item item = GlobalVars.current_cart_items.get(i);
-                    int new_qty = stock_qty_list.get(i) - GlobalVars.current_cart_item_counts.get(i);
-                    dbHandler.update_quantity(item.getId(), GlobalVars.current_cart_sizes.get(i), GlobalVars.current_cart_colors.get(i), new_qty);
-                    //Log.d("update qty", String.valueOf(item.getId()) + new_qty);
-                    dbHandler.add_cart_item(cart.getCart_id(), item.getId(), GlobalVars.current_cart_sizes.get(i), GlobalVars.current_cart_colors.get(i), GlobalVars.current_cart_item_counts.get(i));
-                    //Log.d("add cart item", String.valueOf(GlobalVars.current_cart_item_counts.get(i)));
-                }
-                dbHandler.add_order(cart.getCart_id(),
-                        Integer.parseInt(((String) SubtotalPriceTV.getText()).replaceAll("[.]", "")),
-                        (!ShippingFeeTV.getText().equals("Free") ? Integer.parseInt(((String) ShippingFeeTV.getText()).replaceAll("[.]", "")) : 0), get_payment_method(), 1);
+                    GlobalVars.current_cart_items.clear();
+                    GlobalVars.current_cart_sizes.clear();
+                    GlobalVars.current_cart_colors.clear();
+                    GlobalVars.current_cart_item_counts.clear();
 
-                GlobalVars.current_cart_items.clear();
-                GlobalVars.current_cart_sizes.clear();
-                GlobalVars.current_cart_colors.clear();
-                GlobalVars.current_cart_item_counts.clear();
+                    toPlaceOrderSuccessfully(view);
+                }
+       else{
+           ArrayList<ItemQuantity> res = dbHandler.search_quantity(
+                   GlobalVars.quick_cart_item.getId(),
+                   GlobalVars.quick_cart_size,
+                   GlobalVars.quick_cart_color);
 
-                toPlaceOrderSuccessfully(view);
-            }
-        }
+           if (res == null || res.size() == 0 || res.get(0).getCount() == 0)
+           {
+               Toast.makeText(PaymentActivity.this, "Sorry, your item \"" + GlobalVars.quick_cart_item.getName()
+                       + "\" is out of stock!", Toast.LENGTH_SHORT).show();
+               return;
+           }
+
+           Cart cart = dbHandler.add_cart(GlobalVars.current_user.getUsername());
+           Log.d("new cart", String.valueOf(cart.getCart_id()));
+           if (cart == null)
+           {
+               Toast.makeText(PaymentActivity.this, "Sorry, something went wrong!", Toast.LENGTH_SHORT).show();
+               return;
+           }
+
+           int new_stock_qty =  res.get(0).getCount() - GlobalVars.quick_cart_count;
+
+           dbHandler.update_quantity(
+                   GlobalVars.quick_cart_item.getId(),
+                   GlobalVars.quick_cart_size,
+                   GlobalVars.quick_cart_color,
+                   new_stock_qty);
+
+           dbHandler.add_cart_item(cart.getCart_id(),
+                   GlobalVars.quick_cart_item.getId(),
+                   GlobalVars.quick_cart_size,
+                   GlobalVars.quick_cart_color,
+                   GlobalVars.quick_cart_count);
+
+           dbHandler.add_order(cart.getCart_id(),
+                   Integer.parseInt(((String) SubtotalPriceTV.getText()).replaceAll("[.]", "")),
+                   (!ShippingFeeTV.getText().equals("Free") ?
+                           Integer.parseInt(((String) ShippingFeeTV.getText()).replaceAll("[.]", "")) : 0)
+                   ,get_payment_method(), 1);
+
+           GlobalVars.quick_cart_item = null;
+           GlobalVars.quick_cart_size= null;
+           GlobalVars.quick_cart_color = null;
+           GlobalVars.quick_cart_color = null;
+
+           toPlaceOrderSuccessfully(view);
+       }
     }
 
     private String get_payment_method()
