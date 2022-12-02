@@ -53,7 +53,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("tag", "Shopping cart onResume called");
+        //Log.d("tag", "Shopping cart onResume called");
         mProductItems = new ArrayList<ProductItemInCart>();
         loadProductItems();
         mProductItemAdapter = new ProductItemAdapter(this, mProductItems);

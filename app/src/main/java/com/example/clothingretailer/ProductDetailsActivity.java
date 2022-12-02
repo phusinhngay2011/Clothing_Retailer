@@ -75,7 +75,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("tag", "details onResume called");
+        //Log.d("tag", "details onResume called");
         for (int i = 0; i < GlobalVars.current_favorite_items.size(); i++) {
             if (GlobalVars.current_favorite_items.get(i).getName().equals(item.getName())) {
                 likeBtn.setChecked(true);
@@ -416,7 +416,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 if (mItem.getName() == item.getName())
                 {
                     GlobalVars.current_cart_item_counts.remove(i);
-                    Log.d("tag", "removed an item from favorites");
+                    //Log.d("tag", "removed an item from favorites");
                     break;
                 }
             }
@@ -436,7 +436,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     public String getColor()
     {
         int id = rg_color.getCheckedRadioButtonId();
-        Log.d("tag", String.valueOf(id));
+        //Log.d("tag", String.valueOf(id));
         if (id == blackBtn.getId())
             return "Black";
         else if (id == whiteBtn.getId())
@@ -452,7 +452,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     public String getSize()
     {
         int id = rg_size.getCheckedRadioButtonId();
-        Log.d("tag", String.valueOf(id));
+        //Log.d("tag", String.valueOf(id));
         if (id == sizeSBtn.getId())
             return "S";
         else if (id == sizeMBtn.getId())

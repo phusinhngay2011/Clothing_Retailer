@@ -196,9 +196,9 @@ public class PaymentActivity extends AppCompatActivity {
 
                         stock_qty_list.add(res.get(0).getCount());
                     }
-                    Log.d("qty list", stock_qty_list + "");
+                    //Log.d("qty list", stock_qty_list + "");
                     Cart cart = dbHandler.add_cart(GlobalVars.current_user.getUsername());
-                    Log.d("new cart", String.valueOf(cart.getCart_id()));
+                    //Log.d("new cart", String.valueOf(cart.getCart_id()));
                     if (cart == null)
                     {
                         Toast.makeText(PaymentActivity.this, "Sorry, something went wrong!", Toast.LENGTH_SHORT).show();
@@ -238,7 +238,7 @@ public class PaymentActivity extends AppCompatActivity {
            }
 
            Cart cart = dbHandler.add_cart(GlobalVars.current_user.getUsername());
-           Log.d("new cart", String.valueOf(cart.getCart_id()));
+           //Log.d("new cart", String.valueOf(cart.getCart_id()));
            if (cart == null)
            {
                Toast.makeText(PaymentActivity.this, "Sorry, something went wrong!", Toast.LENGTH_SHORT).show();

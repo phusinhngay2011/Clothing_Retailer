@@ -50,7 +50,7 @@ public class SearchActivity extends AppCompatActivity {
         generateViewById();
         setButtonOnclick();
         setupSpinner();
-        Log.d("tag", "search onCreate called");
+        //Log.d("tag", "search onCreate called");
     }
 
     @Override
@@ -116,7 +116,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void setupRV() {
-        Log.d("tag", current_gender + current_type);
+        //Log.d("tag", current_gender + current_type);
         if (items != null) {
             items.clear();
         }
@@ -131,7 +131,7 @@ public class SearchActivity extends AppCompatActivity {
         items = dbHandler.search_item(null, gender, (current_type == null || current_type.equals("All types") ? null : current_type));
 
         if (items != null) {
-            Log.d("tag", String.valueOf(items.size()));
+            //Log.d("tag", String.valueOf(items.size()));
             main_rv.setAdapter(new SeachRVAdapter(SearchActivity.this, this.items));
             main_rv.setLayoutManager(new GridLayoutManager(SearchActivity.this, 2));
 

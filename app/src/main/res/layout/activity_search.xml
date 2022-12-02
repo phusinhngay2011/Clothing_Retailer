@@ -30,7 +30,7 @@
                 android:background="@drawable/profile_button_ripple"
                 android:minWidth="130dp"
                 android:paddingHorizontal="10dp"
-                android:src="@drawable/ic_user" />
+                android:src="@drawable/ic_arrow_left" />
 
             <SearchView
                 android:id="@+id/home_search_view"
