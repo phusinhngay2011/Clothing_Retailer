@@ -121,13 +121,13 @@
                     android:textSize="20dp"></TextView>
 
                 <TextView
+                    android:id="@+id/totalPriceTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="20dp"
                     android:text="2.700.000d"
-                    android:textColor="@color/black"
-                    android:id="@+id/totalPriceTV"></TextView>
+                    android:textColor="@color/black"></TextView>
             </RelativeLayout>
         </LinearLayout>
 
