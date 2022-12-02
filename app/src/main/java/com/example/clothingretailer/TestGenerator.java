@@ -274,11 +274,17 @@ public class TestGenerator {
         handler.add_tfw_item(10);
         handler.add_tfw_item(15);
 
+        String[] SIZE = {
+                "M", "L", "XL", "XXL", "3XL"
+        };
+        String[] COLOR = {
+                "Black", "White", "Grey", "Be"
+        };
+
         for (int i = 1; i <= 51; i++)
-        {
-            handler.add_quantity(i, "M", "Black", 10);
-            handler.add_quantity(i, "L", "Black", 10);
-        }
+            for(int j = 0; j < SIZE.length - 1; j++)
+                for(int k = 0; k < COLOR.length; k++)
+                    handler.add_quantity(i, SIZE[j], COLOR[k], 10);
 
         handler.close_DB();
     }
