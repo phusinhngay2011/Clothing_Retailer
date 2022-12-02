@@ -434,7 +434,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 Item mItem = GlobalVars.current_favorite_items.get(i);
                 if (mItem.getName().equals(item.getName()))
                 {
-                    GlobalVars.current_cart_item_counts.remove(i);
                     if (GlobalVars.logged_in) 
                     {
                         dbHandler.delete_like(GlobalVars.current_user.getUsername(), item.getId());
