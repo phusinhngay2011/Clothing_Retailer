@@ -326,7 +326,8 @@ public class DBHandler extends SQLiteOpenHelper {
     public ArrayList<Item> search_item(@Nullable String name, int gender, @Nullable String type)
     {
         open_DB_for_read();
-        name = name.toLowerCase();
+        if (name != null)
+            name = name.toLowerCase();
         String selection = null;
         String[] selectionArgs = null;
 
@@ -336,6 +337,7 @@ public class DBHandler extends SQLiteOpenHelper {
                     + ((gender != Item.BOTH_GENDERS && type != null) || (name != null && type != null) ? " AND " : "") + (type != null ? ITEM_TYPE + " = ?" : "");
             int count = 0;
             count += (name != null ? 1 : 0) + (gender != Item.BOTH_GENDERS ? 1 : 0) + (type != null ? 1 : 0);
+            Log.d("count", String.valueOf(count));
             selectionArgs = new String[count];
             if (type != null)
             {
@@ -354,6 +356,9 @@ public class DBHandler extends SQLiteOpenHelper {
             }
         }
 
+        if (selection != null && selectionArgs != null) {
+            Log.d("tag", selection + selectionArgs + " " + gender + " " + (type != null ? type: ""));
+        }
         Cursor cursor = read_db.query(ITEM_TABLE, null, selection, selectionArgs, null, null, null);
         ArrayList<Item> result = new ArrayList<Item>();
 
