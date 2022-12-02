@@ -147,9 +147,8 @@ public class AboutUsActivity extends FragmentActivity implements OnMapReadyCallb
         try {
             String origin = inputLocationEditText.getText().toString();
             String des = SNIPPET_STORE[spinner.getSelectedItemPosition()];
-            String polylines = "\"_cu`AimcjShBm@rAa@zC{@BLhBnGpC|InB`HtAxExCnJpFeAfDq@x@KtCm@`BY~@QZfBd@pCPE~Cm@\"";
-            List<LatLng> polyLines = PolyUtil.decode(polylines);
-            mGoogleMap.addPolyline(new PolylineOptions().addAll(polyLines));
+            Toast.makeText(getApplicationContext(), "Nhóm không có thẻ Thanh toán QT :(",
+                    Toast.LENGTH_SHORT).show();
         }
         catch (Exception e){
             Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
