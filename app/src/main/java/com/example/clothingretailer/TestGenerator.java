@@ -1,10 +1,6 @@
 package com.example.clothingretailer;
 
 import android.content.Context;
-import android.util.Log;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class TestGenerator {
     public static void generate_test_db(Context context)
