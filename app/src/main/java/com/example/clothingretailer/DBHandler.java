@@ -123,10 +123,11 @@ public class DBHandler extends SQLiteOpenHelper {
                 + RATING_SCORE + " REAL, "
                 + "PRIMARY KEY (" + RATING_ITEM_ID + ", " + RATING_USERNAME + "))",
         create_quantity_table_query = "CREATE TABLE " + QUANTITY_TABLE + " ("
-               + QUANTITY_ID + " INTEGER PRIMARY KEY, "
+               + QUANTITY_ID + " INTEGER, "
                + QUANTITY_SIZE + " TEXT, "
                + QUANTITY_COLOR + " TEXT, "
-               + QUANTITY_COUNT + " INTEGER)",
+               + QUANTITY_COUNT + " INTEGER, "
+               + "PRIMARY KEY (" + QUANTITY_ID + ", " + QUANTITY_SIZE + ", " + QUANTITY_COLOR + "))",
         create_like_table_query = "CREATE TABLE " + LIKE_TABLE + " ("
                 + LIKE_USERNAME + " TEXT, "
                 + LIKE_ITEM_ID + " INTEGER, "

@@ -1,6 +1,10 @@
 package com.example.clothingretailer;
 
 import android.content.Context;
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TestGenerator {
     public static void generate_test_db(Context context)
@@ -274,11 +278,15 @@ public class TestGenerator {
         handler.add_tfw_item(10);
         handler.add_tfw_item(15);
 
+        ArrayList<String> sizes = new ArrayList<String>(Arrays.asList("S", "M", "L", "XL", "XXL", "3XL"));
+        ArrayList<String> color = new ArrayList<String>(Arrays.asList("Black", "White", "Be", "Grey"));
+
         for (int i = 1; i <= 51; i++)
-        {
-            handler.add_quantity(i, "M", "Black", 10);
-            handler.add_quantity(i, "L", "Black", 10);
-        }
+            for (int j = 0; j < sizes.size(); j++)
+                for (int k = 0; k < color.size(); k++) {
+                    handler.add_quantity(i, sizes.get(j), color.get(k), 10);
+                    //Log.d("tag", "i = " + i);
+                }
 
         handler.close_DB();
     }
