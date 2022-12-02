@@ -60,7 +60,7 @@ public class ProductItemAdapter extends RecyclerView.Adapter<ProductItemAdapter.
                                 GlobalVars.current_cart_sizes.remove(i);
                                 GlobalVars.current_cart_colors.remove(i);
                                 GlobalVars.current_cart_item_counts.remove(i);
-                                Log.d("tag", "global cart updated");
+                                //Log.d("tag", "global cart updated");
                                 break;
                             }
 
@@ -76,7 +76,7 @@ public class ProductItemAdapter extends RecyclerView.Adapter<ProductItemAdapter.
                             {
                                 Integer tmp = GlobalVars.current_cart_item_counts.get(i) - 1;
                                 GlobalVars.current_cart_item_counts.set(i, tmp);
-                                Log.d("tag", "global cart updated");
+                                //Log.d("tag", "global cart updated");
                                 break;
                             }
                         }
@@ -99,7 +99,7 @@ public class ProductItemAdapter extends RecyclerView.Adapter<ProductItemAdapter.
                         {
                             Integer tmp = GlobalVars.current_cart_item_counts.get(i) + 1;
                             GlobalVars.current_cart_item_counts.set(i, tmp);
-                            Log.d("tag", "global cart updated");
+                            //Log.d("tag", "global cart updated");
                             break;
                         }
                     }

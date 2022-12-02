@@ -162,7 +162,7 @@ public class AboutUsActivity extends FragmentActivity implements OnMapReadyCallb
 
 
     public void toHome(View view) {
-        Log.d("log", "toHome called");
+        //Log.d("log", "toHome called");
         Intent switchActivityIntent = new Intent(this, MainActivity.class);
         startActivity(switchActivityIntent);
     }

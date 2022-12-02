@@ -12,20 +12,21 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string-array name="genders">
+        <item>Both genders</item>
         <item>Men</item>
         <item>Women</item>
     </string-array>
     <string-array name="clothes_types">
         <item>T-shirts</item>
         <item>Jeans</item>
-        <item>Sweaters</item>
         <item>Hoodies</item>
-        <item>Dresses</item>
+        <item>Shorts</item>
+        <item>Sweaters</item>
+        <item>Polo-shirts</item>
         <item>Skirts</item>
         <item>Jackets</item>
-        <item>Shorts</item>
-        <item>Coats</item>
         <item>Pants</item>
+        <item>All types</item>
     </string-array>
 
     <string-array name="payment_methods">

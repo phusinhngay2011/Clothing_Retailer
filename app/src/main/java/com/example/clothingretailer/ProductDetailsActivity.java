@@ -3,7 +3,10 @@ package com.example.clothingretailer;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
@@ -24,7 +27,12 @@ import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.bumptech.glide.Glide;
+
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ProductDetailsActivity extends AppCompatActivity {
@@ -67,7 +75,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("tag", "details onResume called");
+        //Log.d("tag", "details onResume called");
         for (int i = 0; i < GlobalVars.current_favorite_items.size(); i++) {
             if (GlobalVars.current_favorite_items.get(i).getName().equals(item.getName())) {
                 likeBtn.setChecked(true);
@@ -75,7 +83,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
             }
         }
     }
-
 
     private void GenerateFindViewById_ProductDetails() {
         viewPager2 = findViewById(R.id.viewPagerClothingDetails);
@@ -402,19 +409,14 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
 
     public void onClickLikeProduct() {
-        DBHandler dbHandler = new DBHandler(this.getApplicationContext());
-
         if (likeBtn.isChecked() == false) {
             for (int i = 0; i < GlobalVars.current_favorite_items.size(); i++)
             {
                 Item mItem = GlobalVars.current_favorite_items.get(i);
-                if (mItem.getName().equals(item.getName()))
+                if (mItem.getName() == item.getName())
                 {
-                    if (GlobalVars.logged_in) {
-                        dbHandler.delete_like(GlobalVars.current_user.getUsername(), item.getId());
-                    }
-                    GlobalVars.current_favorite_items.remove(i);
-                    Log.d("tag", "removed an item from favorites");
+                    GlobalVars.current_cart_item_counts.remove(i);
+                    //Log.d("tag", "removed an item from favorites");
                     break;
                 }
             }
@@ -422,12 +424,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
         }
         else {
             GlobalVars.current_favorite_items.add(item);
-            if (GlobalVars.logged_in) {
-                dbHandler.add_like(GlobalVars.current_user.getUsername(), item.getId());
-            }
             //likeBtn.setChecked(false);
         }
-        dbHandler.close_DB();
     }
 
     public void toHome(View view) {
@@ -438,7 +436,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     public String getColor()
     {
         int id = rg_color.getCheckedRadioButtonId();
-        Log.d("tag", String.valueOf(id));
+        //Log.d("tag", String.valueOf(id));
         if (id == blackBtn.getId())
             return "Black";
         else if (id == whiteBtn.getId())
@@ -454,7 +452,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     public String getSize()
     {
         int id = rg_size.getCheckedRadioButtonId();
-        Log.d("tag", String.valueOf(id));
+        //Log.d("tag", String.valueOf(id));
         if (id == sizeSBtn.getId())
             return "S";
         else if (id == sizeMBtn.getId())
