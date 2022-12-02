@@ -424,25 +424,36 @@ public class ProductDetailsActivity extends AppCompatActivity {
     public void onClickShareProduct(View view) {
     }
 
-
     public void onClickLikeProduct() {
-        if (likeBtn.isChecked() == false) {
+        DBHandler dbHandler = new DBHandler(this.getApplicationContext());
+
+        if (likeBtn.isChecked() == false) 
+        {
             for (int i = 0; i < GlobalVars.current_favorite_items.size(); i++)
             {
                 Item mItem = GlobalVars.current_favorite_items.get(i);
-                if (mItem.getName() == item.getName())
+                if (mItem.getName().equals(item.getName()))
                 {
                     GlobalVars.current_cart_item_counts.remove(i);
-                    //Log.d("tag", "removed an item from favorites");
+                    if (GlobalVars.logged_in) 
+                    {
+                        dbHandler.delete_like(GlobalVars.current_user.getUsername(), item.getId());
+                    }
+                    GlobalVars.current_favorite_items.remove(i);
                     break;
                 }
             }
-            //likeBtn.setChecked(true);
         }
-        else {
+        else 
+        {
             GlobalVars.current_favorite_items.add(item);
+            if (GlobalVars.logged_in) 
+            {
+                dbHandler.add_like(GlobalVars.current_user.getUsername(), item.getId());
+            }
             //likeBtn.setChecked(false);
         }
+        dbHandler.close_DB();
     }
 
     public void toHome(View view) {
