@@ -1,17 +1,15 @@
 package com.example.clothingretailer;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.InputType;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
@@ -132,6 +130,16 @@ public class SignInMainActivity extends AppCompatActivity {
         {
             GlobalVars.current_user = res.get(0);
             GlobalVars.logged_in = true;
+
+            // Load saved user favorites
+            ArrayList<UserLike> savedUserLikes = this.dbHandler.search_like(username);
+            if (savedUserLikes != null && savedUserLikes.size() > 0) {
+                for (int i = 0; i < savedUserLikes.size(); i++ ) {
+                    GlobalVars.current_favorite_items.add(this.dbHandler.search_item_by_id(savedUserLikes.get(i).getItem_id()).get(0));
+                }
+            }
+
+
             SharedPreferences.Editor editor = getSharedPreferences(
                     PREFERENCES_NAME, MODE_PRIVATE).edit();
             if(rmbMeCheckBox.isChecked()){

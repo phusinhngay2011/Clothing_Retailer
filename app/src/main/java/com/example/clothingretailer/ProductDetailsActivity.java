@@ -3,10 +3,7 @@ package com.example.clothingretailer;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
@@ -27,12 +24,7 @@ import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.bumptech.glide.Glide;
-
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class ProductDetailsActivity extends AppCompatActivity {
@@ -83,6 +75,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
             }
         }
     }
+
 
     private void GenerateFindViewById_ProductDetails() {
         viewPager2 = findViewById(R.id.viewPagerClothingDetails);
@@ -409,13 +402,18 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
 
     public void onClickLikeProduct() {
+        DBHandler dbHandler = new DBHandler(this.getApplicationContext());
+
         if (likeBtn.isChecked() == false) {
             for (int i = 0; i < GlobalVars.current_favorite_items.size(); i++)
             {
                 Item mItem = GlobalVars.current_favorite_items.get(i);
-                if (mItem.getName() == item.getName())
+                if (mItem.getName().equals(item.getName()))
                 {
-                    GlobalVars.current_cart_item_counts.remove(i);
+                    if (GlobalVars.logged_in) {
+                        dbHandler.delete_like(GlobalVars.current_user.getUsername(), item.getId());
+                    }
+                    GlobalVars.current_favorite_items.remove(i);
                     Log.d("tag", "removed an item from favorites");
                     break;
                 }
@@ -424,8 +422,12 @@ public class ProductDetailsActivity extends AppCompatActivity {
         }
         else {
             GlobalVars.current_favorite_items.add(item);
+            if (GlobalVars.logged_in) {
+                dbHandler.add_like(GlobalVars.current_user.getUsername(), item.getId());
+            }
             //likeBtn.setChecked(false);
         }
+        dbHandler.close_DB();
     }
 
     public void toHome(View view) {
