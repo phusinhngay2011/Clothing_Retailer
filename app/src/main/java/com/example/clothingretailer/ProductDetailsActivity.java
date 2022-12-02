@@ -456,8 +456,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     }
 
     public void toHome(View view) {
-        Intent switchActivityIntent = new Intent(this, MainActivity.class);
-        startActivity(switchActivityIntent);
+        onBackPressed();
     }
 
     public String getColor()

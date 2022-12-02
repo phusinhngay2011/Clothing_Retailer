@@ -147,7 +147,6 @@ public class UserInfoActivity extends AppCompatActivity {
     }
     public void popUpDatePicker(View view){
         try {
-            et_dob = findViewById(R.id.birthdaySignupET);
             final Calendar c = Calendar.getInstance();
 
             int _year = c.get(Calendar.YEAR);
@@ -167,7 +166,7 @@ public class UserInfoActivity extends AppCompatActivity {
                             if (diff < 13)
                                 Toast.makeText(UserInfoActivity.this, "Invalid Age!", Toast.LENGTH_SHORT).show();
                             else
-                                et_dob.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                                et_dob.setText(new String(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year));
                         }
                     },
                     _year - 13, _month, _day);
